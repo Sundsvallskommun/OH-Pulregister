@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;PulRegister/src/main/java/se/sk&apos; to &apos;sundsvallskommun&apos;" description="Rename resource &apos;sk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/se/sk" name="sundsvallskommun" stamp="1489656076040" updateReferences="true"/>
+</session>

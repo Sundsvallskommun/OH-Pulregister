@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: commons-dbcp-1.3.jar commons-pool-1.5.5.jar jquery.jar jun
+ iversalchardet-1.0.3.jar ckeditor-filemanager.jar ckeditor-mediaembed
+ .jar ckeditor-scripts.jar ckeditor.jar
+

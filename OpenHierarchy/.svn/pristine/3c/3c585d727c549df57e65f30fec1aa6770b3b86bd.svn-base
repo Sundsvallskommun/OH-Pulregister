@@ -1,0 +1,15 @@
+package se.unlogic.hierarchy.core.interfaces;
+
+import java.util.List;
+
+public interface SMS {
+
+	public String getSenderName();
+
+	public String getMessage();
+
+	public List<String> getRecipients();
+
+	public AttributeHandler getAttributeHandler();
+
+}

@@ -1,0 +1,6 @@
+1474977400882	Extract method 'generateAttributeDetailsXml'
+1475158392733	Rename field 'parentTypeID'
+1475218479475	Rename field 'delimiter'
+1475218491363	Rename field 'prefix'
+1475218516546	Rename field 'details_element_name'
+1475219261426	Rename local variable 'startElement'

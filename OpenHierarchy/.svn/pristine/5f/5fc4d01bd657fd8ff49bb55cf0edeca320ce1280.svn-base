@@ -1,0 +1,69 @@
+package se.unlogic.hierarchy.core.utils.extensionlinks;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import se.unlogic.hierarchy.core.beans.User;
+import se.unlogic.hierarchy.core.utils.AccessUtils;
+import se.unlogic.standardutils.collections.NameComparator;
+import se.unlogic.standardutils.xml.XMLUtils;
+
+
+public class ExtensionLinkUtils {
+
+	protected static Logger LOG = Logger.getLogger(ExtensionLinkUtils.class);
+	
+	public static void appendExtensionLinks(Collection<ExtensionLinkProvider> linkProviders, User user, HttpServletRequest req, Document doc, Element targetElement){
+		
+		appendExtensionLinks(linkProviders, user, req, doc, targetElement, NameComparator.getInstance());
+	}
+	
+	public static void appendExtensionLinks(Collection<ExtensionLinkProvider> linkProviders, User user, HttpServletRequest req, Document doc, Element targetElement, Comparator<? super ExtensionLink> comparator){
+		
+		if(linkProviders.isEmpty()){
+			
+			return;
+		}
+		
+		List<ExtensionLink> links = new ArrayList<ExtensionLink>(linkProviders.size());
+		
+		for(ExtensionLinkProvider linkProvider : linkProviders){
+			
+			if(linkProvider.getAccessInterface() == null || AccessUtils.checkAccess(user, linkProvider.getAccessInterface())){
+				
+				ExtensionLink link;
+				
+				try {
+					link = linkProvider.getExtensionLink(user);
+					
+				} catch (Exception e) {
+
+					LOG.error("Error getting extension link from provider " + linkProvider, e);
+					
+					return;
+				}
+				
+				if(link != null){
+					
+					links.add(link);
+				}
+			}
+		}
+		
+		if(links.size() > 1 && comparator != null){
+			
+			Collections.sort(links, comparator);
+		}
+		
+		XMLUtils.append(doc, targetElement, links);
+	}
+}

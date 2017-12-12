@@ -1,0 +1,5 @@
+1482139700068	Rename local variable 'noteIDParamFactory'
+1482142869239	Rename method 'getDynamicAttributeChildParent'
+1482143007876	Extract method 'handleNewNotes'
+1482143388189	Rename field 'parentAttributeID'
+1482143493266	Rename method 'getDynamicAttributeNoteParent'

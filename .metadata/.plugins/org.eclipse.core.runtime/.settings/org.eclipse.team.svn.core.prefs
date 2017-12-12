@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+externalMigrateFromAuthorizationDatabase/isMigrated=true
+migrateFromAuthorizationDatabase/isMigrated=true
+repositories/00ada8259f75001614d8d136bf2e9307=00ada8259f75001614d8d136bf2e9307;svn\://svn.openhierarchy.org/openhierarchy/framework;svn\://svn.openhierarchy.org/openhierarchy/framework;branches;tags;trunk;true;871e2af6-a44c-4ae7-ad5e-835a91e1ada1;svn\://svn.openhierarchy.org/openhierarchy;;false;;;0
+repositories/706c50b5a175001614d8d136bf2e9307=706c50b5a175001614d8d136bf2e9307;svn\://svn.unlogic.se/utils;svn\://svn.unlogic.se/utils;branches;tags;trunk;true;2efb5510-a528-0410-9aa5-8ebbf97e54e7;svn\://svn.unlogic.se/utils;;false;<svn\://svn.unlogic.se\:3690> 2efb5510-a528-0410-9aa5-8ebbf97e54e7;;0
+repositories/809bdce19f75001614d8d136bf2e9307=809bdce19f75001614d8d136bf2e9307;svn\://unlogic.se/utils/libraries;svn\://unlogic.se/utils/libraries;branches;tags;trunk;true;2efb5510-a528-0410-9aa5-8ebbf97e54e7;svn\://unlogic.se/utils;;false;;;0
+repositories/b0a3c8ffad75001614d8d136bf2e9307=b0a3c8ffad75001614d8d136bf2e9307;svn\://svn.unlogic.se/purecaptcha;svn\://svn.unlogic.se/purecaptcha;branches;tags;trunk;true;75ae9ac6-1248-40bb-9959-9a19223b8d8e;svn\://svn.unlogic.se/purecaptcha;;false;;;0
+repositories/c0bf21e7c375001614d8d136bf2e9307=c0bf21e7c375001614d8d136bf2e9307;svn\://svn.sundsvall.se/byggsundsvall;svn\://svn.sundsvall.se/byggsundsvall;branches;tags;trunk;true;fc3481ee-0e7c-6e4c-871c-0a49b1f2af0b;svn\://svn.sundsvall.se/byggsundsvall;;false;<svn\://svn.sundsvall.se\:3690> fc3481ee-0e7c-6e4c-871c-0a49b1f2af0b;;0
+repositories/d082fb5e9f75001614d8d136bf2e9307=d082fb5e9f75001614d8d136bf2e9307;svn\://svn.openhierarchy.org/openhierarchy/modules;svn\://svn.openhierarchy.org/openhierarchy/modules;branches;tags;trunk;true;871e2af6-a44c-4ae7-ad5e-835a91e1ada1;svn\://svn.openhierarchy.org/openhierarchy;;false;;;0

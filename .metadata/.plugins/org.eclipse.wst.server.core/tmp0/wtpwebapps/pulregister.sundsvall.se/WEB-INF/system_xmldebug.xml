@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><document><links/><scripts/><moduleTransformedResponse><![CDATA[<div class="row">
+<div class="col-xs-offset-3 col-xs-6 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+<h3 class="text-center">
+<strong>Inloggning</strong>
+</h3>
+<div class="jumbotron">
+<form method="post" action="">
+<div class="form-group">
+<label for="username">Anv&auml;ndarnamn</label><input type="text" class="form-control" name="username" id="username" placeholder="Anv&auml;ndarnamn">
+</div>
+<div class="form-group">
+<label for="password">L&ouml;senord</label><input type="password" class="form-control" name="password" id="password" placeholder="L&ouml;senord">
+</div>
+<div class="text-right">
+<button type="submit" class="btn btn-success">Logga in</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+]]></moduleTransformedResponse><version><![CDATA[OpenHierarchy 1.2.10 (rev. 2145)]]></version><requestinfo><contextpath><![CDATA[/pulregister.sundsvall.se]]></contextpath><servletpath><![CDATA[/core]]></servletpath><servername><![CDATA[localhost]]></servername><currentURI><![CDATA[/pulregister.sundsvall.se]]></currentURI><url><![CDATA[http://localhost:8080/pulregister.sundsvall.se/login]]></url><uri><![CDATA[/pulregister.sundsvall.se/login]]></uri><uriparts><uripart><value>login</value><position>0</position></uripart></uriparts></requestinfo><section><sectionID>1</sectionID><alias><![CDATA[start]]></alias><fullAlias/><enabled>true</enabled><anonymousAccess>true</anonymousAccess><userAccess>true</userAccess><adminAccess>true</adminAccess><visibleInMenu>true</visibleInMenu><breadCrumb>true</breadCrumb><name><![CDATA[Startsidan]]></name><description><![CDATA[Startsidan]]></description><anonymousDefaultURI><![CDATA[/pulregister/nodes/showflatlist]]></anonymousDefaultURI><userDefaultURI><![CDATA[/pulregister/nodes/showflatlist]]></userDefaultURI></section><menus><menu sectionAlias="" sectionID="1" sectionName="Startsidan"><menuitem><name><![CDATA[PUL-Register]]></name><description><![CDATA[PUL-Register]]></description><menuIndex><![CDATA[2]]></menuIndex><url><![CDATA[/pulregister]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType><itemType><![CDATA[SECTION]]></itemType><sectionID><![CDATA[1]]></sectionID><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>true</anonymousAccess><sectionMenuItem><subSectionID><![CDATA[3]]></subSectionID></sectionMenuItem></menuitem></menu></menus><title><![CDATA[Logga in]]></title><breadcrumbs><breadcrumb><name><![CDATA[Startsidan]]></name><description><![CDATA[Startsidan]]></description><url><![CDATA[/]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb><breadcrumb><name><![CDATA[Logga in]]></name><description><![CDATA[Logga in]]></description><url><![CDATA[/login]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb></breadcrumbs></document>

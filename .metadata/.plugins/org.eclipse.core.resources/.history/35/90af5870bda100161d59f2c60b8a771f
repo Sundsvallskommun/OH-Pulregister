@@ -1,0 +1,75 @@
+package main.java.se.sk.facilities.beans;
+
+import java.io.Serializable;
+import se.unlogic.standardutils.dao.annotations.DAOManaged;
+import se.unlogic.standardutils.dao.annotations.Key;
+import se.unlogic.standardutils.dao.annotations.ManyToOne;
+import se.unlogic.standardutils.dao.annotations.Table;
+import se.unlogic.standardutils.xml.GeneratedElementable;
+import se.unlogic.standardutils.xml.XMLElement;
+
+@Table(name = "facility_geo_location")
+@XMLElement(name="geo",skipChildParentElement=true)
+public class FacilityGeoLocation extends GeneratedElementable implements Serializable {
+	
+	private static final long serialVersionUID = -6188427465428775655L;
+
+	@DAOManaged(columnName = "geo_id")
+	@Key
+	@XMLElement	
+	private Integer geoID;
+	
+	@XMLElement
+	@DAOManaged(columnName = "ST_ASTEXT(geo_data)")	
+	private String geoData;
+	
+	@DAOManaged(columnName = "parent_node")
+	@ManyToOne
+	private FacilityNode parentNode;
+	
+	@DAOManaged(columnName = "parent_node_attribute")
+	private Integer parentAttributeID;
+	
+	private FacilityNodeAttribute parentAttribute;
+
+	public Integer getGeoID() {
+		return geoID;
+	}
+
+	public void setGeoID(Integer geoID) {
+		this.geoID = geoID;
+	}
+
+	public String getGeoData() {
+		return geoData;
+	}
+
+	public void setGeoData(String geoData) {
+		this.geoData = geoData;
+	}
+
+	public FacilityNode getParentNode() {
+		return parentNode;
+	}
+
+	public void setParentNode(FacilityNode parentNode) {
+		this.parentNode = parentNode;
+	}
+
+	public Integer getParentAttributeID() {
+		return parentAttributeID;
+	}
+
+	public void setParentAttributeID(Integer parentAttribute) {
+		this.parentAttributeID = parentAttribute;
+	}
+
+	public FacilityNodeAttribute getParentAttribute() {
+		return parentAttribute;
+	}
+
+	public void setParentAttribute(FacilityNodeAttribute parentAttribute) {
+		this.parentAttribute = parentAttribute;
+	}
+	
+}

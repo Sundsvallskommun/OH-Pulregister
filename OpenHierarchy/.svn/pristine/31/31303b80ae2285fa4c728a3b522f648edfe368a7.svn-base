@@ -1,0 +1,23 @@
+package se.unlogic.hierarchy.foregroundmodules.logout;
+
+import java.io.Serializable;
+
+import se.unlogic.hierarchy.core.beans.User;
+
+public class LogoutEvent implements Serializable {
+
+	private static final long serialVersionUID = 3242472844320157721L;
+	
+	private final User user;
+
+	public LogoutEvent(User user) {
+
+		super();
+		this.user = user;
+	}
+
+	public User getUser() {
+
+		return user;
+	}
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<document>
+<module>
+<moduleID>3</moduleID>
+<name><![CDATA[Logga in]]></name>
+<classname>se.unlogic.hierarchy.foregroundmodules.login.UserProviderLoginModule</classname>
+<adminAccess>false</adminAccess>
+<userAccess>false</userAccess>
+<anonymousAccess>true</anonymousAccess>
+<enabled>true</enabled>
+<sectionID>1</sectionID>
+<xslPath>/se/sundsvall/bygg/login/login.xsl</xslPath>
+<xslPathType>Classpath</xslPathType>
+<description><![CDATA[Logga in]]></description>
+<alias><![CDATA[login]]></alias>
+<visibleInMenu>false</visibleInMenu>
+</module>
+<uri><![CDATA[/pulregister.sundsvall.se/login]]></uri>
+<contextpath><![CDATA[/pulregister.sundsvall.se]]></contextpath>
+<Login/>
+</document>

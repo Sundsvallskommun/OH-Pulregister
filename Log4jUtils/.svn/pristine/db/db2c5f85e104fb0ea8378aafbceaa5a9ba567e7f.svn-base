@@ -1,0 +1,22 @@
+package se.unlogic.log4jutils.progressmeter;
+
+
+import org.apache.log4j.Logger;
+
+import se.unlogic.standardutils.operation.ProgressLogger;
+
+public class Log4jProgressLogger implements ProgressLogger {
+
+	private final Logger log;
+	
+	public Log4jProgressLogger(Logger log) {
+
+		this.log = log;
+	}
+
+	public void logProgress(String logMessage) {
+
+		log.info(logMessage);
+	}
+
+}
