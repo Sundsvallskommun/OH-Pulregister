@@ -1,0 +1,827 @@
+<DBScripts>
+
+	<Script version="1">
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Servicenter', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kommunstyrelsen (Koncernstaben)', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kommunstyrelsen (Servicecenter)', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kommunstyrelsen (Drakfastigheter)', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Barn- och utbildningsnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Socialnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Stadsbyggnadsnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Miljönämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Energi AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'MittSverige Vatten AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Medelpads räddningstjänstförbund', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kultur- och fritidsnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Lantmäterinämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Nämnden för arbetsmarknad, vuxenutbildning och integration (Navi)', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Personalnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Valnämnden', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Överförmyndarnämnden Mitt', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Biogas Mellannorrland AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kollektivtrafikmyndigheten', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Kommungaranti Skandinavien Försäkrings AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Mitthem AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Norra Kajen Exploatering AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Näringslivsbolaget i Sundsvall AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Reko Sundsvall AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Scenkonst Västernorrland AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'SKIFU AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Stadsbacken AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Elnät AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Logistikpark AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Oljehamn AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Timrå Airport', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ( 'Sundsvall Vatten AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `simple_groups` (`name`, `description`, `enabled`) VALUES ('Sundsvalls Hamn AB', 'PUL-Register', 1);
+		
+		]]>
+		</Query>
+
+			
+	</Script>
+	
+	<Script version="2">
+
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_types` (
+		  `type_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `name` VARCHAR(45) NOT NULL,
+		  `type_description` MEDIUMTEXT NULL,
+		  `parent_type` INT UNSIGNED NULL,
+		  PRIMARY KEY (`type_id`),
+		  INDEX `fk_facility_node_types_facility_node_types1_idx` (`parent_type` ASC),
+		  CONSTRAINT `fk_facility_node_types_facility_node_types1`
+		    FOREIGN KEY (`parent_type`)
+		    REFERENCES `node_types` (`type_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_owner` (
+		  `node_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `parent_node` INT UNSIGNED NULL,
+		  `type` INT UNSIGNED NOT NULL,
+		  `name` VARCHAR(256) NULL,
+		  `node_owner_group` INT UNSIGNED NULL,
+		  INDEX `type_index` (`type` ASC),
+		  INDEX `parent_index` (`parent_node` ASC),
+		  UNIQUE INDEX `node_id_UNIQUE` (`node_id` ASC),
+		  PRIMARY KEY (`node_id`),
+		  CONSTRAINT `fk_parent_constraint`
+		    FOREIGN KEY (`parent_node`)
+		    REFERENCES `node_owner` (`node_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION,
+		  CONSTRAINT `fk_type_constraint`
+		    FOREIGN KEY (`type`)
+		    REFERENCES `node_types` (`type_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_attribute_types` (
+		  `attribute_type_name` VARCHAR(45) NOT NULL,
+		  PRIMARY KEY (`attribute_type_name`))
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_template_attributes` (
+		  `parent_type_id` INT UNSIGNED NOT NULL,
+		  `name` VARCHAR(1024) NOT NULL,
+		  `value` MEDIUMTEXT NULL,
+		  `value_type` VARCHAR(45) NOT NULL,
+		  `template_attribute_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `description` VARCHAR(2048) NULL,
+		  `required` TINYINT(1) NULL DEFAULT 0,
+		  `regex` VARCHAR(256) NULL,
+		  `sort_prio` INT UNSIGNED NULL DEFAULT 0,
+		  `parent_template_attribute` INT UNSIGNED NULL,
+		  `show_only_when_value_equals` MEDIUMTEXT NULL,
+		  INDEX `fk_facility_template_attributes_facility_attribute_types1_idx` (`value_type` ASC),
+		  PRIMARY KEY (`template_attribute_id`),
+		  INDEX `fk_parent_template_attribute_idx` (`parent_template_attribute` ASC),
+		  CONSTRAINT `fk_facility_template_attributes_facility_node_types1_xyz`
+		    FOREIGN KEY (`parent_type_id`)
+		    REFERENCES `node_types` (`type_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION,
+		  CONSTRAINT `fk_facility_template_attributes_facility_attribute_types1_xyz`
+		    FOREIGN KEY (`value_type`)
+		    REFERENCES `node_attribute_types` (`attribute_type_name`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION,
+		  CONSTRAINT `fk_parent_template_attribute_xyz`
+		    FOREIGN KEY (`parent_template_attribute`)
+		    REFERENCES `node_template_attributes` (`template_attribute_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION,
+		  CONSTRAINT `fk_require_attribute_type_exists`
+		    FOREIGN KEY (`value_type`)
+		    REFERENCES `node_attribute_types` (`attribute_type_name`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_attributes` (
+		  `parent_node` INT UNSIGNED NOT NULL,
+		  `value` MEDIUMTEXT NULL,
+		  `attribute_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `template_id` INT UNSIGNED NOT NULL,
+		  PRIMARY KEY (`attribute_id`),
+		  INDEX `fk_facility_node_attributes_facility_template_attributes1_idx` (`template_id` ASC),
+		  CONSTRAINT `fk_facility_node_attributes_facility_node1_xyz`
+		    FOREIGN KEY (`parent_node`)
+		    REFERENCES `node_owner` (`node_id`)
+		    ON DELETE CASCADE
+		    ON UPDATE CASCADE,
+		  CONSTRAINT `fk_facility_node_attributes_facility_template_attributes1_xyz`
+		    FOREIGN KEY (`template_id`)
+		    REFERENCES `node_template_attributes` (`template_attribute_id`)
+		    ON DELETE RESTRICT
+		    ON UPDATE RESTRICT)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_geo_location` (
+		  `parent_node` INT UNSIGNED NOT NULL,
+		  `geo_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `geo_data` GEOMETRY NULL,
+		  `parent_node_attribute` INT UNSIGNED NULL,
+		  PRIMARY KEY (`geo_id`),
+		  UNIQUE INDEX `geo_id_UNIQUE` (`geo_id` ASC),
+		  INDEX `assert_parent_attribute_idx` (`parent_node_attribute` ASC),
+		  CONSTRAINT `assert_parentnode`
+		    FOREIGN KEY (`parent_node`)
+		    REFERENCES `node_owner` (`node_id`)
+		    ON DELETE CASCADE
+		    ON UPDATE CASCADE,
+		  CONSTRAINT `assert_parent_attribute`
+		    FOREIGN KEY (`parent_node_attribute`)
+		    REFERENCES `node_attributes` (`attribute_id`)
+		    ON DELETE NO ACTION
+		    ON UPDATE NO ACTION)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_restrictions` (
+		  `node_id` INT UNSIGNED NOT NULL,
+		  `node_type_id` INT UNSIGNED NOT NULL,
+		  PRIMARY KEY (`node_id`))
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_specific_default` (
+		  `id` INT UNSIGNED NOT NULL,
+		  PRIMARY KEY (`id`))
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_files` (
+		  `facility_file_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `data` LONGBLOB NULL,
+		  `name` VARCHAR(1024) NULL,
+		  `date_added` DATETIME NULL,
+		  `filesize` MEDIUMTEXT NULL,
+		  `parent_node_id` INT UNSIGNED NULL,
+		  `parent_node_attribute` INT UNSIGNED NULL,
+		  PRIMARY KEY (`facility_file_id`),
+		  INDEX `assert_parentnode_idx` (`parent_node_id` ASC),
+		  CONSTRAINT `assert_file_has_parentnode`
+		    FOREIGN KEY (`parent_node_id`)
+		    REFERENCES `node_owner` (`node_id`)
+		    ON DELETE CASCADE
+		    ON UPDATE CASCADE)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_global_tags` (
+		  `tag_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `name` VARCHAR(128) NOT NULL,
+		  UNIQUE INDEX `tag_id_UNIQUE` (`tag_id` ASC),
+		  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
+		  PRIMARY KEY (`tag_id`))
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_tags` (
+		  `tag_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `node_id` INT UNSIGNED NOT NULL,
+		  PRIMARY KEY (`tag_id`))
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		CREATE TABLE `node_attribute_notes` (
+		  `node_attribute_notes_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		  `value` MEDIUMTEXT NULL,
+		  `node_attribute_parent` INT UNSIGNED NOT NULL,
+		  PRIMARY KEY (`node_attribute_notes_id`),
+		  UNIQUE INDEX `node_attribute_parent_UNIQUE` (`node_attribute_parent` ASC),
+		  CONSTRAINT `fk_note_must_have_parent_node_attribute`
+		    FOREIGN KEY (`node_attribute_parent`)
+		    REFERENCES `node_attributes` (`attribute_id`)
+		    ON DELETE CASCADE
+		    ON UPDATE CASCADE)
+		ENGINE = InnoDB;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		SET SQL_MODE=@OLD_SQL_MODE;
+		SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+		SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_types` (`type_id`, `name`, `type_description`, `parent_type`) VALUES (1, 'PUL-Register', NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('STRING');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('INTEGER');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('TIME');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('DATE');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('BOOL');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('ENUM');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('TAGS');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('FILE');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('FILES');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('YEAR');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('OPENHOURS');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('UNKNOWN');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('URL');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('EMAIL');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('PHONE');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('GEO-POINT');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('UINTEGER');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('GEO-AREA');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('MULTISELECT');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('CUSTOM-ENUM');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('SINGLESELECT');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('INFO');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_attribute_types` (`attribute_type_name`) VALUES ('STRINGBOX');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Roll', 'Personuppgiftsansvarig|Personuppgiftsbiträde', 'SINGLESELECT', 1, 'Ange din roll. För vems räkning görs denna förteckning?', 1, NULL, NULL, 1, 'never');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Personuppgiftsansvarig', 'KS (Koncernstaben)|KS (Servicecenter)|KS (Drakfastigheter)|Barn- och utbildningsnämnden|Socialnämnden|Stadsbyggnadsnämnden|Miljönämnden|SEAB|MSV|MRF|Servicenter|Annat', 'SINGLESELECT', 2, 'Ange personuppgiftsansvarig (kan vara nämnd eller bolag). ', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Typer av personuppgift', 'Namn|Adress|Fastighetsbeteckning|Epost|Personnummer|Lön på personnivå|Telefonnummer|Mobilnummer|ip-nummer|Kundnummer|GPS-kordinat kopplat till en individ|Nej, men genom kompletterande uppgifter kan man enkelt identifiera fysiska personer t.ex. utgallring, single out.', 'MULTISELECT', 4, 'Ange vilken typ eller vilka typer av personuppgift eller personuppgifter som behandlas. Begreppet personuppgift är vitt och avser varje information som kan direkt eller indirekt kan identifiera en levande person. Avlidna personer omfattas inte av personuppgiftslagen eller dataskyddsförordningen.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Känsliga personuppgifter', NULL, 'BOOL', 5, 'Förekommer det känsliga personuppgifter? En känslig personuppgift är en uppgift som avslöjar ras/etniskt ursprung, politiska åsikter, religiös/filosofisk övertygelse, medlem i fackförening, hälsa (t ex sjukdomar, allergier), sexualliv, biometriska uppgifter (t ex fingeravtryck, iris) eller genetiska (t ex DNA) uppgifter. OBS, porträttfoton räknas inte som biometrisk uppgift. ', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Ändamål', NULL, 'STRINGBOX', 6, 'Ange ändamålet med personuppgiftsbehandlingen. Varje personuppgiftsbehandling ska som huvudregel utföras för ett förutbestämt ändamål. Om man samlar in personuppgifter från medborgare ska ändamålen vara bestämda innan insamlingen. Ändamålen ska informeras till de registrerade, de får inte vara för allmänt hållna utan måste vara specificerade i viss mån. Ändamålsbestämning utförs för att försäkra de registrerade om att den personuppgiftsansvarige inte behandlar uppgifterna helt godtyckligt. Man får inte byta ändamål med personuppgiftsbehandlingen efter insamlande hur som helst.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Registrerade', 'Anställda|Medborgare i kommunen|Barn|Medborgare i andra kommuner|Utländska medborgare', 'MULTISELECT', 7, 'Ange kategori av registrerade. Dataskyddsförordningen ställer högre krav på behandling av barns personuppgifter. Samtycke kommer att krävas av vårdnadshavare. Vid vilken ålder ska regleras i kommande kompletterande nationell lagstiftning. Särskild information måste lämnas som är anpassad för barn.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Användarkrets', 'Allmänheten|Alla anställda|Flera förvaltningar eller bolag|En förvaltning eller bolag|En eller flera avdelningar inom samma förvaltning eller bolag|Vissa utvalda roller i koncernen', 'MULTISELECT', 8, 'Vilka har direktåtkomst till registret eller systemet?', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Användarkonton', 'Öppet, ingen inloggning|Inloggning som anstäld|Inloggning som medborgare|Inloggning med särskild roll|Systemadmin med personligt konto', 'MULTISELECT', 9, 'Tillgången till registret är begänsat för olika användare genom roller. Finns det inom systemet flera roller för att komma åt olika mycket information tex sök person, se personuppgifter för en person även se personens relationer (maka. barn föräldrar) ta hem personuppgifter för någon som inte bor i kommunen.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Behörighetstilldelning', 'Samtliga användare har samma nivå av behörighet i systemet|Behörighet tilldelas till användare utefter arbetsuppgift', 'SINGLESELECT', 10, 'Hur ser tilldelningen av behörigheter ut? Behörigheter ska vara begränsade till vad som krävs för att utföra de arbetsuppgifter användaren har. Samma identitet ska inte användas för t ex drift, systemadministration och vanlig användning.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Biträdesrelation', 'Nej|Ja, Servicenter IT|Ja, Annan', 'MULTISELECT', 11, 'Föreligger biträdesrelation? Ett personuppgiftsbiträde definieras som en fysisk eller juridisk person, offentlig myndighet eller annat organ som behandlar personuppgifter för den personuppgiftsansvariges räkning. Om den personuppgiftsansvarige lagrar sina uppgifter hos en extern molntjänstleverantör är leverantören att betrakta som biträde. Om en extern leverantör på andra sätt nyttjar den personuppgiftsansvariges uppgifter å den personuppgiftsansvarige vägnar är leverantören också att betrakta som biträde. När uppgifterna enbart behandlas internt i kommunen är som huvudregel servicecenter biträde åt nämnderna.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Personuppgiftsbiträdesavtal', NULL, 'BOOL', 12, 'Finns personuppgiftsbiträdesavtal? Om det föreligger en biträdesrelation ska personuppgiftsbiträdesavtal föreligga. Det är genom avtalet som man reglerar ansvarsfördelningen. I den kommande dataskyddsförordningen finns direkta lagkrav som gäller för personuppgiftsbiträdet, någon motsvarighet föreligger inte i personuppgiftslagen. ', NULL, NULL, NULL, 11, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Bifoga personuppgiftsbiträdesavtal', NULL, 'FILES', 13, NULL, NULL, NULL, NULL, 12, 'true');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Underleverantörer', NULL, 'BOOL', 14, 'Har personuppgiftsbiträdet underleverantörer som har tillgång till den personuppgiftsansvariges personuppgifter? Personuppgiftsbiträdet kan i sin tur ha egna personuppgiftsbiträden som behandlar den personuppgiftsansvariges uppgifter, så kallade underleverantörer eller underbiträden. Det ska framgå i personuppgiftsbiträdesavtalet om biträdet har egna biträden, relationen mellan den personuppgiftsansvarige och underbiträden ska också regleras i personuppgiftsbiträdesavtalet.', NULL, NULL, NULL, 11, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Laglig grund', 'Den registrerade har lämnat sitt samtycke|Avtal ska kunna fullgöras med den registrerade|Den personuppgiftsansvarige ska kunna fullgöra en rättslig skyldighet|Vitala intressen för den registrerade ska skyddas|En arbetsuppgift av allmänt intresse ska kunna utföras|En arbetsuppgift i samband med myndighetsutövning ska kunna utföras|Berättigat intresse för behandlingen väger tyngre än den registrerades intresse av skydd mot kränkning av den personliga integriteten.', 'MULTISELECT', 15, 'Ange enligt vilken eller vilka lagliga grunder som personuppgiftsbehandlingen utförs:', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Samtycke', 'Ja, och det finns samtycke|Ja, men det finns inte|Nej', 'SINGLESELECT', 16, 'Behövs  samtycke? Som utgångspunkt krävs samtycke om man inte kan utföra personuppgiftsbehandling på någon annan rättslig grund som anges i 9§ PuL eller i dataskyddsförordningens motsvarighet artikel 9. Det behövs till exempel inte samtycke vid insamlande av uppgifter som krävs för myndighetsutövning.  Enligt dataskyddsförordningen är personuppgiftsbehandling från barn endast tillåten om det föreligger samtycke från föräldrar. Vid vilken ålder som man räknas som barn får bestämmas i nationell rätt. Sveriges regering utreder förnärvarande vid vilken ålder en person ska räknas som barn.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Särskild registerförfattning', 'Nej|Vet ej|Ja', 'SINGLESELECT', 17, 'Regleras verksamhetens behandling av personuppgifter i en särskild registerförfattning? I nuläget gäller s.k särskilda registerförfattningar jämte personuppgiftslagen. Dessa regelverk gäller främst för myndigheters hantering av personuppgifter inom en specifik verksamhet. Personuppgiftslagen är subsidiär i förhållande till andra författningar, det betyder att om en verksamhets personuppgiftsbehandling faller inom tillämpningsområdet för en särskild registerförfattning så gäller bestämmelserna i den särskilda registerförfatttningen före PuL. Exempel på särskilda registerförfattningar är polisdatalagen, patientdatalagen och lagen om behandling av personuppgifter inom socialtjänsten.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Namn på särskild registerförfattning', NULL, 'STRING', 18, 'Namn', NULL, NULL, NULL, 17, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Insamling', 'Personuppgifterna samlas in från den registrerade själv|Personuppgifterna samlas in från någon annan', 'MULTISELECT', 19, 'Hur samlas personuppgifterna in? Den personuppgiftsansvarige har olika informationsskyldigheter beroende på om personuppgifterna samlas in från den registrerade själv eller från någon annan.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Information registrerade', 'Ja, muntligt|Ja, skriftligt|Ja, på annat sätt|Nej', 'SINGLESELECT', 20, 'Informeras de registrerade om att deras personuppgifter behandlas?', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Lagringstid', 'För evigt|Gallras, ange antal år de sparas', 'SINGLESELECT', 21, 'Hur länge lagras personuppgifterna? Det är viktigt att få en överblick över hur länge personuppgifter lagras. Lagringstiden kan variera beroende på för vilket ändamål. Till exempel måste uppgifter lagras i minst 10 år för bokföringsändamål enligt 11§ kommunala redovisnings lagen.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Langringstid - Antal år', '', 'UINTEGER', 22, NULL, NULL, NULL, NULL, 21, '1');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Utlämning till EU-land', 'Nej|Vet ej|Ja', 'SINGLESELECT', 23, 'Lämnas uppgifter ut ett annat EU-land av leverantör eller dess eventuella underleverantör gäller både nyttjande och lagring? Även om ett personuppgiftsbiträde har sina serverhallar i Sverige, så kan deras underbiträden ha serverhallar i andra länder där den personuppgiftsansvariges uppgifter behandlas.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Lagöverträdelser', NULL, 'BOOL', 25, 'Behandlas uppgifter som rör lagöverträdelser? Strikta krav föreligger vid behandling av uppgifter om lagöverträdelser.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Ange skäl till behandlingen', NULL, 'STRINGBOX', 26, NULL, NULL, NULL, NULL, 25, 'true');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Organisation', NULL, 'STRING', 28, NULL, NULL, NULL, NULL, 23, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'EU-Land', 'Belgien|Bulgarien|Cypern|Danmark|Estland|Finland|Frankrike|Grekland|Irland|Italien|Kroatien|Lettland|Litauen|Luxemburg|Malta|Nederländerna|Polen|Portugal|Rumänien|Slovakien|Slovenien|Spanien|Storbritannien|Sverige|Tjeckien|Tyskland|Ungern|Österrike', 'ENUM', 29, '', NULL, NULL, NULL, 23, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Utlämning tredje land', 'Nej|Vet ej|Ja', 'SINGLESELECT', 30, 'Lämnas uppgifter ut till tredje land av leverantör eller dess eventuella underleverantör gäller både nyttjande och lagring? Även om ett personuppgiftsbiträde har sina serverhallar i Sverige, så kan deras underbiträden ha serverhallar i andra länder där den personuppgiftsansvariges uppgifter behandlas.', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Land utanför EU', 'Afghanistan|Albanien|Algeriet|Amerikanska jungfruöarna|Amerikanska Samoa|Andorra|Angola|Anguilla|Antigua och Barbuda|Argentina|Armenien|Aruba|Australien|Azerbajdzjan|Bahamas|Bahrain|Bangladesh|Barbados|Belize|Benin|Bermuda|Bhutan|Bolivia|Bosnien Hercegovina|Botswana|Brasilien|Brittiska jungfruöarna|Brunei|Burkina Faso|Burma|Burundi|Caymanöarna|Centralafrikanska republiken|Chile|Colombia|Comorerna|Cooköarna|Costa Rica|Dominica|Dominikanska republiken|Ecuador|Egypten|Ekvatorialguinea|El Salvador|Elfenbenskusten|England|Eritrea|Etiopien|Falklandsöarna|Fiji|Filippinerna|Franska Guyana|Franska Polynesien|Färöarna|Gabon|Gambia|Georgien|Ghana|Gibraltar|Grenada|Grönland|Guadeloupe|Guam|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hongkong|Indien|Indonesien|Irak|Iran|Island|Isle of Man|Israel|Jamaica|Japan|Jemen|Jordanien|Kambodja|Kamerun|Kanada|Kenya|Kina|Kiribati|Kongo-Kinshasa|Kuba|Kuwait|Laos|Lesotho|Libanon|Liberia|Libyen|Liechtenstein|Madagaskar|Makedonien|Malawi|Malaysia|Maldiverna|Mali|Marocko|Marshallöarna|Martinique|Mauritius|Mayotte|Mexiko|Mikronesiens federerade stater|Moçambique|Moldavien|Monaco|Mongoliet|Namibia|Nauru|Nederländska Antillerna|Nepal|Nicaragua|Niger|Nigeria|Nordkorea|Norge|Nya Zeeland|Oman|Pakistan|Panama|Papua Nya Guinea|Paraguay|Peru|Pitcairnöarna|Puerto Rico|Reunion|Rwanda|Ryssland|Saint Christopher och Nevis|Saint Helena|Saint Lucia|Saint Vincent och Grenadinerna|Saint-Pierre-et-Miquelon|Salomonöarna|Samoa|São Tomé och Príncipe|Saudiarabien|Schweiz|Senegal|Serbien|Sierra Leone|Singapore|Skottland|Sri Lanka|Sudan|Surinam|Swaziland|Sydafrika|Sydkorea|Syrien|Taiwan|Tanzania|Tchad|Thailand|Togo|Tonga|Trinidad och Tobago|Tunisien|Turkiet|Turkmenistan|Turks- och Caicosöarna|Tuvalu|Uganda|Ukraina|Uruguay|USA|Uzbekistan|Vanuatu|Venezuela|Vietnam|Vitryssland|Wales|Wallis och Futuna|Zambia|Zimbabwe|Österrike|Östtimor', 'ENUM', 31, 'Välj vilket land utanför EU det gäller.', NULL, NULL, NULL, 30, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Organisation eller företag', NULL, 'STRING', 32, NULL, NULL, NULL, NULL, 30, '2');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Information', 'För USA krävs ett specialskrivet personuppgiftsbiträdesavtal.', 'INFO', 33, NULL, NULL, NULL, NULL, 31, '171');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Annan', '', 'STRING', 35, 'Ange personuppgiftsansvarig', NULL, NULL, NULL, 2, '11');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Information gällande intresse för behandlingen', 'Detta alternativ kommer att försvinna med dataskyddsförordningen.', 'INFO', 36, NULL, NULL, NULL, NULL, 15, '6');
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Kontaktuppgifter', NULL, 'STRING', 37, 'Namn', NULL, NULL, NULL, NULL, NULL);
+		
+		]]>
+		</Query>
+		<Query>
+		<![CDATA[
+		INSERT INTO `node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES (1, 'Mail', NULL, 'STRING', 38, 'Skriv in mail-addressen för kontaktpersonen (ex: kontaktperson@bolag.com)', NULL, NULL, NULL, 37, NULL);
+		
+		]]>
+		</Query>
+
+	</Script>
+	
+	<Script version="3">
+		
+		<Query>
+		<![CDATA[
+			CREATE FUNCTION f_exists_procedure(in_name VARCHAR(255))
+			RETURNS BIT DETERMINISTIC
+			BEGIN
+			SELECT COUNT(1) INTO @f_result
+			FROM information_schema.ROUTINES as info
+			WHERE info.ROUTINE_SCHEMA = DATABASE() AND info.ROUTINE_TYPE = 'PROCEDURE'
+			AND info.ROUTINE_NAME = in_name;
+
+			RETURN @f_result;
+
+			END;
+		]]>
+		</Query>
+		
+		<Query>
+		<![CDATA[
+			CREATE FUNCTION GeoToText(g geometry)
+			RETURNS MEDIUMTEXT
+			BEGIN
+
+			IF f_exists_procedure('ST_ASTEXT') THEN
+			return ST_ASTEXT(g);
+			ELSE
+			return AsText(g);
+			END IF;
+
+			RETURN NULL;
+
+			END;
+		]]>
+		</Query>
+		
+	</Script>
+	
+</DBScripts>
