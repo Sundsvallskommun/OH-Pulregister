@@ -23,6 +23,8 @@
   <xsl:template match="Nodes">  
   
   <div class="panel-content pull-right" style="margin-right: 50px;">
+  	<button type="button" onclick="location.href='{/document/requestinfo/currentURI}/{/document/module/alias}/exportemptycsv'; return false" class="btn btn-default biggermargintop"><span class="glyphicon glyphicon-export"></span>&#160;Exportera tom mall</button>
+    <span class="hspace20"></span>
     <button type="button" onclick="location.href='{/document/requestinfo/currentURI}/{/document/module/alias}/exportcsv'; return false" class="btn btn-default biggermargintop"><span class="glyphicon glyphicon-export"></span>&#160;Exportera till CSV</button>
     <span class="hspace20"></span>
     <button type="button" onclick="location.href='{/document/requestinfo/currentURI}/{/document/module/alias}/addfacility/1'; return false" class="btn btn-success biggermargintop"><span class="glyphicon glyphicon-plus"></span>&#160;Skapa ny</button>

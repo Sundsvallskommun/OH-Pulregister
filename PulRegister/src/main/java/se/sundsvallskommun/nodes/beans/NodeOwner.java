@@ -79,6 +79,7 @@ public class NodeOwner extends GeneratedElementable implements SearchableItem, S
 	private String editUrl;
 	
 	@DAOManaged(columnName = "node_owner_group")
+	@XMLElement
 	private Integer groupOwnerID;
 	
 	

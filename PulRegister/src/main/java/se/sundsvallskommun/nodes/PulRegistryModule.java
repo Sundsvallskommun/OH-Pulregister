@@ -459,6 +459,32 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		return null;
 	}
 
+	//Export an empty csv file with only headers
+    @WebPublic(toLowerCase = true)
+    public ForegroundModuleResponse exportemptyCsv(HttpServletRequest req, HttpServletResponse res, User user,
+                            URIParser uriParser) throws IOException, AccessDeniedException, SQLException {
+                
+    
+    String delimiter = ";";
+        String lineSeparator = System.getProperty("line.separator");
+                String csvString = "Namn";
+                List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
+                
+                for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
+                            
+                            csvString += delimiter + tAttrib.getName();
+                }
+                
+                csvString += lineSeparator;
+                
+                InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
+                
+                HTTPUtils.sendFile( inputStream, "mall.csv", "application/csv", "", req, res, ContentDisposition.INLINE );
+                
+                return null;
+    }
+
+	
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse getTagsJson(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws AccessDeniedException, SQLException, IOException {

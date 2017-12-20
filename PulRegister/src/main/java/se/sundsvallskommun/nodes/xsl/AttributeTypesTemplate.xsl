@@ -371,7 +371,6 @@
 		<xsl:param name="multi" select="null"/>
 		<xsl:param name="selectAllOption" select="false"/>
 		
-							
 		<xsl:call-template name="ApplyAttributeDescription"/>
 		
 		<div class="pannel panel-body panel-default">
@@ -381,12 +380,14 @@
 				</xsl:if>
 				<xsl:attribute name="size"><xsl:value-of select="count(choices/choice)"/></xsl:attribute>			
 				<xsl:for-each select="choices/choice">
+				<xsl:if test="name!=''">
 					<option value="{value}">						
 						<xsl:if test="selected">
 							<xsl:attribute name="selected"/>
 						</xsl:if>			
 						<xsl:value-of select="name"/>
 					</option>
+				</xsl:if>
 				</xsl:for-each>
 			</select>			
 			<script type="text/javascript">

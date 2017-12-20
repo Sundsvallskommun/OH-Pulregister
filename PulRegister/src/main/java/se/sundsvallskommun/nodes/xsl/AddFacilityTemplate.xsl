@@ -31,7 +31,15 @@
 				Lägg till
 				<xsl:value-of select="NodeTypes/NodeType/name"></xsl:value-of>
 			</h2>		
-			
+			<div id="save_message_top" style="background:white;width:auto;position:sticky;top:0;z-index:2;">
+				<div class="panel-body">
+					<span id="time_left_message"></span>
+					<span onclick="onClickSubmit()" class="btn btn-success pull-right">
+						<span class="glyphicon glyphicon-edit"></span>
+						Lägg till
+					</span>
+				</div>
+			</div>
 			<form id="dynamic_attributes_form" class="form-horizontal" role="form" action="{/document/requestinfo/url}"
 				method="post" enctype="multipart/form-data" onsubmit="return false;">	
 				
@@ -367,15 +375,12 @@
 	</xsl:template>
 
 	<xsl:template name="IterateTemplateAttributes">
-		<!-- 
 		<xsl:for-each
 			select="NodeTypes/NodeType/NodeTemplateAttributes/NodeTemplateAttribute">
 
 			<xsl:call-template name="HandleTemplateAttributeType" />
 
 		</xsl:for-each>
-		 -->
-		<xsl:apply-templates select="NodeTypes" />
 	</xsl:template>
 	
 	<xsl:template match="NodeTags">
