@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete 5 resources" deleteContents="false" description="Delete 5 resources" element1="/pulregister.sundsvall.se/WebContent/WEB-INF/config.xml" element2="/pulregister.sundsvall.se/WebContent/WEB-INF/log4j.dtd" element3="/pulregister.sundsvall.se/WebContent/WEB-INF/log4j.xml" element4="/pulregister.sundsvall.se/WebContent/WEB-INF/SDAS715.config.xml" element5="/pulregister.sundsvall.se/WebContent/WEB-INF/SDAS715.log4j.xml" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="5" stamp="1491315062541"/>
-</session>

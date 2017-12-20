@@ -169,7 +169,7 @@
 	<xsl:template name="AddNotesSection">
 	
 		<div id="{AttributeDetails}-notes-div" style="display:none;">
-			<h3 class="pull-right">Anteckningar <a href="javascript:$('[id=&quot;{AttributeDetails}-notes-div&quot;]').slideUp();"><span title="Dölj" class="glyphicon glyphicon-chevron-up pull-right" style="color:rgba(0,0,0,0.2);padding-left: 5px;"/></a> </h3>
+			<h3 class="pull-right">Anteckningar <a href="javascript:void(0);" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').slideUp();"><span title="Dölj" class="glyphicon glyphicon-chevron-up pull-right" style="color:rgba(0,0,0,0.2);padding-left: 5px;"/></a> </h3>
 			
 			<textarea type="text" id="{AttributeDetails}|note" name="{AttributeDetails}|note" rows="5" style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;"><xsl:value-of select="Note/NodeAttributeNote/value"/></textarea>			
 		</div>
@@ -183,7 +183,7 @@
 			var currentAttributeDetail = '<xsl:value-of select="AttributeDetails"/>';
 		</script>
 	
-		<article requiredcontent="{required}" name="{AttributeDetails}">
+		<article requiredcontent="{required}" name="{AttributeDetails}" requiredaction="{requiredAction}">
 			
 			<xsl:if test="NodeTemplateAttribute/parentTemplateAttribute">
 				<xsl:attribute name="parentTemplate"><xsl:value-of select="NodeTemplateAttribute/parentTemplateAttribute"/></xsl:attribute>
@@ -287,6 +287,13 @@
 				$("[id='<xsl:value-of select="AttributeDetails"/>']").on("change", function(event) { 
 				     updateDynamicAttributes(this);
 				} );
+				
+				var requiredActionBGColor = "#f7f777";
+				<xsl:if test="requiredAction='true'">
+					$("article[name='<xsl:value-of select="AttributeDetails"/>']").css('background', requiredActionBGColor);
+					$("[id='<xsl:value-of select="AttributeDetails"/>-notes-div']").show();
+				</xsl:if>
+				
 			</script>
 			
 		</article>

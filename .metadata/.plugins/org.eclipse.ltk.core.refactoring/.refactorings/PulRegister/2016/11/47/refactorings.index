@@ -1,4 +1,0 @@
-1479739401826	Rename resource 'FacilityRestOperations'
-1479740023135	Rename resource 'RequestContext.java'
-1479740042865	Rename type 'RequestContext'
-1479823790877	Extract method 'nodeToJson'

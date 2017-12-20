@@ -1,4 +1,0 @@
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Lite b\u00E4ttre hantering av krav p\u00E5 geometri.</message>\r\n<message>Lagt till verifiering av obligatoriska f\u00E4lt.</message>\r\n<message>P\u00E5b\u00F6rjat REST-API.</message>\r\n<message>Lagt till st\u00F6d f\u00F6r beskrivning av attribut och en dbscript.xml.</message>\r\n<message>Showfacility visar lite mer. P\u00E5b\u00F6rjat editering av nodtyper. Fixat s\u00E5&\#x0A;det ser lite b\u00E4ttre ut i IE11.</message>\r\n<message>Filhantering klar.</message>\r\n<message>Kart-funktionalitet (sparar ej geo-data till db).</message>\r\n<message>Halvf\u00E4rdiga tags. Halvf\u00E4rdig file-upload.</message>\r\n<message>P\u00E5b\u00F6rjat taggar.</message>\r\n<message>Uppdelning av anl\u00E4ggning,byggnad och serviceobjekt.</message>\r\n</messages>
-eclipse.preferences.version=1
-resourcehistory_graph_split=792,207
-resourcehistory_rev_split=700,300

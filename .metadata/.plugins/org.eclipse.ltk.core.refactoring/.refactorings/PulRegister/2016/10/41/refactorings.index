@@ -1,5 +1,0 @@
-1476086545698	Rename resource 'FacilityNodeFile.java'
-1476099447611	Extract method 'decodeKey'
-1476218431917	Rename resource 'FacilityNodeTag'
-1476274983378	Rename local variable 'existingTags'
-1476277891691	Extract method 'handleNewTags'

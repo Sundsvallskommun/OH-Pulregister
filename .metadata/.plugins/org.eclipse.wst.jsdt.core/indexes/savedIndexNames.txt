@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+/home/nikander/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-1765950844.index
-5545605.index
-2245677945.index
-4108262111.index
-240985052.index
-3160975896.index
-788546957.index

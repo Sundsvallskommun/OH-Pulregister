@@ -38,6 +38,14 @@
 					
 					$( document ).ready(function() {
     					updateDynamicAttributes();
+    					
+    					$( "article" ).each(function() {
+						  if($(this).parent().attr('requiredaction')=="true"){
+						  	var parentBGColor = $(this).parent().css('background-color');
+						  	$(this).css('background-color',parentBGColor);
+						  }
+						});
+						    					
     					setInterval(updateTimeLeftMessage, 30000);
     					
     					/*alert(lastLogin);*/
@@ -133,7 +141,7 @@
 		 
 		<xsl:for-each
 			select="NodeOwner/NodeAttributes/NodeAttribute">
-
+			
 			<xsl:call-template name="HandleTemplateAttributeType" />
 
 		</xsl:for-each>

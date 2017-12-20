@@ -45,3 +45,6 @@ INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`
 
 INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`) VALUES ('1', 'Status', 'Ej påbörjad|Påbörjad|Klar', 'ENUM', '64');
 
+ALTER TABLE `register.sundsvall.se`.`node_attributes` 
+ADD COLUMN `required_action` TINYINT(1) NULL AFTER `template_id`;
+
