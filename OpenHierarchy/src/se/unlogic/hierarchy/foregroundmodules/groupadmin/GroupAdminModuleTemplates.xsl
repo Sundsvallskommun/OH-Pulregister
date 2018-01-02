@@ -18,6 +18,14 @@
 	</xsl:variable>
 
 	<xsl:template match="Document">
+	<script>
+		function filterInputField(inputField)
+					{
+						var data = inputField.val();
+						data = data.replace(/[^-\w\s]/gi,'');
+						inputField.val(data);
+					}
+	</script>
 		<div class="contentitem">			
 			<xsl:apply-templates select="Groups"/>
 			<xsl:apply-templates select="AddGroup"/>
@@ -114,7 +122,7 @@
 			<table>
 				<tr>
 					<td><xsl:value-of select="$name"/>:</td>
-					<td><input type="text" name="name" size="40" value="{requestparameters/parameter[name='name']/value}"/></td>
+					<td><input type="text" name="name" id="nameField" size="40" value="{requestparameters/parameter[name='name']/value}"/></td>
 				</tr>
 				<tr>
 					<td><xsl:value-of select="$description"/>:</td>
@@ -154,7 +162,7 @@
 			<xsl:call-template name="AddEditFormData"/>
 			
 			<div align="right">
-				<input type="submit" value="{$addGroup}"/>			
+				<input type="submit" value="{$addGroup}" onclick="filterInputField($('#nameField'))"/>			
 			</div>
 		</form>
 	</xsl:template>
@@ -170,7 +178,7 @@
 				<tr>
 					<td><xsl:value-of select="$name"/>:</td>
 					<td>
-						<input type="text" name="name" size="40">
+						<input type="text" name="name" id="nameField" size="40">
 							<xsl:attribute name="value">
 								<xsl:choose>
 									<xsl:when test="requestparameters">
@@ -242,7 +250,7 @@
 			<xsl:call-template name="AddEditFormData"/>
 			
 			<div align="right">
-				<input type="submit" value="{$saveChanges}"/>			
+				<input type="submit" value="{$saveChanges}" onclick="filterInputField($('#nameField'))"/>			
 			</div>
 		</form>
 	</xsl:template>	

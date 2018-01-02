@@ -13,6 +13,7 @@ import se.unlogic.standardutils.dao.annotations.OneToMany;
 import se.unlogic.standardutils.dao.annotations.Table;
 import se.unlogic.standardutils.xml.GeneratedElementable;
 import se.unlogic.standardutils.xml.XMLElement;
+import se.unlogic.standardutils.xml.XMLUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,10 +42,12 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 	@XMLElement
 	private String value;
 	
-	@DAOManaged(columnName = "required_action")
+	/*
+	@DAOManaged
+	@WebPopulate
 	@XMLElement
 	private Boolean requiredAction;
-	
+	*/
 	
 	@DAOManaged
 	@OneToMany(autoGet=true,autoAdd=true,autoUpdate=true)
@@ -62,7 +65,7 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 					this.getName(),
 					this.getType(),
 					this.getAttributeID(),
-					this.getTemplateID() != null ? this.getTemplateID().getTemplateAttributeID() : -1 );
+					this.getTemplateID() != null ? this.getTemplateID().getTemplateAttributeID() : -1 );			
 			return element;			
 		} catch (UnsupportedEncodingException e) {
 			return null;			
@@ -175,7 +178,7 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 		this.note.add(note);
 	}
 
-
+	/*
 	public Boolean getRequiredAction() {
 		return requiredAction;
 	}
@@ -183,6 +186,6 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 	public void setRequiredAction(Boolean requiredAction) {
 		this.requiredAction = requiredAction;
 	}
-
+	*/
 	
 }

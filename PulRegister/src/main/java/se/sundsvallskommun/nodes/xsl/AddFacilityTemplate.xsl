@@ -65,7 +65,34 @@
 					$( document ).ready(function() {
 					
     					updateDynamicAttributes();
+    					
+    					$("input").on("change", function(event) { 
+				     		if($(this).parent().text().trim() == "Åtgärder krävs"){
+				     			var parentArticle =  $(this).closest("article").parent("article");
+				     			if($(this).closest("li").attr("class") == "active"){
+						     		updateRequiredAction(parentArticle,1);
+					     		}
+					     		else{
+					     			updateRequiredAction(parentArticle,0);
+					     		}
+				     		}
+						} );
 					});
+					
+					function updateRequiredAction(updatedArticle,isChecked){
+						var BGColor;
+						if(isChecked){
+							BGColor = "#f7f777";
+							updatedArticle.children(".notes-div").first().slideDown();
+						}else{
+							BGColor = "#f7f7f7";
+						}
+						updatedArticle.css('background-color',BGColor);
+						updatedArticle.find("article").css('background-color',BGColor);
+						updatedArticle.find(".line-divider").css('border', '1px '+BGColor);
+					}
+					
+					
 					
 					
 					]]>					
@@ -141,7 +168,19 @@
 	
 	
 	<xsl:template name="AddMenuButton">
-	
+	<!-- 
+		<xsl:call-template name="createCheckbox">
+			<xsl:with-param name="id" select="AttributeDetails" />
+			<xsl:with-param name="name" select="AttributeDetails" />
+			<xsl:with-param name="checked" select="requiredAction" />
+			<xsl:with-param name="value" select="requiredAction"/>
+		</xsl:call-template>Åtgärder krävs
+		 -->
+		<!-- 
+		<input type='hidden' value='false' name="{AttributeDetails}_requiredAction" class="hiddenRequiredCheckBox"/>
+		<input type="checkbox" id="{AttributeDetails}-requiredActionCheckbox" name="{AttributeDetails}_requiredAction" class="requiredActionCheckbox" value="{requiredAction}"/>
+		Åtgärder krävs
+		 -->
 		
 		
 		<a data-toggle="dropdown" href="javascript:void(0);" title="Alternativ"><div name="hamburger-menu-button" style="color:rgba(0,0,0,0.2);" onclick="" class="upper-left-corner glyphicon glyphicon-menu-hamburger"></div></a>
@@ -168,7 +207,7 @@
 	
 	<xsl:template name="AddNotesSection">
 	
-		<div id="{AttributeDetails}-notes-div" style="display:none;">
+		<div id="{AttributeDetails}-notes-div" style="display:none;" class="notes-div">
 			<h3 class="pull-right">Anteckningar <a href="javascript:void(0);" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').slideUp();"><span title="Dölj" class="glyphicon glyphicon-chevron-up pull-right" style="color:rgba(0,0,0,0.2);padding-left: 5px;"/></a> </h3>
 			
 			<textarea type="text" id="{AttributeDetails}|note" name="{AttributeDetails}|note" rows="5" style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;"><xsl:value-of select="Note/NodeAttributeNote/value"/></textarea>			
@@ -183,7 +222,7 @@
 			var currentAttributeDetail = '<xsl:value-of select="AttributeDetails"/>';
 		</script>
 	
-		<article requiredcontent="{required}" name="{AttributeDetails}" requiredaction="{requiredAction}">
+		<article requiredcontent="{required}" name="{AttributeDetails}" >
 			
 			<xsl:if test="NodeTemplateAttribute/parentTemplateAttribute">
 				<xsl:attribute name="parentTemplate"><xsl:value-of select="NodeTemplateAttribute/parentTemplateAttribute"/></xsl:attribute>
@@ -249,6 +288,9 @@
 			<xsl:if test="type='STRING'">
 				<xsl:call-template name="StringType" />
 			</xsl:if>
+			<xsl:if test="type='SPECIALSTRING'">
+				<xsl:call-template name="StringType" />
+			</xsl:if>
 			<xsl:if test="type='STRINGBOX'">
 				<xsl:call-template name="StringBoxType" />
 			</xsl:if>			
@@ -288,11 +330,19 @@
 				     updateDynamicAttributes(this);
 				} );
 				
-				var requiredActionBGColor = "#f7f777";
+				
+				<!-- 
+				$("[id='<xsl:value-of select="AttributeDetails"/>-requiredActionCheckbox']").on("change", function(event) { 
+				     updateRequiredAction($("article[name='<xsl:value-of select="AttributeDetails"/>']"));
+				} );
+				
 				<xsl:if test="requiredAction='true'">
+					var requiredActionBGColor = "#f7f777";
 					$("article[name='<xsl:value-of select="AttributeDetails"/>']").css('background', requiredActionBGColor);
 					$("[id='<xsl:value-of select="AttributeDetails"/>-notes-div']").show();
+					$("[id='<xsl:value-of select="AttributeDetails"/>-requiredActionCheckbox']").prop('checked', true);
 				</xsl:if>
+				 -->
 				
 			</script>
 			

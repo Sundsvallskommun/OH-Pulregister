@@ -27,6 +27,7 @@
 					
 					function onClickSubmit()
 					{
+						
 						if (typeof mapInitialized !== 'undefined' && mapInitialized ){
 						 
 							updateGeo();
@@ -39,17 +40,44 @@
 					$( document ).ready(function() {
     					updateDynamicAttributes();
     					
-    					$( "article" ).each(function() {
-						  if($(this).parent().attr('requiredaction')=="true"){
-						  	var parentBGColor = $(this).parent().css('background-color');
-						  	$(this).css('background-color',parentBGColor);
-						  }
+    					$("input").on("change", function(event) { 
+				     		if($(this).parent().text().trim() == "Åtgärder krävs"){
+				     			var parentArticle =  $(this).closest("article").parent("article");
+				     			if($(this).closest("li").attr("class") == "active"){
+						     		updateRequiredAction(parentArticle,1);
+					     		}
+					     		else{
+					     			updateRequiredAction(parentArticle,0);
+					     		}
+				     		}
+						} );
+						$( "input" ).each(function() {
+							if($(this).parent().text().trim() == "Åtgärder krävs"){
+				     			var parentArticle =  $(this).closest("article").parent("article");
+				     			if($(this).closest("li").attr("class") == "active"){
+						     		updateRequiredAction(parentArticle,1);
+					     		}
+				     		}		
 						});
-						    					
-    					setInterval(updateTimeLeftMessage, 30000);
-    					
-    					/*alert(lastLogin);*/
+										
+    					//setInterval(updateTimeLeftMessage, 30000);
+
 					});		
+					
+					
+					function updateRequiredAction(updatedArticle,isChecked){
+						var BGColor;
+						if(isChecked){
+							BGColor = "#f7f777";
+							updatedArticle.children(".notes-div").first().slideDown();
+						}else{
+							BGColor = "#f7f7f7";
+						}
+						updatedArticle.css('background-color',BGColor);
+						updatedArticle.find("article").css('background-color',BGColor);
+						updatedArticle.find(".line-divider").css('border', '1px '+BGColor);
+					}
+					
 					
 					function updateTimeLeftMessage(){
 						showTimeLeftMessage(123);

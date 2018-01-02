@@ -347,47 +347,49 @@
 					<xsl:variable name="paramValue" select="$requestparameters/parameter[name=$name]/value"/>
 				
 					<xsl:for-each select="$element">
-						<option value="{*[name()=$valueElementName]}">
-							<xsl:choose>
-								<xsl:when test="$requestparameters">
-									<xsl:if test="$paramValue = *[local-name()=$valueElementName]">
-										<xsl:attribute name="selected">selected</xsl:attribute>
-									</xsl:if>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:if test="*[name()=$valueElementName] = $selectedValue">
-										<xsl:attribute name="selected">selected</xsl:attribute>
-									</xsl:if>
-								</xsl:otherwise>
-							</xsl:choose>
-							
-							<xsl:if test="$labelPrefix">
-								<xsl:value-of select="$labelPrefix"/>
-							</xsl:if>
-							
-							<xsl:value-of select="*[name()=$labelElementName]" />
-							
-							<xsl:if test="$labelDelimiter">
-								<xsl:text>&#160;</xsl:text><xsl:value-of select="$labelDelimiter"/>
-							</xsl:if>
-							
-							<xsl:if test="$labelElementName2Parenthesis">
-								<xsl:text>&#160;(</xsl:text>
-							</xsl:if>
-							
-							<xsl:if test="$labelElementName2">
-								<xsl:if test="not($labelElementName2Parenthesis)">
-									<xsl:text>&#160;</xsl:text>
+						<xsl:if test="name!=''">
+							<option value="{*[name()=$valueElementName]}">
+								<xsl:choose>
+									<xsl:when test="$requestparameters">
+										<xsl:if test="$paramValue = *[local-name()=$valueElementName]">
+											<xsl:attribute name="selected">selected</xsl:attribute>
+										</xsl:if>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="*[name()=$valueElementName] = $selectedValue">
+											<xsl:attribute name="selected">selected</xsl:attribute>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>
+								
+								<xsl:if test="$labelPrefix">
+									<xsl:value-of select="$labelPrefix"/>
 								</xsl:if>
 								
-								<xsl:value-of select="*[name()=$labelElementName2]" />
-							</xsl:if>
-							
-							<xsl:if test="$labelElementName2Parenthesis">
-								<xsl:text>)</xsl:text>
-							</xsl:if>
-							
-						</option>
+								<xsl:value-of select="*[name()=$labelElementName]" />
+								
+								<xsl:if test="$labelDelimiter">
+									<xsl:text>&#160;</xsl:text><xsl:value-of select="$labelDelimiter"/>
+								</xsl:if>
+								
+								<xsl:if test="$labelElementName2Parenthesis">
+									<xsl:text>&#160;(</xsl:text>
+								</xsl:if>
+								
+								<xsl:if test="$labelElementName2">
+									<xsl:if test="not($labelElementName2Parenthesis)">
+										<xsl:text>&#160;</xsl:text>
+									</xsl:if>
+									
+									<xsl:value-of select="*[name()=$labelElementName2]" />
+								</xsl:if>
+								
+								<xsl:if test="$labelElementName2Parenthesis">
+									<xsl:text>)</xsl:text>
+								</xsl:if>
+								
+							</option>
+						</xsl:if>
 					</xsl:for-each>
 					
 				</xsl:otherwise>
