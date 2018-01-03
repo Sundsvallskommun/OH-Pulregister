@@ -27,6 +27,7 @@ import se.unlogic.hierarchy.core.enums.URLType;
 import se.unlogic.hierarchy.core.exceptions.AccessDeniedException;
 import se.unlogic.hierarchy.core.exceptions.URINotFoundException;
 import se.unlogic.hierarchy.core.interfaces.ForegroundModuleResponse;
+import se.unlogic.hierarchy.foregroundmodules.login.BaseLoginModule;
 import se.unlogic.standardutils.dao.CRUDDAO;
 import se.unlogic.standardutils.validation.ValidationError;
 import se.unlogic.standardutils.validation.ValidationException;
@@ -128,6 +129,9 @@ public abstract class GenericCRUD<BeanType extends Elementable, IDType, UserType
 		SimpleForegroundModuleResponse moduleResponse = createAddFormModuleResponse(doc, req, user, uriParser);
 
 		moduleResponse.addBreadcrumbsLast(this.getAddBreadcrumbs(req, user, uriParser));
+		
+		XMLUtils.appendNewElement(doc, addTypeElement, "sessionTimeout", user.getSession().getMaxInactiveInterval());
+		XMLUtils.appendNewElement(doc, addTypeElement, "sessionLastAccess", user.getSession().getLastAccessedTime());
 
 		return moduleResponse;
 	}
@@ -296,7 +300,9 @@ public abstract class GenericCRUD<BeanType extends Elementable, IDType, UserType
 		SimpleForegroundModuleResponse moduleResponse = createUpdateFormModuleResponse(bean, doc, req, user, uriParser);
 
 		moduleResponse.addBreadcrumbsLast(getUpdateBreadcrumbs(bean,req, user, uriParser));
-
+		
+		XMLUtils.appendNewElement(doc, updateTypeElement, "sessionTimeout", user.getSession().getMaxInactiveInterval());
+		XMLUtils.appendNewElement(doc, updateTypeElement, "sessionLastAccess", user.getSession().getLastAccessedTime());
 		return moduleResponse;
 	}
 

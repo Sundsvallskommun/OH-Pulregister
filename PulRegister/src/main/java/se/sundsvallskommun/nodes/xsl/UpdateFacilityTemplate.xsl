@@ -13,7 +13,9 @@
 		<script>
 			var isAdding = false;
 			var isUpdating = true;
-			var lastLogin = '<xsl:value-of select="NodeOwner/NodeType/name"/>';
+			
+			var sessionTimeout = <xsl:value-of select="sessionTimeout"></xsl:value-of>;
+			function getCurrentLogin(){ return new Date(<xsl:value-of select="sessionLastAccess"></xsl:value-of>);}
 		</script>
 
 		<script>
@@ -60,7 +62,7 @@
 				     		}		
 						});
 										
-    					//setInterval(updateTimeLeftMessage, 30000);
+    					setInterval(updateTimeLeftMessage, 10000);
 
 					});		
 					
@@ -80,29 +82,35 @@
 					
 					
 					function updateTimeLeftMessage(){
-						showTimeLeftMessage(123);
-						$("#time_left_message").text($.now());
+						currentLogin = getCurrentLogin();
+						currentTime = new Date($.now());
+						timeSinceLogin = Math.floor((currentTime - currentLogin)/(1000));
+						timeLeft = sessionTimeout - timeSinceLogin;
+						showTimeLeftMessage(timeLeft);
 					}	
 					
 					function showTimeLeftMessage(loginTimeRemaining)
 					{
-						if(loginTimeRemaining <= 300)
+						if(loginTimeRemaining <= 5*60)
 						{
-							var timeLeftInMinutes = Math.floor(loginTimeRemaining/60);
 							var message;
-							if(loginTimeRemaining <60)
-							{
-								$("#time_left_message").text("Du kommer att loggas ut om mindre än 1 minut. Icke sparade ändringar kommer att förloras!");
+							if(loginTimeRemaining <0){
+								$("#time_left_message").html(' <a target="_blank" href="/login"><font color="black"><b>Du har blivit utloggad. <i>Klicka här</i> för att logga in igen innan du sparar.</b></font></a> ');
 								$('#save_message_top').css({background: 'red'});
+							}
+							else if(loginTimeRemaining <1*60)
+							{
+								$("#time_left_message").text("Du kommer att loggas ut om mindre än 1 minut.");
+								$('#save_message_top').css({background: 'orange'});
 							}else 
 							{						
 								$('#save_message_top').css({background: 'yellow'});
-								if(timeLeftInMinutes == 1){ 
+								if(Math.floor((loginTimeRemaining)/(60)) == 1){ 
 									message = "Du kommer att loggas ut om 1 minut.";
 								}
 								else
 								{
-							    	message = "Du kommer att loggas ut om " + timeLeftInMinutes + " minuter.";
+							    	message = "Du kommer att loggas ut om " + Math.floor((loginTimeRemaining)/(60)) + " minuter."; 
 						    	}
 								$("#time_left_message").text(message);
 							}

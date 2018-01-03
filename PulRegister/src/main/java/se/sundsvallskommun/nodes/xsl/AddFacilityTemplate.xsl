@@ -13,6 +13,9 @@
 		<script>
 			var isAdding = true;
 			var isUpdating = false;
+			
+			var sessionTimeout = <xsl:value-of select="sessionTimeout"></xsl:value-of>;
+			function getCurrentLogin(){ return new Date(<xsl:value-of select="sessionLastAccess"></xsl:value-of>);}
 		</script>
 		
 		<xsl:call-template name="DynamicAttributesInit"/>		
@@ -77,6 +80,7 @@
 					     		}
 				     		}
 						} );
+						setInterval(updateTimeLeftMessage, 20000);
 					});
 					
 					function updateRequiredAction(updatedArticle,isChecked){
@@ -92,7 +96,47 @@
 						updatedArticle.find(".line-divider").css('border', '1px '+BGColor);
 					}
 					
+					function updateTimeLeftMessage(){
+						currentLogin = getCurrentLogin();
+						currentTime = new Date($.now());
+						timeSinceLogin = Math.floor((currentTime - currentLogin)/(1000));
+						timeLeft = sessionTimeout - timeSinceLogin;
+						showTimeLeftMessage(timeLeft);
+					}	
 					
+					function showTimeLeftMessage(loginTimeRemaining)
+					{
+						if(loginTimeRemaining <= 5*60)
+						{
+							var message;
+							if(loginTimeRemaining <0){
+								$("#time_left_message").html(' <a target="_blank" href="/login"><font color="black"><b>Du har blivit utloggad. <i>Klicka här</i> för att logga in igen innan du sparar.</b></font></a> ');
+								$('#save_message_top').css({background: 'red'});
+							}
+							else if(loginTimeRemaining <1*60)
+							{
+								$("#time_left_message").text("Du kommer att loggas ut om mindre än 1 minut.");
+								$('#save_message_top').css({background: 'orange'});
+							}else 
+							{						
+								$('#save_message_top').css({background: 'yellow'});
+								if(Math.floor((loginTimeRemaining)/(60)) == 1){ 
+									message = "Du kommer att loggas ut om 1 minut.";
+								}
+								else
+								{
+							    	message = "Du kommer att loggas ut om " + Math.floor((loginTimeRemaining)/(60)) + " minuter."; 
+						    	}
+								$("#time_left_message").text(message);
+							}
+						    
+						}
+						else
+						{
+							$('#save_message_top').css({background: 'white'});
+							$("#time_left_message").text("");
+						}
+					}
 					
 					
 					]]>					
