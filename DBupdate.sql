@@ -105,4 +105,10 @@ INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`
 
 INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `parent_template_attribute`) VALUES ('1', '', 'Åtgärder krävs', 'MULTISELECT', '123', '64');
 
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `value`='', `value_type`='BOOL' WHERE `template_attribute_id`='42';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `show_only_when_value_equals`='true' WHERE `template_attribute_id`='43';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `value`='', `value_type`='BOOL' WHERE `template_attribute_id`='40';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `show_only_when_value_equals`='true' WHERE `template_attribute_id`='41';
+
+
 
