@@ -14,10 +14,9 @@
 			var isAdding = true;
 			var isUpdating = false;
 			
-			var sessionTimeout = <xsl:value-of select="sessionTimeout"></xsl:value-of>;
-			function getCurrentLogin(){ return new Date(<xsl:value-of select="sessionLastAccess"></xsl:value-of>);}
 		</script>
 		
+		<xsl:call-template name="FormScripts"/>
 		<xsl:call-template name="DynamicAttributesInit"/>		
 		<xsl:call-template name="AddMapGeoDataVariable"/>
 	
@@ -45,103 +44,7 @@
 			</div>
 			<form id="dynamic_attributes_form" class="form-horizontal" role="form" action="{/document/requestinfo/url}"
 				method="post" enctype="multipart/form-data" onsubmit="return false;">	
-				
-				<script>
-					<![CDATA[					
-					
-					function afterVerification(verified)
-					{
-						mapClient.map.updateSize();
-						console.log("update map");
-					}
-					
-					function onClickSubmit()
-					{
-						if (typeof mapInitialized !== 'undefined' && mapInitialized ){
-						 
-							updateGeo();
-							verifyAndSubmit(afterVerification);
-						}
-						else verifyAndSubmit(function(){});						
-					}
-					
-					$( document ).ready(function() {
-					
-    					updateDynamicAttributes();
-    					
-    					$("input").on("change", function(event) { 
-				     		if($(this).parent().text().trim() == "Åtgärder krävs"){
-				     			var parentArticle =  $(this).closest("article").parent("article");
-				     			if($(this).closest("li").attr("class") == "active"){
-						     		updateRequiredAction(parentArticle,1);
-					     		}
-					     		else{
-					     			updateRequiredAction(parentArticle,0);
-					     		}
-				     		}
-						} );
-						setInterval(updateTimeLeftMessage, 20000);
-					});
-					
-					function updateRequiredAction(updatedArticle,isChecked){
-						var BGColor;
-						if(isChecked){
-							BGColor = "#f7f777";
-							updatedArticle.children(".notes-div").first().slideDown();
-						}else{
-							BGColor = "#f7f7f7";
-						}
-						updatedArticle.css('background-color',BGColor);
-						updatedArticle.find("article").css('background-color',BGColor);
-						updatedArticle.find(".line-divider").css('border', '1px '+BGColor);
-					}
-					
-					function updateTimeLeftMessage(){
-						currentLogin = getCurrentLogin();
-						currentTime = new Date($.now());
-						timeSinceLogin = Math.floor((currentTime - currentLogin)/(1000));
-						timeLeft = sessionTimeout - timeSinceLogin;
-						showTimeLeftMessage(timeLeft);
-					}	
-					
-					function showTimeLeftMessage(loginTimeRemaining)
-					{
-						if(loginTimeRemaining <= 5*60)
-						{
-							var message;
-							if(loginTimeRemaining <0){
-								$("#time_left_message").html(' <a target="_blank" href="/login"><font color="black"><b>Du har blivit utloggad. <i>Klicka här</i> för att logga in igen innan du sparar.</b></font></a> ');
-								$('#save_message_top').css({background: 'red'});
-							}
-							else if(loginTimeRemaining <1*60)
-							{
-								$("#time_left_message").text("Du kommer att loggas ut om mindre än 1 minut.");
-								$('#save_message_top').css({background: 'orange'});
-							}else 
-							{						
-								$('#save_message_top').css({background: 'yellow'});
-								if(Math.floor((loginTimeRemaining)/(60)) == 1){ 
-									message = "Du kommer att loggas ut om 1 minut.";
-								}
-								else
-								{
-							    	message = "Du kommer att loggas ut om " + Math.floor((loginTimeRemaining)/(60)) + " minuter."; 
-						    	}
-								$("#time_left_message").text(message);
-							}
-						    
-						}
-						else
-						{
-							$('#save_message_top').css({background: 'white'});
-							$("#time_left_message").text("");
-						}
-					}
-					
-					
-					]]>					
-				</script>				
-				
+								
 				<xsl:call-template name="AddFacilityForm" />
 				<xsl:call-template name="IterateTemplateAttributes" />
 
@@ -485,6 +388,115 @@
 	</xsl:template>
 	
 	<xsl:template match="NodeTags">
+	</xsl:template>
+	
+	<xsl:template name="FormScripts">
+		<script>
+			<![CDATA[
+			
+			function afterVerification(verified)
+			{
+				mapClient.map.updateSize();
+				console.log("update map");
+			}
+			
+			function onClickSubmit()
+			{
+				if (typeof mapInitialized !== 'undefined' && mapInitialized ){
+					updateGeo();
+					verifyAndSubmit(afterVerification);
+				}
+				else verifyAndSubmit(function(){});
+			}
+			
+			$( document ).ready(function() {
+  				updateDynamicAttributes();
+			});	
+			]]>
+		
+			var sessionTimeout = <xsl:value-of select="sessionTimeout"></xsl:value-of>;
+			function getCurrentLogin(){ return new Date(<xsl:value-of select="sessionLastAccess"></xsl:value-of>);}
+			<![CDATA[
+			$( document ).ready(function() {
+  					$("input").on("change", function(event) { 
+		     		if($(this).parent().text().trim() == "Åtgärder krävs"){
+		     			var parentArticle =  $(this).closest("article").parent("article");
+		     			if($(this).closest("li").attr("class") == "active"){
+				     		updateRequiredAction(parentArticle,1);
+			     		}
+			     		else{
+			     			updateRequiredAction(parentArticle,0);
+			     		}
+		     		}
+				} );
+				$( "input" ).each(function() {
+					if($(this).parent().text().trim() == "Åtgärder krävs"){
+		     			var parentArticle =  $(this).closest("article").parent("article");
+		     			if($(this).closest("li").attr("class") == "active"){
+				     		updateRequiredAction(parentArticle,1);
+			     		}
+		     		}		
+				});	
+				setInterval(updateTimeLeftMessage, 10000);
+			});	
+			
+			function updateRequiredAction(updatedArticle,isChecked){
+						var BGColor;
+						if(isChecked){
+							BGColor = "#f7f777";
+							updatedArticle.children(".notes-div").first().slideDown();
+						}else{
+							BGColor = "#f7f7f7";
+						}
+						updatedArticle.css('background-color',BGColor);
+						updatedArticle.find("article").css('background-color',BGColor);
+						updatedArticle.find(".line-divider").css('border', '1px '+BGColor);
+					}
+					
+					
+			function updateTimeLeftMessage(){
+				currentLogin = getCurrentLogin();
+				currentTime = new Date($.now());
+				timeSinceLogin = Math.floor((currentTime - currentLogin)/(1000));
+				timeLeft = sessionTimeout - timeSinceLogin;
+				showTimeLeftMessage(timeLeft);
+			}	
+				
+			function showTimeLeftMessage(loginTimeRemaining)
+			{
+				if(loginTimeRemaining <= 5*60)
+				{
+					var message;
+					if(loginTimeRemaining < 0){
+						$("#time_left_message").html(' <a target="_blank" href="/login"><font color="black"><b>Du har blivit utloggad. <i>Klicka här</i> för att logga in igen innan du sparar.</b></font></a> ');
+						$('#save_message_top').css({background: 'red'});
+					}
+					else if(loginTimeRemaining <1*60)
+					{
+						$("#time_left_message").text("Du kommer att loggas ut om mindre än 1 minut.");
+						$('#save_message_top').css({background: 'orange'});
+					}else 
+					{						
+						$('#save_message_top').css({background: 'yellow'});
+						if(Math.floor((loginTimeRemaining)/(60)) == 1){ 
+							message = "Du kommer att loggas ut om 1 minut.";
+						}
+						else
+						{
+					    	message = "Du kommer att loggas ut om " + Math.floor((loginTimeRemaining)/(60)) + " minuter."; 
+				    	}
+						$("#time_left_message").text(message);
+					}
+				    
+				}
+				else
+				{
+					$('#save_message_top').css({background: 'white'});
+					$("#time_left_message").text("");
+				}
+			}
+			]]>
+		</script>
 	</xsl:template>
 
 </xsl:stylesheet>
