@@ -1,8 +1,11 @@
 package se.sundsvallskommun.nodes;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,10 +19,15 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import rst.pdfbox.layout.elements.Paragraph;
+import rst.pdfbox.layout.text.BaseFont;
+import rst.pdfbox.layout.text.Indent;
+import rst.pdfbox.layout.text.SpaceUnit;
 import se.sundsvallskommun.nodes.beans.NodeFile;
 import se.sundsvallskommun.nodes.beans.NodeFileInfo;
 import se.sundsvallskommun.nodes.beans.NodeGeoLocation;
@@ -421,7 +429,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
 		
 		for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-			
+			if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>123)
 			csvString += delimiter + tAttrib.getName();
 		}
 		
@@ -435,19 +443,19 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			
 			DynamicAttributes.addMissingAttributes(node);
 			List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
-	
+			
 			for ( NodeAttribute attr : facilityNodeAttributes ) {
-				
-				csvString += delimiter;
-				
-				String value = DynamicAttributes.getDisplayValue(attr);
-				
-				if ( value.contains(delimiter) ) {
-					csvString += String.format("\"%s\"", value );
-				} else {
-					csvString += String.format("%s", value );
+				if (attr.getTemplateID().getTemplateAttributeID()<101 || attr.getTemplateID().getTemplateAttributeID()>123) {
+					csvString += delimiter;
+					
+					String value = DynamicAttributes.getDisplayValue(attr);
+					value = value.replaceAll("\\r\\n|\\r|\\n", " ");
+					if ( value.contains(delimiter) ) {
+						csvString += String.format("\"%s\"", value );
+					} else {
+						csvString += String.format("%s", value );
+					}
 				}
-				
 			}
 			csvString += lineSeparator;
 		}
@@ -465,23 +473,23 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
                             URIParser uriParser) throws IOException, AccessDeniedException, SQLException {
                 
     
-    String delimiter = ";";
+    	String delimiter = ";";
         String lineSeparator = System.getProperty("line.separator");
-                String csvString = "Namn";
-                List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
-                
-                for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-                            
-                            csvString += delimiter + tAttrib.getName();
-                }
-                
-                csvString += lineSeparator;
-                
-                InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
-                
-                HTTPUtils.sendFile( inputStream, "mall.csv", "application/csv", "", req, res, ContentDisposition.INLINE );
-                
-                return null;
+        String csvString = "Namn";
+        List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
+        
+        for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
+        	if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>123)
+                csvString += delimiter + tAttrib.getName();
+        }
+        
+        csvString += lineSeparator;
+        
+        InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
+        
+        HTTPUtils.sendFile( inputStream, "mall.csv", "application/csv", "", req, res, ContentDisposition.INLINE );
+        
+        return null;
     }
 
 	
@@ -729,5 +737,112 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			query.executeUpdate();
 		}
 	}
+	
+	//Export PDF file
+    @WebPublic(toLowerCase = true)
+    public ForegroundModuleResponse exportPdf(HttpServletRequest req, HttpServletResponse res, User user,
+                            URIParser uriParser) throws IOException, AccessDeniedException, SQLException, COSVisitorException {             
+
+                //Creating PDF document object 
+                rst.pdfbox.layout.elements.Document doc = new rst.pdfbox.layout.elements.Document(40, 60, 40, 60);
+
+                Paragraph paragraph1 = new Paragraph();
+
+                String facilityId = uriParser.toString().substring(uriParser.toString().length() - 1);
+                int facID = Integer.valueOf(facilityId);
+                String title = null;
+
+                List<NodeOwner> nodes = this.getFacilityNodes( new ModuleRequestContext(req,res,user,uriParser));             
+
+                List<NodeOwner> allowedNodes = NodeOwnerCRUD.getAllowedNodes(user, nodes);
+
+                for(NodeOwner node : allowedNodes){
+                            //only get the current row
+                            if (node.getNode_id() == facID)
+                            {
+
+                                        DynamicAttributes.addMissingAttributes(node);
+                                        List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
+
+                                        //title of register
+                                        title = node.getTitle();
+                                        paragraph1.addMarkup("\\\\\\\\\\\\*__" + node.getTitle() + "\\\\\\\\\\\\*__\n", 16, BaseFont.Times);
+                                        doc.add(paragraph1);
+
+                                        for ( NodeAttribute attr : facilityNodeAttributes ) {
+
+                                                    //each row that is not a subquestion (<templateAttributeID100) and not empty                       
+                                                    if (attr.getTemplateID().getTemplateAttributeID()<100 && attr.getAttributeID() != null)
+                                                    {
+
+                                                                //Check descriptive text
+                                                                String desc = null;
+                                                                String value = null;
+                                                                if (attr.getTemplateID().getDescription() == null || attr.getTemplateID().getDescription() == "")
+                                                                            desc = "Saknar beskrivande text";
+                                                                else
+                                                                            desc = attr.getTemplateID().getDescription();
+
+                                                                //heading
+                                                                Paragraph paragraph2 = new Paragraph();
+                                                                paragraph2.addMarkup("\\\\\\\\\\\\*" + DynamicAttributes.getTemplateName(attr) + "\\\\\\\\\\\\*" + 
+                                                                                        "\n_" +
+                                                                                        desc +
+                                                                                        "_\n", 11, BaseFont.Times);                                                                                             
+                                                                doc.add(paragraph2);  
+
+                                                                Paragraph paragraph3 = new Paragraph();
+                                                                //individual rows
+                                                                if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("true"))
+                                                                {
+                                                                            if (attr.getValue() == "" || attr.getValue()== null)
+                                                                                        value = "";
+                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
+                                                                            paragraph3.addMarkup("Ja" + 
+                                                                                                    "\n", 11, BaseFont.Times);
+
+                                                                            doc.add(paragraph3);
+                                                                }
+                                                                else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("false"))
+                                                                {
+                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
+                                                                            paragraph3.addMarkup("Nej" + 
+                                                                                                    "\n", 11, BaseFont.Times);
+                                                                            doc.add(paragraph3);
+                                                                }
+                                                                else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals(""))
+                                                                {
+                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
+                                                                            paragraph3.addMarkup("Uppgift saknas" + 
+                                                                                                    "\n", 11, BaseFont.Times);
+                                                                            doc.add(paragraph3);
+                                                                }
+                                                                else
+                                                                {
+                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
+                                                                            paragraph3.addMarkup(DynamicAttributes.getDisplayValue(attr) + 
+                                                                                                    "\n", 11, BaseFont.Times);
+                                                                            doc.add(paragraph3);                                        
+                                                                }
+
+                                                    }
+                                        }
+                            }
+                }                                   
+                
+                final OutputStream outputStream = new FileOutputStream(title +".pdf");
+                doc.save(outputStream);
+                
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+    
+                doc.save(out);
+
+                ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+                HTTPUtils.sendFile( in, title + ".pdf", "application/pdf", "", req, res, ContentDisposition.ATTACHMENT );
+
+                return null;
+
+    }
+
 
 }

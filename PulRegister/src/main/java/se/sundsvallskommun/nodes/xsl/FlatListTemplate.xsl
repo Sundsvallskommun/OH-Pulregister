@@ -110,7 +110,9 @@
         <a style="padding-left: 15px;" href="#" onclick="if(confirm('Ta bort?')) window.location.href='{/document/requestinfo/currentURI}/{/document/module/alias}/removefacility/{node_id}'">
           <span class="glyphicon glyphicon-remove"></span>
         </a>
-        
+        <a style="padding-left: 15px;" href="{/document/requestinfo/currentURI}/{/document/module/alias}/exportpdf/{node_id}">
+  				<span class="glyphicon glyphicon-export"></span>
+ 		</a> 
     </td>
     </tr> 
   </xsl:template>

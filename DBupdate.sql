@@ -111,4 +111,8 @@ UPDATE `register.sundsvall.se`.`node_template_attributes` SET `value`='', `value
 UPDATE `register.sundsvall.se`.`node_template_attributes` SET `show_only_when_value_equals`='true' WHERE `template_attribute_id`='41';
 
 
-
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Vart och hur sparas samtycket?', `description`='' WHERE `template_attribute_id`='39';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Vad finns i fritexten och varför? Finns det rutiner för hur fritext får skrivas?', `description`='' WHERE `template_attribute_id`='41';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Vilka system är födare av eller föds med personuppgifter?', `description`='' WHERE `template_attribute_id`='43';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Kommentera på dem känsliga personuppgifter som registret innehåller.', `description`='' WHERE `template_attribute_id`='48';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Bekriv typ av register i mer detalj.', `description`='' WHERE `template_attribute_id`='47';
