@@ -200,6 +200,22 @@
 		</div>
 	</xsl:template>
 	
+	<xsl:template name="SpecialStringType">
+		
+		<xsl:call-template name="ApplyAttributeDescription"/>
+		
+		
+		<div class="pannel panel-body panel-default">
+			<xsl:call-template name="createTextField">
+				<xsl:with-param name="id" select="AttributeDetails" />
+				<xsl:with-param name="name" select="AttributeDetails" />
+				<xsl:with-param name="value" select="value" />
+				<xsl:with-param name="class" select="'form-control'" />
+				<xsl:with-param name="width" select="'100%'" />				
+			</xsl:call-template>
+		</div>
+	</xsl:template>
+	
 	<xsl:template name="PhoneType">
 		<div class="row">
 			<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">

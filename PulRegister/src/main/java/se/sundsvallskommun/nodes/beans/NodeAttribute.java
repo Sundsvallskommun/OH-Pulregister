@@ -125,26 +125,34 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 
 	@Override
 	public int compareTo(NodeAttribute a) {
-			
-		int lhs_val = this.getTemplateID().getTemplateAttributeID();
-		int rhs_val = a.getTemplateID().getTemplateAttributeID();
+		int lhs_val = this.getTemplateID().getSortPrio();
+		int rhs_val = a.getTemplateID().getSortPrio();
 		
 		int pre_result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
 		
-		if ( this.getTemplateID().getParentTemplateAttribute() != null ) {
-			lhs_val = this.getTemplateID().getParentTemplateAttribute() + 1;
-		}
-		
-		if ( a.getTemplateID().getParentTemplateAttribute() != null ){
-			rhs_val = a.getTemplateID().getParentTemplateAttribute() + 1;
-		}
-		
-		int result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
-		
-		if ( pre_result != 0 && result == 0 )
+		if(pre_result==0) {	
+			lhs_val = this.getTemplateID().getTemplateAttributeID();
+			rhs_val = a.getTemplateID().getTemplateAttributeID();
+			
+			pre_result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
+			
+			if ( this.getTemplateID().getParentTemplateAttribute() != null ) {
+				lhs_val = this.getTemplateID().getParentTemplateAttribute() + 1;
+			}
+			
+			if ( a.getTemplateID().getParentTemplateAttribute() != null ){
+				rhs_val = a.getTemplateID().getParentTemplateAttribute() + 1;
+			}
+			
+			int result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
+			
+			if ( pre_result != 0 && result == 0 )
+				return pre_result;
+			
+			return result;
+		} else {
 			return pre_result;
-		
-		return result;
+		}
 	}
 
 

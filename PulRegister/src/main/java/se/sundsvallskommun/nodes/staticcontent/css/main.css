@@ -122,4 +122,8 @@ article article {
     width: 100% !important;
 }
 
+.sticky {
+    top: 0;
+    position: fixed;
+}
 

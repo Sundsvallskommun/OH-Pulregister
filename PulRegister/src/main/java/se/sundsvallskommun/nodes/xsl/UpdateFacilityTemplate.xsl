@@ -33,7 +33,7 @@
 				Uppdatera 				 
 				<xsl:value-of select="NodeOwner/NodeType/name"></xsl:value-of>	
 			</h2>
-			<div id="save_message_top" style="background:white;width:auto;position:sticky;top:0;z-index:2;">
+			<div id="save_message_top" name="save_message_top" style="background:white;width:auto;position:fixed;position:sticky;top:0;z-index:2;">
 				<div class="panel-body">
 					<span id="time_left_message"></span>
 					<span onclick="onClickSubmit()" class="btn btn-success pull-right">

@@ -63,6 +63,10 @@ public class NodeTemplateAttribute extends GeneratedElementable  implements Comp
 	@XMLElement
 	private Boolean required;
 	
+	@DAOManaged(columnName = "sort_prio")
+	@XMLElement
+	private int sortPrio;
+	
 	@XMLElement
 	private NodeAttribute currentNodeAttribute;
 	
@@ -166,26 +170,37 @@ public class NodeTemplateAttribute extends GeneratedElementable  implements Comp
 
 	@Override
 	public int compareTo(NodeTemplateAttribute a) {
-			
-		int lhs_val = this.getTemplateAttributeID();
-		int rhs_val = a.getTemplateAttributeID();
+		
+		int lhs_val = this.getSortPrio();
+		int rhs_val = a.getSortPrio();
 		
 		int pre_result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
 		
-		if ( this.getParentTemplateAttribute() != null ) {
-			lhs_val = this.getParentTemplateAttribute() + 1;
-		}
-		
-		if ( a.getParentTemplateAttribute() != null ){
-			rhs_val = a.getParentTemplateAttribute() + 1;
-		}
-		
-		int result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
-		
-		if ( pre_result != 0 && result == 0 )
+		if(pre_result==0) {
+			
+			lhs_val = this.getTemplateAttributeID();
+			rhs_val = a.getTemplateAttributeID();
+			
+			pre_result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
+			
+			if ( this.getParentTemplateAttribute() != null ) {
+				lhs_val = this.getParentTemplateAttribute() + 1;
+			}
+			
+			if ( a.getParentTemplateAttribute() != null ){
+				rhs_val = a.getParentTemplateAttribute() + 1;
+			}
+			
+			int result = lhs_val > rhs_val ? 1 : lhs_val < rhs_val ? -1 : 0;
+			
+			if ( pre_result != 0 && result == 0 )
+				return pre_result;
+			
+			return result;
+		}else {
 			return pre_result;
+		}
 		
-		return result;
 	}
 
 	public String getDescription() {
@@ -194,6 +209,14 @@ public class NodeTemplateAttribute extends GeneratedElementable  implements Comp
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getSortPrio() {
+		return sortPrio;
+	}
+
+	public void setSortPrio(int sortPrio) {
+		this.sortPrio = sortPrio;
 	}
 
 	

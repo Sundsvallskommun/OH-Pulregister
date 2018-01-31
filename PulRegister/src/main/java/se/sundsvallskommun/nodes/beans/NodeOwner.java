@@ -86,6 +86,9 @@ public class NodeOwner extends GeneratedElementable implements SearchableItem, S
 	@XMLElement(name="hasNotes")	
 	private Boolean hasNotes = false;
 	
+	@XMLElement(name="hasActionRequired")	
+	private Boolean hasActionRequired = false;
+	
 	public List<NodeTag> getFacilityNodeTags() {
 		return nodeTags;
 	}
@@ -148,16 +151,22 @@ public class NodeOwner extends GeneratedElementable implements SearchableItem, S
 	public Element toXML(Document doc) {
 		
 		this.hasNotes = false;
+		this.hasActionRequired = false;
 		
 		if ( this.nodeAttributes != null && this.nodeAttributes.size() > 0 ) {
 			
 			for ( NodeAttribute attribute : this.nodeAttributes ) {
-				
-				if ( attribute.getNote() != null ) {
-					
+				if ( attribute.getNote() != null && attribute.getNote().getValue() != "" ) {
 					this.hasNotes = true;
 					break;
 				}
+			}
+			
+			for ( NodeAttribute attribute : this.nodeAttributes ) {
+				if(attribute.getTemplateID().getTemplateAttributeID() >=101 && attribute.getTemplateID().getTemplateAttributeID() <=123 && attribute.getValue() != null) {
+					this.hasActionRequired = true;
+					break;
+				}				
 			}
 		}
 		

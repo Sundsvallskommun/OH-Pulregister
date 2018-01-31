@@ -74,6 +74,9 @@
         <xsl:if test="hasNotes='true'">       
           <div title="Registret har anteckningar." style="color:rgba(0,0,0,0.2);padding-right: 8px;;padding-top: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-comment"></div>
         </xsl:if>
+        <xsl:if test="hasActionRequired='true'"> 
+        	<div title="Åtgärder krävs." style="color:rgba(ff,ff,00,0.2);padding-right: 8px;;padding-top: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-exclamation-sign"></div>
+        </xsl:if>
       </td>
       <td>    
         <xsl:choose>

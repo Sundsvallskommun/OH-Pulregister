@@ -33,7 +33,7 @@
 				Lägg till
 				<xsl:value-of select="NodeTypes/NodeType/name"></xsl:value-of>
 			</h2>		
-			<div id="save_message_top" style="background:white;width:auto;position:sticky;top:0;z-index:2;">
+			<div id="save_message_top" name="save_message_top" style="background:white;width:auto;position:fixed;position:sticky;top:0;z-index:2;">
 				<div class="panel-body">
 					<span id="time_left_message"></span>
 					<span onclick="onClickSubmit()" class="btn btn-success pull-right">
@@ -132,14 +132,14 @@
 		
 		<a data-toggle="dropdown" href="javascript:void(0);" title="Alternativ"><div name="hamburger-menu-button" style="color:rgba(0,0,0,0.2);" onclick="" class="upper-left-corner glyphicon glyphicon-menu-hamburger"></div></a>
 		
-		<xsl:if test="Note/NodeAttributeNote/value">		
-			<a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;"><div title="{Note/NodeAttributeNote/value}" style="color:rgba(0,0,0,0.2);padding-right: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-comment"></div></a>
+		<xsl:if test="Note/NodeAttributeNote/value != '' ">		
+			<a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;" id="{AttributeDetails}-noteIcon"><div title="{Note/NodeAttributeNote/value}" style="color:rgba(0,0,0,0.2);padding-right: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-comment"></div></a>
 		</xsl:if>
 		
 		<ul class="dropdown-menu upper-left-corner">
 	      <li><a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;"><span class="glyphicon glyphicon-pencil" style="padding-right: 5px;"/>Anteckningar</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-remove" style="padding-right: 5px;"/>Rensa</a></li>	      
-	    </ul>
+	      <li><a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').hide();$('[id=&quot;{AttributeDetails}|note&quot;]').val('');$('[id=&quot;{AttributeDetails}-noteIcon&quot;]').hide();return false;"><span class="glyphicon glyphicon-remove" style="padding-right: 5px;"/>Rensa</a></li>	 
+	    </ul> 
 	    <!-- 	
 		<div class="" style="margin-top: 20px;">
 			<div class="row">
@@ -153,12 +153,13 @@
 	</xsl:template>
 	
 	<xsl:template name="AddNotesSection">
-	
+		
 		<div id="{AttributeDetails}-notes-div" style="display:none;" class="notes-div">
 			<h3 class="pull-right">Anteckningar <a href="javascript:void(0);" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').slideUp();"><span title="Dölj" class="glyphicon glyphicon-chevron-up pull-right" style="color:rgba(0,0,0,0.2);padding-left: 5px;"/></a> </h3>
 			
 			<textarea type="text" id="{AttributeDetails}|note" name="{AttributeDetails}|note" rows="5" style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;"><xsl:value-of select="Note/NodeAttributeNote/value"/></textarea>			
 		</div>
+		<input type="hidden" id="{AttributeDetails}|note" name="{AttributeDetails}|note" value="" />	
 		
 	</xsl:template>
 	
@@ -236,7 +237,7 @@
 				<xsl:call-template name="StringType" />
 			</xsl:if>
 			<xsl:if test="type='SPECIALSTRING'">
-				<xsl:call-template name="StringType" />
+				<xsl:call-template name="SpecialStringType" />
 			</xsl:if>
 			<xsl:if test="type='STRINGBOX'">
 				<xsl:call-template name="StringBoxType" />
@@ -418,7 +419,7 @@
 			function getCurrentLogin(){ return new Date(<xsl:value-of select="sessionLastAccess"></xsl:value-of>);}
 			<![CDATA[
 			$( document ).ready(function() {
-  					$("input").on("change", function(event) { 
+				$("input").on("change", function(event) { 
 		     		if($(this).parent().text().trim() == "Åtgärder krävs"){
 		     			var parentArticle =  $(this).closest("article").parent("article");
 		     			if($(this).closest("li").attr("class") == "active"){
@@ -429,6 +430,7 @@
 			     		}
 		     		}
 				} );
+				
 				$( "input" ).each(function() {
 					if($(this).parent().text().trim() == "Åtgärder krävs"){
 		     			var parentArticle =  $(this).closest("article").parent("article");
@@ -439,7 +441,6 @@
 				});	
 				setInterval(updateTimeLeftMessage, 10000);
 			});	
-			
 			function updateRequiredAction(updatedArticle,isChecked){
 						var BGColor;
 						if(isChecked){
@@ -494,6 +495,11 @@
 					$('#save_message_top').css({background: 'white'});
 					$("#time_left_message").text("");
 				}
+			}
+			
+			function clearNote(noteTextId){
+				var noteTextArea = $("textarea[id='" + noteTextId + "']");
+				noteTextArea.val("");
 			}
 			]]>
 		</script>
