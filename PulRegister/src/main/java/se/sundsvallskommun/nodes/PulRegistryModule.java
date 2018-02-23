@@ -265,6 +265,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			URIParser uriParser) throws Exception {
 
 		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "ADD");
+		Collections.sort(bean.getFacilityNodeType().getFacilityTemplateAttributes());
 		this.nodeCRUD.checkAccess( bean , user);
 		
 		ForegroundModuleResponse fgResp = this.nodeCRUD.add(req, res, user, uriParser);
@@ -429,7 +430,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
 		
 		for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-			if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>123)
+			if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>199)
 			csvString += delimiter + tAttrib.getName();
 		}
 		
@@ -443,9 +444,9 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			
 			DynamicAttributes.addMissingAttributes(node);
 			List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
-			
+			Collections.sort(facilityNodeAttributes);
 			for ( NodeAttribute attr : facilityNodeAttributes ) {
-				if (attr.getTemplateID().getTemplateAttributeID()<101 || attr.getTemplateID().getTemplateAttributeID()>123) {
+				if (attr.getTemplateID().getTemplateAttributeID()<101 || attr.getTemplateID().getTemplateAttributeID()>199) {
 					csvString += delimiter;
 					
 					String value = DynamicAttributes.getDisplayValue(attr);
@@ -477,9 +478,9 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
         String lineSeparator = System.getProperty("line.separator");
         String csvString = "Namn";
         List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
-        
+        Collections.sort(facilityTemplates);
         for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-        	if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>123)
+        	if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>199)
                 csvString += delimiter + tAttrib.getName();
         }
         
@@ -763,7 +764,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 
                                         DynamicAttributes.addMissingAttributes(node);
                                         List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
-
+                                        Collections.sort(facilityNodeAttributes);
                                         //title of register
                                         title = node.getTitle();
                                         paragraph1.addMarkup("\\\\\\\\\\\\*__" + node.getTitle() + "\\\\\\\\\\\\*__\n", 16, BaseFont.Times);

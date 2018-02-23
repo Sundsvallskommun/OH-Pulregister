@@ -260,6 +260,7 @@ public class NodeRestOperations {
 			if ( !objectExists(nodeType,context) ) return;
 			
 			facilityTemplateAttributes = nodeType.getFacilityTemplateAttributes();
+			Collections.sort(facilityTemplateAttributes);
 			
 			if ( !objectExists(facilityTemplateAttributes,context) ) return;
 			

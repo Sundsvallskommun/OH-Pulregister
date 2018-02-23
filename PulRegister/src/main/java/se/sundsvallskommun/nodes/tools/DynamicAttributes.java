@@ -78,8 +78,9 @@ public class DynamicAttributes {
 			attributes.add(newAttribute);
 			
 		}
-		bean.setFacilityNodeAttributes(attributes);
 		Collections.sort(attributes);
+		bean.setFacilityNodeAttributes(attributes);
+		
 	}
 	
 	static public String getTemplateName(NodeAttribute attribute ) {

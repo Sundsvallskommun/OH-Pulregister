@@ -53,3 +53,47 @@ UPDATE `register.sundsvall.se`.`node_template_attributes` SET `description`='Beh
 UPDATE `register.sundsvall.se`.`node_template_attributes` SET `value`='För evigt|Gallras|Vej ej' WHERE `template_attribute_id`='21';
 UPDATE `register.sundsvall.se`.`node_template_attributes` SET `name`='Beskriv rutiner för gallring, t ex hur länge personuppgifter sparas' WHERE `template_attribute_id`='22';
 
+INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`, `name`, `value_type`, `template_attribute_id`, `description`, `required`, `sort_prio`) VALUES ('1', 'Utlämnande av uppgifter', 'BOOL', '66', 'Lämnas ut personuppgifter till någon/några utanför organisationen?', '0', '155');
+INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`, `name`, `value_type`, `template_attribute_id`, `description`, `required`, `regex`, `sort_prio`, `parent_template_attribute`, `show_only_when_value_equals`) VALUES ('1', 'Till vilka lämnas personuppgifterna ut utanför organisationen?', 'STRINGBOX', '67', 'ex support, skatteverket, försäkringskassan, pensionsförvaltare, tjänsteleverantörer osv', '0', NULL, '999', '66', 'true');
+INSERT INTO `register.sundsvall.se`.`node_template_attributes` (`parent_type_id`, `name`, `value`, `value_type`, `template_attribute_id`, `required`, `sort_prio`, `parent_template_attribute`) VALUES ('1', '', 'Åtgärder krävs', 'MULTISELECT', '124', '0', '999', '66');
+
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='221' WHERE `template_attribute_id`='12';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='222' WHERE `template_attribute_id`='13';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='223' WHERE `template_attribute_id`='14';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='131' WHERE `template_attribute_id`='18';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='181' WHERE `template_attribute_id`='22';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='141' WHERE `template_attribute_id`='26';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='201' WHERE `template_attribute_id`='28';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='202' WHERE `template_attribute_id`='29';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='211' WHERE `template_attribute_id`='31';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='213' WHERE `template_attribute_id`='32';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='212' WHERE `template_attribute_id`='33';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='111' WHERE `template_attribute_id`='36';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='231' WHERE `template_attribute_id`='38';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='121' WHERE `template_attribute_id`='39';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='191' WHERE `template_attribute_id`='41';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='161' WHERE `template_attribute_id`='43';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='51' WHERE `template_attribute_id`='44';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='52' WHERE `template_attribute_id`='45';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='31' WHERE `template_attribute_id`='47';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='61' WHERE `template_attribute_id`='48';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='224' WHERE `template_attribute_id`='49';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='225' WHERE `template_attribute_id`='50';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='226' WHERE `template_attribute_id`='51';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='227' WHERE `template_attribute_id`='52';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='151' WHERE `template_attribute_id`='53';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='241' WHERE `template_attribute_id`='56';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='231' WHERE `template_attribute_id`='57';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='232' WHERE `template_attribute_id`='58';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='233' WHERE `template_attribute_id`='59';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='234' WHERE `template_attribute_id`='60';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='235' WHERE `template_attribute_id`='61';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='236' WHERE `template_attribute_id`='62';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='237' WHERE `template_attribute_id`='63';
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `sort_prio`='156' WHERE `template_attribute_id`='67';
+
+UPDATE `register.sundsvall.se`.`node_template_attributes` SET `value`='Öppet, ingen inloggning|Inloggning som anställd|Inloggning som medborgare|Inloggning med särskild roll|Systemadmin med personligt konto' WHERE `template_attribute_id`='9';
+
+
+
+

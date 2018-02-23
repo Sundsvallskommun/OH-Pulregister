@@ -152,7 +152,6 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			String getMode) throws SQLException, AccessDeniedException {
 		
 		NodeOwner node =  super.getRequestedBean(req, res, user, uriParser, getMode);
-		
 		checkAccess(node,user);
 		
 		return node;
@@ -165,8 +164,11 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 		List<String> l = Arrays.asList(uriParser.getAll());
 		Collections.reverse(l);
 		Integer typeID = Integer.parseInt(l.get(0));
-
-		XMLUtils.append(doc, addTypeElement, "NodeTypes", callback.getNodeTypes(typeID));
+		List<NodeType> nodeTypes = callback.getNodeTypes(typeID);
+		for(NodeType nodeType : nodeTypes){
+			Collections.sort(nodeType.getFacilityTemplateAttributes());
+		}
+		XMLUtils.append(doc, addTypeElement, "NodeTypes", nodeTypes);
 	}
 	
 	@Override
@@ -179,7 +181,6 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 		} catch (SQLException e) {
 			log.error("Could not append bean.", e);
 		}
-		
 		super.appendBean(bean, targetElement, doc, user);
 	};
 
@@ -467,6 +468,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 				attrList.add(attr);
 			}
 		}
+		Collections.sort(attrList);
 		bean.setFacilityGeoLocations(geoLocations);
 		bean.setFacilityNodeAttributes(attrList);		
 		handleNewNotes(bean, notes);

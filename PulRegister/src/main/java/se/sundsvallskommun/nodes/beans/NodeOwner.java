@@ -163,7 +163,7 @@ public class NodeOwner extends GeneratedElementable implements SearchableItem, S
 			}
 			
 			for ( NodeAttribute attribute : this.nodeAttributes ) {
-				if(attribute.getTemplateID().getTemplateAttributeID() >=101 && attribute.getTemplateID().getTemplateAttributeID() <=123 && attribute.getValue() != null) {
+				if(attribute.getTemplateID().getTemplateAttributeID() >=101 && attribute.getTemplateID().getTemplateAttributeID() <=199 && attribute.getValue() != null && !"".equals(attribute.getValue())) {
 					this.hasActionRequired = true;
 					break;
 				}				
