@@ -130,9 +130,6 @@ public abstract class GenericCRUD<BeanType extends Elementable, IDType, UserType
 
 		moduleResponse.addBreadcrumbsLast(this.getAddBreadcrumbs(req, user, uriParser));
 		
-		XMLUtils.appendNewElement(doc, addTypeElement, "sessionTimeout", user.getSession().getMaxInactiveInterval());
-		XMLUtils.appendNewElement(doc, addTypeElement, "sessionLastAccess", user.getSession().getLastAccessedTime());
-
 		return moduleResponse;
 	}
 
@@ -300,9 +297,7 @@ public abstract class GenericCRUD<BeanType extends Elementable, IDType, UserType
 		SimpleForegroundModuleResponse moduleResponse = createUpdateFormModuleResponse(bean, doc, req, user, uriParser);
 
 		moduleResponse.addBreadcrumbsLast(getUpdateBreadcrumbs(bean,req, user, uriParser));
-		
-		XMLUtils.appendNewElement(doc, updateTypeElement, "sessionTimeout", user.getSession().getMaxInactiveInterval());
-		XMLUtils.appendNewElement(doc, updateTypeElement, "sessionLastAccess", user.getSession().getLastAccessedTime());
+
 		return moduleResponse;
 	}
 

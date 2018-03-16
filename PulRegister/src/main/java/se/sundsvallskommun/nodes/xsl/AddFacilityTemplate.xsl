@@ -18,7 +18,7 @@
 		
 		<xsl:call-template name="FormScripts"/>
 		<xsl:call-template name="DynamicAttributesInit"/>		
-		<xsl:call-template name="AddMapGeoDataVariable"/>
+<!-- 		<xsl:call-template name="AddMapGeoDataVariable"/> -->
 	
 		
 		<div class="container">
@@ -132,8 +132,8 @@
 		
 		<a data-toggle="dropdown" href="javascript:void(0);" title="Alternativ"><div name="hamburger-menu-button" style="color:rgba(0,0,0,0.2);" onclick="" class="upper-left-corner glyphicon glyphicon-menu-hamburger"></div></a>
 		
-		<xsl:if test="Note/NodeAttributeNote/value != '' ">		
-			<a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;" id="{AttributeDetails}-noteIcon"><div title="{Note/NodeAttributeNote/value}" style="color:rgba(0,0,0,0.2);padding-right: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-comment"></div></a>
+		<xsl:if test="note != '' ">		
+			<a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;" id="{AttributeDetails}-noteIcon"><div title="{note}" style="color:rgba(0,0,0,0.2);padding-right: 8px;" onclick="" class="upper-left-corner glyphicon glyphicon-comment"></div></a>
 		</xsl:if>
 		
 		<ul class="dropdown-menu upper-left-corner">
@@ -157,7 +157,7 @@
 		<div id="{AttributeDetails}-notes-div" style="display:none;" class="notes-div">
 			<h3 class="pull-right">Anteckningar <a href="javascript:void(0);" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').slideUp();"><span title="Dölj" class="glyphicon glyphicon-chevron-up pull-right" style="color:rgba(0,0,0,0.2);padding-left: 5px;"/></a> </h3>
 			
-			<textarea type="text" id="{AttributeDetails}|note" name="{AttributeDetails}|note" rows="5" style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;"><xsl:value-of select="Note/NodeAttributeNote/value"/></textarea>			
+			<textarea type="text" id="{AttributeDetails}|note" name="{AttributeDetails}|note" rows="5" style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;"><xsl:value-of select="note"/></textarea>			
 		</div>
 		<input type="hidden" id="{AttributeDetails}|note" name="{AttributeDetails}|note" value="" />	
 		
@@ -165,10 +165,6 @@
 	
 
 	<xsl:template name="HandleTemplateAttributeType">
-	
-		<script>
-			var currentAttributeDetail = '<xsl:value-of select="AttributeDetails"/>';
-		</script>
 	
 		<article requiredcontent="{required}" name="{AttributeDetails}" >
 			
@@ -266,12 +262,12 @@
 			<xsl:if test="type='URL'">
 				<xsl:call-template name="UrlType" />
 			</xsl:if>
-			<xsl:if test="type='GEO-AREA'">
-				<xsl:call-template name="MapAreaType" />
-			</xsl:if>
-			<xsl:if test="type='GEO-POINT'">
-				<xsl:call-template name="MapPointType" />
-			</xsl:if>
+<!-- 			<xsl:if test="type='GEO-AREA'"> -->
+<!-- 				<xsl:call-template name="MapAreaType" /> -->
+<!-- 			</xsl:if> -->
+<!-- 			<xsl:if test="type='GEO-POINT'"> -->
+<!-- 				<xsl:call-template name="MapPointType" /> -->
+<!-- 			</xsl:if> -->
 			
 			<script>
 				$("[id='<xsl:value-of select="AttributeDetails"/>']").on("change", function(event) { 
@@ -404,7 +400,7 @@
 			function onClickSubmit()
 			{
 				if (typeof mapInitialized !== 'undefined' && mapInitialized ){
-					updateGeo();
+					//updateGeo();
 					verifyAndSubmit(afterVerification);
 				}
 				else verifyAndSubmit(function(){});

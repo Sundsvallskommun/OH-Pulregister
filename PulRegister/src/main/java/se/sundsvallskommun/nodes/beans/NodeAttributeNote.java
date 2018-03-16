@@ -21,9 +21,9 @@ public class NodeAttributeNote extends GeneratedElementable {
 	@XMLElement
 	String value;
 	
-	@DAOManaged(columnName="node_attribute_parent")
-	@ManyToOne	
-	NodeAttribute parentAttribute;
+//	@DAOManaged(columnName="node_attribute_parent")
+//	@ManyToOne	
+//	NodeAttribute parentAttribute;
 	
 	
 	Integer parentTemplateAttributeID = null;
@@ -49,14 +49,14 @@ public class NodeAttributeNote extends GeneratedElementable {
 	}
 
 
-	public NodeAttribute getParentAttribute() {
-		return parentAttribute;
-	}
-
-
-	public void setParentAttribute(NodeAttribute parentAttribute) {
-		this.parentAttribute = parentAttribute;
-	}
+//	public NodeAttribute getParentAttribute() {
+//		return parentAttribute;
+//	}
+//
+//
+//	public void setParentAttribute(NodeAttribute parentAttribute) {
+//		this.parentAttribute = parentAttribute;
+//	}
 
 
 	public Integer getParentTemplateAttributeID() {

@@ -2,7 +2,7 @@ package se.sundsvallskommun.nodes.cruds;
 
 import se.sundsvallskommun.nodes.beans.NodeFile;
 import se.sundsvallskommun.nodes.beans.NodeFileInfo;
-import se.sundsvallskommun.nodes.beans.NodeGeoLocation;
+//import se.sundsvallskommun.nodes.beans.NodeGeoLocation;
 import se.sundsvallskommun.nodes.beans.NodeOwner;
 import se.sundsvallskommun.nodes.beans.NodeAttribute;
 import se.sundsvallskommun.nodes.beans.NodeAttributeNote;
@@ -175,7 +175,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 	protected void appendBean(NodeOwner bean, Element targetElement, Document doc, User user) {
 		
 		try {			
-			bean.setFacilityGeoLocations( callback.getGeoData(bean) );		
+			//bean.setFacilityGeoLocations( callback.getGeoData(bean) );		
 			bean.setFacilityNodeFiles( callback.getFilesAttached(bean) );
 			DynamicAttributes.addMissingAttributes(bean);
 		} catch (SQLException e) {
@@ -269,27 +269,32 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 
 		bean.setFacilityNodeType(facilityType);
 
-		List<NodeGeoLocation> geoLocations = bean.getFacilityGeoLocations();
-		if ( geoLocations == null ) geoLocations = new ArrayList<NodeGeoLocation>();
+//		List<NodeGeoLocation> geoLocations = bean.getFacilityGeoLocations();
+//		if ( geoLocations == null ) geoLocations = new ArrayList<NodeGeoLocation>();
 		Map<String, String[]> params = req.getParameterMap();
 		List<NodeAttributeNote> notes = new ArrayList<NodeAttributeNote>();
-		
+		log.info("node attributes 1: " + bean.getFacilityNodeAttributes());
 		for (Map.Entry<String, String[]> entry : params.entrySet()) {
 			
 			NodeAttribute attr = new NodeAttribute();
 			String key = entry.getKey();
 			String[] value = entry.getValue();
 			
+//			log.info("key: "+key);
+//			log.info("value: "+Arrays.toString(value));
+			
 			if ( value.length == 0  || ( value.length == 1 && value[0].equals("") ) ) continue;
 			
-			Integer noteTemplateID = getNoteParentTemplateID(bean,key,value);
-			Integer noteID = getNoteParentID(bean,key,value);
 			
-			if ( noteTemplateID != null || noteID != null ){
+
+			Integer noteTemplateID = getNoteParentTemplateID(bean,key,value);
+//			Integer noteID = getNoteParentID(bean,key,value);
+			
+			if ( noteTemplateID != null /*|| noteID != null */){
 				
 				NodeAttributeNote note = new NodeAttributeNote();
 				note.setValue(value[0]);				
-				note.setNodeAttributeNoteID(noteID);
+//				note.setNodeAttributeNoteID(noteID);
 				note.setParentTemplateAttributeID(noteTemplateID);
 				notes.add(note);
 				continue;
@@ -297,19 +302,24 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			
 			handleFileRemoval( bean , key , value );
 		
+			log.info("encoded key: "+key);
+			
 			key = DynamicAttributes.decodeKey(key);
+			
+			log.info("decoded key: "+key);
 
 			if (DynamicAttributes.isDynamicAttribute(key)) {
 				
 				List<String> parts = new ArrayList<String>(Arrays.asList(key.split("\\|")));
 				try {
-					Integer attrID = Integer.parseInt(parts.get(3));
+					String attributeID = parts.get(3).replaceAll("[^0-9]", "");
+					Integer attrID = Integer.parseInt(attributeID);
 					if (attrID != null) {
 						attr = bean.getAttributeFromID(attrID);
 						setAttributeValue(attr, value);
 					}
 				} catch (NumberFormatException e) {
-					
+					log.info("numberexception error; value: " + Arrays.toString(value));
 					attr.setAttributeID(null);
 					attr.setParentNode(bean);
 					
@@ -322,7 +332,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 					bean.setFacilityNodeAttributes(attrList);
 				}
 				handleNewTags(bean, attr);
-				handleGeoData(bean, attr , geoLocations);
+//				handleGeoData(bean, attr , geoLocations);
 				handleNewUploadedFiles(bean, req, attr);
 				setAttributeValue(attr, value);
 				handleGroupOwner(bean, attr, user);				
@@ -330,17 +340,46 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			}
 			
 		}
-		bean.setFacilityGeoLocations(geoLocations);
+//		bean.setFacilityGeoLocations(geoLocations);
+		log.info("node attributes 3: " + bean.getFacilityNodeAttributes());
 		if ( bean.getFacilityNodeAttributes() != null )
 		{
 			for ( NodeAttribute a : bean.getFacilityNodeAttributes() ){			
 				if ( a.getHandled().equals(false)){
-					a.setValue(null);
+					a.setValue("");
 				}
 			}
 		}
-		handleNewNotes(bean, notes);
 		
+		handleNewNotes(bean, notes);
+	}
+	
+	public void handleNewNotes(NodeOwner bean, List<NodeAttributeNote> notes) throws SQLException {
+		List<NodeAttribute> attributes = bean.getFacilityNodeAttributes();
+		for ( NodeAttributeNote note : notes ) {
+			
+			Boolean found = false;
+			for ( NodeAttribute attr : attributes ){
+				if ( attr.getTemplateID() != null && attr.getTemplateID().getTemplateAttributeID().equals(note.getParentTemplateAttributeID())){
+					
+					attr.setNote(note.getValue());
+					found = true;
+					break;
+				}
+			}
+			if ( !found ){
+					
+				NodeAttribute attr = new NodeAttribute();
+				
+				NodeTemplateAttribute templateAttrib = callback.getFacilityTemplate(note.getParentTemplateAttributeID());
+				attr.setTemplateID(templateAttrib);
+				attr.setNote(note.getValue());
+				attr.setValue("");
+				attr.setParentNode(bean);	
+				
+				attributes.add(attr);
+			}
+		}
 	}
 	
 	private Integer getNoteParentInternal(NodeOwner bean, String key, String[] value, Boolean getTemplateID ) throws SQLException {
@@ -422,7 +461,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 
 		List<NodeAttribute> attrList = new ArrayList<NodeAttribute>();
 		Map<String, String[]> params = req.getParameterMap();
-		List<NodeGeoLocation> geoLocations = new ArrayList<NodeGeoLocation>();
+//		List<NodeGeoLocation> geoLocations = new ArrayList<NodeGeoLocation>();
 		List<NodeAttributeNote> notes = new ArrayList<NodeAttributeNote>();
 
 		for (Map.Entry<String, String[]> entry : params.entrySet()) {
@@ -431,7 +470,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			
 			if ( value.length == 0  || ( value.length == 1 && value[0].equals("") ) ) continue;
 			
-			
+	
 			Integer noteTemplateID = getNoteParentTemplateID(bean,key,value);
 			
 			if ( noteTemplateID != null ){
@@ -444,7 +483,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			}
 
 			NodeAttribute attr = new NodeAttribute();
-
+			
 			key = DynamicAttributes.decodeKey(key);
 
 			if (DynamicAttributes.isDynamicAttribute(key)) {
@@ -462,48 +501,17 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 				setAttributeValue(attr, value);
 
 				handleNewTags(bean, attr);
-				handleGeoData(bean, attr, geoLocations);
+//				handleGeoData(bean, attr, geoLocations);
 				handleNewUploadedFiles(bean, req, attr);
 				handleGroupOwner(bean, attr, user);
 				attrList.add(attr);
 			}
 		}
 		Collections.sort(attrList);
-		bean.setFacilityGeoLocations(geoLocations);
+//		bean.setFacilityGeoLocations(geoLocations);
 		bean.setFacilityNodeAttributes(attrList);		
 		handleNewNotes(bean, notes);
 			
-	}
-
-
-	public void handleNewNotes(NodeOwner bean, List<NodeAttributeNote> notes) throws SQLException {
-		List<NodeAttribute> attributes = bean.getFacilityNodeAttributes();
-		for ( NodeAttributeNote note : notes ) {
-			
-			Boolean found = false;
-			for ( NodeAttribute attr : attributes ){
-				if ( attr.getTemplateID() != null && attr.getTemplateID().getTemplateAttributeID().equals(note.getParentTemplateAttributeID())){
-					
-					note.setParentAttribute(attr);
-					attr.setNote(note);
-					found = true;
-					break;
-				}
-			}
-			if ( !found ){
-					
-				NodeAttribute attr = new NodeAttribute();
-				
-				NodeTemplateAttribute templateAttrib = callback.getFacilityTemplate(note.getParentTemplateAttributeID());
-				attr.setTemplateID(templateAttrib);
-				attr.setNote(note);
-				attr.setValue("");
-				attr.setParentNode(bean);	
-				
-				note.setParentAttribute(attr);
-				attributes.add(attr);
-			}
-		}
 	}
 
 	public void handleNewUploadedFiles(NodeOwner bean, HttpServletRequest req, NodeAttribute attr)
@@ -583,7 +591,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 		this.checkAccess( bean , user);
 		
 		NodeOwner node = super.populateFromUpdateRequest(bean, req, user, uriParser);
-		node.setFacilityGeoLocations( callback.getGeoData(node) );
+		//node.setFacilityGeoLocations( callback.getGeoData(node) );
 		return node;
 	}
 	
@@ -604,7 +612,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			}
 		}
 	}
-	
+	/*
 	public void handleGeoData(NodeOwner bean, NodeAttribute attr, List<NodeGeoLocation> geoLocations ) throws SQLException, UnsupportedEncodingException {
 		
 		if ( attr.getType().equals("GEO-AREA") || attr.getType().equals("GEO-POINT") )
@@ -632,19 +640,19 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			geoLocations.add(geo);
 		}
 	}
-	
+	*/
 	@Override
 	protected ForegroundModuleResponse beanAdded(NodeOwner bean, HttpServletRequest req, HttpServletResponse res,
 			User user, URIParser uriParser) throws Exception {
 		
 		this.checkAccess( bean , user);
 		
-		for ( NodeGeoLocation geo : bean.getFacilityGeoLocations() )
-		{
-			geo.setParentAttributeID(geo.getParentAttribute().getAttributeID());
-			geo.setParentNode(bean);
-			callback.addGeoData(geo);
-		}
+//		for ( NodeGeoLocation geo : bean.getFacilityGeoLocations() )
+//		{
+//			geo.setParentAttributeID(geo.getParentAttribute().getAttributeID());
+//			geo.setParentNode(bean);
+//			callback.addGeoData(geo);
+//		}
 		
 		return super.beanAdded(bean, req, res, user, uriParser);
 	}
@@ -655,12 +663,12 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 		
 		this.checkAccess( bean , user);
 		
-		for ( NodeGeoLocation geo : bean.getFacilityGeoLocations() )
-		{
-			geo.setParentAttributeID(geo.getParentAttribute().getAttributeID());
-			geo.setParentNode(bean);
-			callback.updateGeoData(geo);
-		}
+//		for ( NodeGeoLocation geo : bean.getFacilityGeoLocations() )
+//		{
+//			geo.setParentAttributeID(geo.getParentAttribute().getAttributeID());
+//			geo.setParentNode(bean);
+//			callback.updateGeoData(geo);
+//		}
 		return super.beanUpdated(bean, req, res, user, uriParser);
 	}	
 

@@ -49,10 +49,10 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 	private Boolean requiredAction;
 	*/
 	
-	@DAOManaged
-	@OneToMany(autoGet=true,autoAdd=true,autoUpdate=true)
-	@XMLElement(name="Note")
-	private List<NodeAttributeNote> note;
+	@DAOManaged(columnName = "note")
+	@WebPopulate(required = true)
+	@XMLElement
+	private String note;
 	
 	private Boolean handled = false;
 	
@@ -165,25 +165,15 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 		this.handled = handled;
 	}
 
-
-	public List<NodeAttributeNote> getNoteList() {
-		return note;
+	
+	public String getNote() {
+		
+		return this.note;		
 	}
 	
-	public NodeAttributeNote getNote() {
+	public void setNote(String note) {
 		
-		return this.note != null && this.note.size() > 0 ? this.note.get(0) : null;		
-	}
-
-
-	public void setNote(List<NodeAttributeNote> note) {
 		this.note = note;
-	}
-	
-	public void setNote(NodeAttributeNote note) {
-		
-		this.note = new ArrayList<NodeAttributeNote>();
-		this.note.add(note);
 	}
 
 	/*
@@ -195,5 +185,16 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 		this.requiredAction = requiredAction;
 	}
 	*/
+	
+	@Override
+	public String toString() { 
+		Integer nodeOwnerId = null;
+		Integer templateId = null;
+		if(getParentNode() != null) {nodeOwnerId = getParentNode().getNode_id();}
+		if(getTemplateID() != null) {templateId = getTemplateID().getTemplateAttributeID();}
+		
+	    String result = "[" + "id: " + getAttributeID() + ", node owner: "+ nodeOwnerId + ", template id: "+ templateId + ", note: " + getNote() + "]"; 
+	    return result;
+	} 
 	
 }

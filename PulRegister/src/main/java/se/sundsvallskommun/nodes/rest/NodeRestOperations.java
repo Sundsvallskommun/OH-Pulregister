@@ -176,7 +176,7 @@ public class NodeRestOperations {
 		
 		node.setEditUrl(context.getUriParser().getFullContextPath()+ "/pulregister/nodes/updatefacility/" + node.getID() );
 	}	
-	
+	/*
 	public void getGeoLocations( ModuleRequestContext context ) {
 		
 		try {
@@ -199,7 +199,7 @@ public class NodeRestOperations {
 		}		
 		
 	}
-
+	*/
 	public void getTemplateAttributes(ModuleRequestContext context, Integer typeIndex) throws IOException {
 		
 		NodeType nodeType = null;

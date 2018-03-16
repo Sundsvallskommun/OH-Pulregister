@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,6 @@ import rst.pdfbox.layout.text.Indent;
 import rst.pdfbox.layout.text.SpaceUnit;
 import se.sundsvallskommun.nodes.beans.NodeFile;
 import se.sundsvallskommun.nodes.beans.NodeFileInfo;
-import se.sundsvallskommun.nodes.beans.NodeGeoLocation;
 import se.sundsvallskommun.nodes.beans.NodeOwner;
 import se.sundsvallskommun.nodes.beans.NodeAttribute;
 import se.sundsvallskommun.nodes.beans.NodeAttributeNote;
@@ -76,13 +76,13 @@ import se.unlogic.webutils.http.URIParser;
 import se.unlogic.webutils.http.enums.ContentDisposition;
 
 public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallback<User> {
-	
+
 	protected AnnotatedDAO<NodeOwner> nodeDAO;
 	protected AnnotatedDAO<NodeType> nodeTypeDAO;
 	protected AnnotatedDAO<NodeAttribute> nodeAttributeDAO;
 	protected AnnotatedDAO<NodeTag> nodeTagDAO;
 	protected AnnotatedDAO<NodeTemplateAttribute> templateAttributeDAO;
-	protected AnnotatedDAO<NodeGeoLocation> geoLocationDAO;
+	// protected AnnotatedDAO<NodeGeoLocation> geoLocationDAO;
 	protected AnnotatedDAO<NodeFile> fileDAO;
 	protected AnnotatedDAO<NodeFileInfo> fileInfoDAO;
 	protected AnnotatedDAO<NodeAttributeNote> noteDAO;
@@ -99,14 +99,14 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	protected QueryParameterFactory<NodeFile, NodeOwner> nodeFileIDParamFactory;
 
 	protected QueryParameterFactory<NodeTag, String> facilityTagNameParamFactory;
-	protected QueryParameterFactory<NodeGeoLocation, Integer> facilityGeoIDParamFactory;
+//	protected QueryParameterFactory<NodeGeoLocation, Integer> facilityGeoIDParamFactory;
 	protected QueryParameterFactory<NodeFile, Integer> facilitySingleFileIDParamFactory;
 	protected QueryParameterFactory<NodeFileInfo, Integer> facilitySingleFileInfoIDParamFactory;
-	
+
 	protected NodeRestOperations nodeRestOperations;
-	
+
 	public PulRegistryModule() {
-	
+
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 
 			log.info(upgradeResult.toString());
 		}
-		
+
 		HierarchyAnnotatedDAOFactory daoFactory = new HierarchyAnnotatedDAOFactory(dataSource,
 				systemInterface.getUserHandler(), systemInterface.getGroupHandler());
 		this.nodeDAO = daoFactory.getDAO(NodeOwner.class);
@@ -127,101 +127,105 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		this.nodeAttributeDAO = daoFactory.getDAO(NodeAttribute.class);
 		this.templateAttributeDAO = daoFactory.getDAO(NodeTemplateAttribute.class);
 		this.nodeTagDAO = daoFactory.getDAO(NodeTag.class);
-		this.geoLocationDAO = daoFactory.getDAO(NodeGeoLocation.class);
+//		this.geoLocationDAO = daoFactory.getDAO(NodeGeoLocation.class);
 		this.fileDAO = daoFactory.getDAO(NodeFile.class);
 		this.fileInfoDAO = daoFactory.getDAO(NodeFileInfo.class);
 		this.noteDAO = daoFactory.getDAO(NodeAttributeNote.class);
 
-		AdvancedAnnotatedDAOWrapper<NodeOwner, Integer> facilityNodeDaoWrapper = this.nodeDAO.getAdvancedWrapper(Integer.class);
-		AdvancedAnnotatedDAOWrapper<NodeType, Integer> NodeTypeDaoWrapper = this.nodeTypeDAO.getAdvancedWrapper(Integer.class);
-		AdvancedAnnotatedDAOWrapper<NodeAttribute, Integer> facilityNodeAttributeDaoWrapper = this.nodeAttributeDAO.getAdvancedWrapper(Integer.class);
-		AdvancedAnnotatedDAOWrapper<NodeTag, Integer> facilityNodeTagDaoWrapper = this.nodeTagDAO.getAdvancedWrapper(Integer.class);		
+		AdvancedAnnotatedDAOWrapper<NodeOwner, Integer> facilityNodeDaoWrapper = this.nodeDAO
+				.getAdvancedWrapper(Integer.class);
+		AdvancedAnnotatedDAOWrapper<NodeType, Integer> NodeTypeDaoWrapper = this.nodeTypeDAO
+				.getAdvancedWrapper(Integer.class);
+		AdvancedAnnotatedDAOWrapper<NodeAttribute, Integer> facilityNodeAttributeDaoWrapper = this.nodeAttributeDAO
+				.getAdvancedWrapper(Integer.class);
+		AdvancedAnnotatedDAOWrapper<NodeTag, Integer> facilityNodeTagDaoWrapper = this.nodeTagDAO
+				.getAdvancedWrapper(Integer.class);
 
 		facilityNodeDaoWrapper.getGetQuery().addRelations(NodeOwner.TAGS_RELATION);
 		facilityNodeDaoWrapper.getGetAllQuery().addRelations(NodeOwner.TAGS_RELATION);
 		facilityNodeDaoWrapper.getAddQuery().addRelations(NodeOwner.TAGS_RELATION);
 		facilityNodeDaoWrapper.getUpdateQuery().addRelations(NodeOwner.TAGS_RELATION);
 
-		this.nodeCRUD = new NodeOwnerCRUD(facilityNodeDaoWrapper, this , systemInterface );
+		this.nodeCRUD = new NodeOwnerCRUD(facilityNodeDaoWrapper, this, systemInterface);
 		this.nodeTypeCRUD = new NodeTypeCRUD(NodeTypeDaoWrapper, this);
 		this.nodeAttributeCRUD = new NodeAttributeCRUD(facilityNodeAttributeDaoWrapper, this);
-		this.nodeTagCRUD = new NodeTagCRUD(facilityNodeTagDaoWrapper, this);		
+		this.nodeTagCRUD = new NodeTagCRUD(facilityNodeTagDaoWrapper, this);
 
 		this.facilityTypeIDParamFactory = this.nodeTypeDAO.getParamFactory("type_id", Integer.class);
-		this.facilityTypeParentIDParamFactory = this.nodeTypeDAO.getParamFactory("parentType",NodeType.class);
-		this.facilityTemplateIDParamFactory = this.templateAttributeDAO.getParamFactory("templateAttributeID",Integer.class);
-		this.facilityTemplateFromParentTypeParamFactory = this.templateAttributeDAO.getParamFactory("parentNodeType", NodeType.class);
+		this.facilityTypeParentIDParamFactory = this.nodeTypeDAO.getParamFactory("parentType", NodeType.class);
+		this.facilityTemplateIDParamFactory = this.templateAttributeDAO.getParamFactory("templateAttributeID",
+				Integer.class);
+		this.facilityTemplateFromParentTypeParamFactory = this.templateAttributeDAO.getParamFactory("parentNodeType",
+				NodeType.class);
 		this.nodeFileIDParamFactory = this.fileDAO.getParamFactory("parentNode", NodeOwner.class);
 		this.facilitySingleFileIDParamFactory = this.fileDAO.getParamFactory("nodeFileID", Integer.class);
-		this.facilitySingleFileInfoIDParamFactory = this.fileInfoDAO.getParamFactory("nodeFileID",Integer.class);
+		this.facilitySingleFileInfoIDParamFactory = this.fileInfoDAO.getParamFactory("nodeFileID", Integer.class);
 		this.facilityTagNameParamFactory = this.nodeTagDAO.getParamFactory("tagName", String.class);
-		this.facilityGeoIDParamFactory = this.geoLocationDAO.getParamFactory("geoID", Integer.class);
-	
+//		this.facilityGeoIDParamFactory = this.geoLocationDAO.getParamFactory("geoID", Integer.class);
+
 		this.nodeCRUD.addRequestFilter(new TransactionRequestFilter(dataSource));
-		
 
 	};
-	
+
 	@Override
 	public void init(ForegroundModuleDescriptor moduleDescriptor, SectionInterface sectionInterface,
 			DataSource dataSource) throws Exception {
-		
-		nodeRestOperations = new NodeRestOperations(this);		
+
+		nodeRestOperations = new NodeRestOperations(this);
 		super.init(moduleDescriptor, sectionInterface, dataSource);
 	}
 
-	
 	@RESTMethod(alias = "rest/api/1/registry/{registryIndex}", method = "get")
 	public void getFacilityREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser,
 			@URIParam(name = "registryIndex") Integer facilityIndex) throws Throwable {
 
-		this.nodeRestOperations.getNode(new ModuleRequestContext(req, res, user, uriParser), facilityIndex );		
+		this.nodeRestOperations.getNode(new ModuleRequestContext(req, res, user, uriParser), facilityIndex);
 	}
+
 	@RESTMethod(alias = "rest/api/1/registry", method = "get")
-	public void getFacilitiesREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser) throws Throwable {
+	public void getFacilitiesREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser)
+			throws Throwable {
 
-		this.nodeRestOperations.getNodes(new ModuleRequestContext(req, res, user, uriParser) );		
+		this.nodeRestOperations.getNodes(new ModuleRequestContext(req, res, user, uriParser));
 	}
-	@RESTMethod(alias = "rest/api/1/registry/geo", method = "get")
-	public void getFacilitiesGeoLocationsREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser) throws Throwable {
+	/*
+	 * @RESTMethod(alias = "rest/api/1/registry/geo", method = "get") public void
+	 * getFacilitiesGeoLocationsREST(HttpServletRequest req, HttpServletResponse
+	 * res, User user, URIParser uriParser) throws Throwable {
+	 * 
+	 * this.nodeRestOperations.getGeoLocations(new ModuleRequestContext(req, res,
+	 * user, uriParser) ); }
+	 */
 
-		this.nodeRestOperations.getGeoLocations(new ModuleRequestContext(req, res, user, uriParser) );		
-	}
-	
-	
 	@RESTMethod(alias = "rest/api/1/registryType/{typeIndex}/templateAttribute", method = "get")
-	public void getTemplateAttributesREST(HttpServletRequest req, 
-			HttpServletResponse res, 
-			User user, 
-			URIParser uriParser,
-			@URIParam(name = "typeIndex") Integer typeIndex) throws Throwable {
+	public void getTemplateAttributesREST(HttpServletRequest req, HttpServletResponse res, User user,
+			URIParser uriParser, @URIParam(name = "typeIndex") Integer typeIndex) throws Throwable {
 
-		this.nodeRestOperations.getTemplateAttributes(new ModuleRequestContext(req, res, user, uriParser) , typeIndex );		
+		this.nodeRestOperations.getTemplateAttributes(new ModuleRequestContext(req, res, user, uriParser), typeIndex);
 	}
+
 	@RESTMethod(alias = "rest/api/1/registryType/{typeIndex}/templateAttribute/{index}", method = "get")
-	public void getTemplateAttributesREST(HttpServletRequest req, 
-			HttpServletResponse res, 
-			User user, URIParser uriParser,
-			@URIParam(name = "typeIndex") Integer typeIndex,
+	public void getTemplateAttributesREST(HttpServletRequest req, HttpServletResponse res, User user,
+			URIParser uriParser, @URIParam(name = "typeIndex") Integer typeIndex,
 			@URIParam(name = "index") Integer index) throws Throwable {
 
-		this.nodeRestOperations.getTemplateAttribute(new ModuleRequestContext(req, res, user, uriParser) , typeIndex , index );		
+		this.nodeRestOperations.getTemplateAttribute(new ModuleRequestContext(req, res, user, uriParser), typeIndex,
+				index);
 	}
-	
-	
-	
+
 	@RESTMethod(alias = "rest/api/1/registryType", method = "get")
-	public void getRegistryTypeREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser) throws Throwable {
+	public void getRegistryTypeREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser)
+			throws Throwable {
 
-		this.nodeRestOperations.getRegistryTypes(new ModuleRequestContext(req, res, user, uriParser) );		
-	}	
-	@RESTMethod(alias = "rest/api/1/registryType/{index}", method = "get")
-	public void getRegistryTypeREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser, @URIParam(name = "index") Integer index) throws Throwable {
-
-		this.nodeRestOperations.getRegistryType(new ModuleRequestContext(req, res, user, uriParser) , index );		
+		this.nodeRestOperations.getRegistryTypes(new ModuleRequestContext(req, res, user, uriParser));
 	}
 
-	
+	@RESTMethod(alias = "rest/api/1/registryType/{index}", method = "get")
+	public void getRegistryTypeREST(HttpServletRequest req, HttpServletResponse res, User user, URIParser uriParser,
+			@URIParam(name = "index") Integer index) throws Throwable {
+
+		this.nodeRestOperations.getRegistryType(new ModuleRequestContext(req, res, user, uriParser), index);
+	}
 
 	@Override
 	public ForegroundModuleResponse processRequest(HttpServletRequest req, HttpServletResponse res, User user,
@@ -265,52 +269,67 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			URIParser uriParser) throws Exception {
 
 		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "ADD");
-		Collections.sort(bean.getFacilityNodeType().getFacilityTemplateAttributes());
-		this.nodeCRUD.checkAccess( bean , user);
-		
+		this.nodeCRUD.checkAccess(bean, user);
+
 		ForegroundModuleResponse fgResp = this.nodeCRUD.add(req, res, user, uriParser);
+		
+		try {
+			if(fgResp != null) {
+				Document doc = fgResp.getDocument();
+				Element element = (Element) fgResp.getDocument().getFirstChild().getFirstChild().getNextSibling().getNextSibling();
+				XMLUtils.appendNewElement(doc, element, "sessionTimeout", user.getSession().getMaxInactiveInterval());
+				XMLUtils.appendNewElement(doc, element, "sessionLastAccess", user.getSession().getLastAccessedTime());
+			}
+		} catch(Exception e) {}
+		
 		return fgResp;
 	}
 
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse updateFacility(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-		
-		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "UPDATE");
-		this.nodeCRUD.checkAccess( bean , user);
 
-		return this.nodeCRUD.update(req, res, user, uriParser);
+		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "UPDATE");
+		this.nodeCRUD.checkAccess(bean, user);
+		ForegroundModuleResponse result = this.nodeCRUD.update(req, res, user, uriParser);
+		
+		try {
+			if(result != null) {
+				Document doc = result.getDocument();
+				Element element = (Element) result.getDocument().getFirstChild().getFirstChild().getNextSibling().getNextSibling();
+				XMLUtils.appendNewElement(doc, element, "sessionTimeout", user.getSession().getMaxInactiveInterval());
+				XMLUtils.appendNewElement(doc, element, "sessionLastAccess", user.getSession().getLastAccessedTime());
+			}
+		} catch(Exception e) {}
+			
+		return result;
 	}
 
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse updateFacilityType(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
 
-		this.nodeCRUD.checkAccess( null , user);
-		
+		this.nodeCRUD.checkAccess(null, user);
+
 		return this.nodeTypeCRUD.update(req, res, user, uriParser);
 	}
 
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse removeFacility(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-		
+
 		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "DELETE");
-			
+
 		this.nodeCRUD.checkAccess(bean, user);
 
-		List<NodeGeoLocation> geoLocations = this.getGeoData(bean);
-		if (geoLocations != null) {
-			this.geoLocationDAO.delete(geoLocations);
-			bean.setFacilityGeoLocations(null);
-		}
+		// List<NodeGeoLocation> geoLocations = this.getGeoData(bean);
+		// if (geoLocations != null) {
+		// this.geoLocationDAO.delete(geoLocations);
+		// bean.setFacilityGeoLocations(null);
+		// }
 
 		List<NodeAttribute> attributes = bean.getFacilityNodeAttributes();
 		if (attributes != null) {
-			for ( NodeAttribute attr : attributes ){
-				if ( attr.getNoteList() != null )
-					noteDAO.delete(attr.getNoteList());
-			}
 			this.nodeAttributeDAO.delete(attributes);
 			bean.setFacilityNodeAttributes(null);
 		}
@@ -320,8 +339,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			this.fileInfoDAO.delete(files);
 			bean.setFacilityNodeFiles(null);
 		}
-		
-		
 
 		ForegroundModuleResponse result = nodeCRUD.delete(req, res, user, uriParser);
 
@@ -331,7 +348,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse viewFacility(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-		
+
 		this.nodeCRUD.checkAccess(this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "SHOW"), user);
 
 		return this.nodeCRUD.show(req, res, user, uriParser);
@@ -351,10 +368,11 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	}
 
 	@WebPublic(toLowerCase = true)
-	public ForegroundModuleResponse chooseFacilityType(HttpServletRequest req, HttpServletResponse res, User user,URIParser uriParser) throws Exception {
+	public ForegroundModuleResponse chooseFacilityType(HttpServletRequest req, HttpServletResponse res, User user,
+			URIParser uriParser) throws Exception {
 
 		this.nodeCRUD.checkAccess(null, user);
-		
+
 		if (req.getMethod() == "POST") {
 			String NodeType = req.getParameter("NodeTypes");
 			redirectToMethod(req, res, "/addfacility/" + NodeType);
@@ -417,87 +435,84 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		return null;
 	}
 
-	
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse exportCsv(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws IOException, AccessDeniedException, SQLException {
-		
-    	
-    	String delimiter = ";";
-	    String lineSeparator = System.getProperty("line.separator");
-		List<NodeOwner> nodes = this.getFacilityNodes( new ModuleRequestContext(req,res,user,uriParser));			
+
+		String delimiter = ";";
+		String lineSeparator = System.getProperty("line.separator");
+		List<NodeOwner> nodes = this.getFacilityNodes(new ModuleRequestContext(req, res, user, uriParser));
 		String csvString = "Namn";
 		List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
-		
-		for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-			if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>199)
-			csvString += delimiter + tAttrib.getName();
+
+		for (NodeTemplateAttribute tAttrib : facilityTemplates) {
+			if (tAttrib.getTemplateAttributeID() < 101 || tAttrib.getTemplateAttributeID() > 199)
+				csvString += delimiter + tAttrib.getName();
 		}
-		
+
 		csvString += lineSeparator;
-		
+
 		List<NodeOwner> allowedNodes = NodeOwnerCRUD.getAllowedNodes(user, nodes);
-		
-		for(NodeOwner node : allowedNodes){
-			
-			csvString += String.format("%s", node.getTitle() );
-			
+
+		for (NodeOwner node : allowedNodes) {
+
+			csvString += String.format("%s", node.getTitle());
+
 			DynamicAttributes.addMissingAttributes(node);
 			List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
 			Collections.sort(facilityNodeAttributes);
-			for ( NodeAttribute attr : facilityNodeAttributes ) {
-				if (attr.getTemplateID().getTemplateAttributeID()<101 || attr.getTemplateID().getTemplateAttributeID()>199) {
+			for (NodeAttribute attr : facilityNodeAttributes) {
+				if (attr.getTemplateID().getTemplateAttributeID() < 101
+						|| attr.getTemplateID().getTemplateAttributeID() > 199) {
 					csvString += delimiter;
-					
+
 					String value = DynamicAttributes.getDisplayValue(attr);
 					value = value.replaceAll("\\r\\n|\\r|\\n", " ");
-					if ( value.contains(delimiter) ) {
-						csvString += String.format("\"%s\"", value );
+					if (value.contains(delimiter)) {
+						csvString += String.format("\"%s\"", value);
 					} else {
-						csvString += String.format("%s", value );
+						csvString += String.format("%s", value);
 					}
 				}
 			}
 			csvString += lineSeparator;
 		}
-	
+
 		InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
-		
-		HTTPUtils.sendFile( inputStream, "export.csv", "application/csv", "", req, res, ContentDisposition.INLINE );
-		
+
+		HTTPUtils.sendFile(inputStream, "export.csv", "application/csv", "", req, res, ContentDisposition.INLINE);
+
 		return null;
 	}
 
-	//Export an empty csv file with only headers
-    @WebPublic(toLowerCase = true)
-    public ForegroundModuleResponse exportemptyCsv(HttpServletRequest req, HttpServletResponse res, User user,
-                            URIParser uriParser) throws IOException, AccessDeniedException, SQLException {
-                
-    
-    	String delimiter = ";";
-        String lineSeparator = System.getProperty("line.separator");
-        String csvString = "Namn";
-        List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
-        Collections.sort(facilityTemplates);
-        for ( NodeTemplateAttribute tAttrib : facilityTemplates ){
-        	if (tAttrib.getTemplateAttributeID()<101 || tAttrib.getTemplateAttributeID()>199)
-                csvString += delimiter + tAttrib.getName();
-        }
-        
-        csvString += lineSeparator;
-        
-        InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
-        
-        HTTPUtils.sendFile( inputStream, "mall.csv", "application/csv", "", req, res, ContentDisposition.INLINE );
-        
-        return null;
-    }
+	// Export an empty csv file with only headers
+	@WebPublic(toLowerCase = true)
+	public ForegroundModuleResponse exportemptyCsv(HttpServletRequest req, HttpServletResponse res, User user,
+			URIParser uriParser) throws IOException, AccessDeniedException, SQLException {
 
-	
+		String delimiter = ";";
+		String lineSeparator = System.getProperty("line.separator");
+		String csvString = "Namn";
+		List<NodeTemplateAttribute> facilityTemplates = this.getFacilityTemplates(this.getNodeType(1));
+		Collections.sort(facilityTemplates);
+		for (NodeTemplateAttribute tAttrib : facilityTemplates) {
+			if (tAttrib.getTemplateAttributeID() < 101 || tAttrib.getTemplateAttributeID() > 199)
+				csvString += delimiter + tAttrib.getName();
+		}
+
+		csvString += lineSeparator;
+
+		InputStream inputStream = new ByteArrayInputStream(csvString.getBytes(StandardCharsets.ISO_8859_1));
+
+		HTTPUtils.sendFile(inputStream, "mall.csv", "application/csv", "", req, res, ContentDisposition.INLINE);
+
+		return null;
+	}
+
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse getTagsJson(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws AccessDeniedException, SQLException, IOException {
-		
+
 		this.nodeCRUD.checkAccess(null, user);
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -514,7 +529,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 			}
 		}
 		parametersJsonArray.toJson(stringBuilder);
-		HTTPUtils.sendReponse(stringBuilder.toString(), "application/json", res);			
+		HTTPUtils.sendReponse(stringBuilder.toString(), "application/json", res);
 
 		return null;
 	}
@@ -570,16 +585,15 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		NodeTemplateAttribute result = templateAttributeDAO.get(query);
 		return result;
 	}
-	
+
 	public List<NodeTemplateAttribute> getFacilityTemplates(NodeType parentType) throws SQLException {
-		
+
 		HighLevelQuery<NodeTemplateAttribute> query = new HighLevelQuery<NodeTemplateAttribute>();
 		query.addParameter(facilityTemplateFromParentTypeParamFactory.getParameter(parentType));
 		List<NodeTemplateAttribute> result = templateAttributeDAO.getAll(query);
 		Collections.sort(result);
 		return result;
 	}
-	
 
 	public NodeTag getTagByName(String name) throws SQLException {
 
@@ -658,18 +672,17 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		List<NodeFile> result = fileDAO.getAll(query);
 		return result;
 	}
-	
-	public NodeOwner getFacilityNode(Integer id, ModuleRequestContext context ) throws AccessDeniedException, SQLException
-	{
-		NodeOwner bean = nodeCRUD.getBean(id,"GET", context.getReq());
-		
-		this.nodeCRUD.checkAccess( bean , context.getUser() );
-		
+
+	public NodeOwner getFacilityNode(Integer id, ModuleRequestContext context)
+			throws AccessDeniedException, SQLException {
+		NodeOwner bean = nodeCRUD.getBean(id, "GET", context.getReq());
+
+		this.nodeCRUD.checkAccess(bean, context.getUser());
+
 		return bean;
 	}
-	
-	public List<NodeOwner> getFacilityNodes(ModuleRequestContext context) throws AccessDeniedException, SQLException
-	{
+
+	public List<NodeOwner> getFacilityNodes(ModuleRequestContext context) throws AccessDeniedException, SQLException {
 		return NodeOwnerCRUD.getAllowedNodes(context.getUser(), nodeDAO.getAll());
 	}
 
@@ -680,170 +693,145 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		query.addParameter(node.getNode_id());
 		return fileInfoDAO.getAll(query);
 	}
-	
-	public List<NodeGeoLocation> getGeoData() throws SQLException {
-		
-		LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
-				"SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from "
-						+ geoLocationDAO.getTableName() );
-		
-		List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query);
-		if (geoLocations == null)
-			geoLocations = new ArrayList<NodeGeoLocation>();
 
-		return geoLocations;
-	}
-		
+	/*
+	 * public List<NodeGeoLocation> getGeoData() throws SQLException {
+	 * 
+	 * LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
+	 * "SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from " +
+	 * geoLocationDAO.getTableName() );
+	 * 
+	 * List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query); if
+	 * (geoLocations == null) geoLocations = new ArrayList<NodeGeoLocation>();
+	 * 
+	 * return geoLocations; }
+	 */
+	/*
+	 * public List<NodeGeoLocation> getGeoData(NodeOwner node) throws SQLException {
+	 * LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
+	 * "SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from " +
+	 * geoLocationDAO.getTableName() + " WHERE parent_node = ?");
+	 * query.addParameter(node.getNode_id());
+	 * query.addRelation(ReflectionUtils.getField(NodeOwner.class, "geoLocations"));
+	 * List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query); if
+	 * (geoLocations == null) geoLocations = new ArrayList<NodeGeoLocation>();
+	 * 
+	 * for (NodeGeoLocation geo : geoLocations) { geo.setParentNode(node); } return
+	 * geoLocations;
+	 * 
+	 * }
+	 */
+	/*
+	 * public void addGeoData(NodeGeoLocation geo) throws SQLException { if
+	 * (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) {
+	 * UpdateQuery query = new UpdateQuery(dataSource, "INSERT INTO " +
+	 * geoLocationDAO.getTableName() +
+	 * " (geo_data,parent_node,parent_node_attribute) VALUES (GeomFromText(?),?,?)"
+	 * ); query.setString(1, geo.getGeoData()); query.setInt(2,
+	 * geo.getParentNode().getNode_id()); query.setInt(3,
+	 * geo.getParentAttributeID()); query.executeUpdate(); } }
+	 */
+	/*
+	 * public void updateGeoData(NodeGeoLocation geo) throws SQLException { if
+	 * (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) { if
+	 * (geo.getGeoID() == null) { addGeoData(geo); return; } UpdateQuery query = new
+	 * UpdateQuery(dataSource, "UPDATE " + geoLocationDAO.getTableName() +
+	 * " SET geo_data=GeomFromText(?),parent_node=?,parent_node_attribute=? WHERE geo_id = ?"
+	 * ); query.setString(1, geo.getGeoData()); query.setInt(2,
+	 * geo.getParentNode().getNode_id()); query.setInt(3,
+	 * geo.getParentAttributeID()); query.setInt(4, geo.getGeoID());
+	 * query.executeUpdate(); } }
+	 */
+	// Export PDF file
+	@WebPublic(toLowerCase = true)
+	public ForegroundModuleResponse exportPdf(HttpServletRequest req, HttpServletResponse res, User user,
+			URIParser uriParser) throws IOException, AccessDeniedException, SQLException, COSVisitorException {
 
-	public List<NodeGeoLocation> getGeoData(NodeOwner node) throws SQLException {
-		LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
-				"SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from "
-						+ geoLocationDAO.getTableName() + " WHERE parent_node = ?");
-		query.addParameter(node.getNode_id());
-		query.addRelation(ReflectionUtils.getField(NodeOwner.class, "geoLocations"));
-		List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query);
-		if (geoLocations == null)
-			geoLocations = new ArrayList<NodeGeoLocation>();
+		// Creating PDF document object
+		rst.pdfbox.layout.elements.Document doc = new rst.pdfbox.layout.elements.Document(40, 60, 40, 60);
 
-		for (NodeGeoLocation geo : geoLocations) {
-			geo.setParentNode(node);
-		}
-		return geoLocations;
+		Paragraph paragraph1 = new Paragraph();
 
-	}
+		String facilityId = uriParser.toString().substring(uriParser.toString().length() - 1);
+		int facID = Integer.valueOf(facilityId);
+		String title = null;
 
-	public void addGeoData(NodeGeoLocation geo) throws SQLException {
-		if (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) {
-			UpdateQuery query = new UpdateQuery(dataSource, "INSERT INTO " + geoLocationDAO.getTableName()
-					+ " (geo_data,parent_node,parent_node_attribute) VALUES (GeomFromText(?),?,?)");
-			query.setString(1, geo.getGeoData());
-			query.setInt(2, geo.getParentNode().getNode_id());
-			query.setInt(3, geo.getParentAttributeID());
-			query.executeUpdate();
-		}
-	}
+		List<NodeOwner> nodes = this.getFacilityNodes(new ModuleRequestContext(req, res, user, uriParser));
 
-	public void updateGeoData(NodeGeoLocation geo) throws SQLException {
-		if (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) {
-			if (geo.getGeoID() == null) {
-				addGeoData(geo);
-				return;
+		List<NodeOwner> allowedNodes = NodeOwnerCRUD.getAllowedNodes(user, nodes);
+
+		for (NodeOwner node : allowedNodes) {
+			// only get the current row
+			if (node.getNode_id() == facID) {
+
+				DynamicAttributes.addMissingAttributes(node);
+				List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
+				Collections.sort(facilityNodeAttributes);
+				// title of register
+				title = node.getTitle();
+				paragraph1.addMarkup("\\\\\\\\\\\\*__" + node.getTitle() + "\\\\\\\\\\\\*__\n", 16, BaseFont.Times);
+				doc.add(paragraph1);
+
+				for (NodeAttribute attr : facilityNodeAttributes) {
+
+					// each row that is not a subquestion (<templateAttributeID100) and not empty
+					if (attr.getTemplateID().getTemplateAttributeID() < 100 && attr.getAttributeID() != null) {
+
+						// Check descriptive text
+						String desc = null;
+						String value = null;
+						if (attr.getTemplateID().getDescription() == null
+								|| attr.getTemplateID().getDescription() == "")
+							desc = "Saknar beskrivande text";
+						else
+							desc = attr.getTemplateID().getDescription();
+
+						// heading
+						Paragraph paragraph2 = new Paragraph();
+						paragraph2.addMarkup("\\\\\\\\\\\\*" + DynamicAttributes.getTemplateName(attr) + "\\\\\\\\\\\\*"
+								+ "\n_" + desc + "_\n", 11, BaseFont.Times);
+						doc.add(paragraph2);
+
+						Paragraph paragraph3 = new Paragraph();
+						// individual rows
+						if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("true")) {
+							if (attr.getValue() == "" || attr.getValue() == null)
+								value = "";
+							paragraph3.add(new Indent(20, SpaceUnit.pt));
+							paragraph3.addMarkup("Ja" + "\n", 11, BaseFont.Times);
+
+							doc.add(paragraph3);
+						} else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("false")) {
+							paragraph3.add(new Indent(20, SpaceUnit.pt));
+							paragraph3.addMarkup("Nej" + "\n", 11, BaseFont.Times);
+							doc.add(paragraph3);
+						} else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("")) {
+							paragraph3.add(new Indent(20, SpaceUnit.pt));
+							paragraph3.addMarkup("Uppgift saknas" + "\n", 11, BaseFont.Times);
+							doc.add(paragraph3);
+						} else {
+							paragraph3.add(new Indent(20, SpaceUnit.pt));
+							paragraph3.addMarkup(DynamicAttributes.getDisplayValue(attr) + "\n", 11, BaseFont.Times);
+							doc.add(paragraph3);
+						}
+
+					}
+				}
 			}
-			UpdateQuery query = new UpdateQuery(dataSource, "UPDATE " + geoLocationDAO.getTableName()
-					+ " SET geo_data=GeomFromText(?),parent_node=?,parent_node_attribute=? WHERE geo_id = ?");
-			query.setString(1, geo.getGeoData());
-			query.setInt(2, geo.getParentNode().getNode_id());
-			query.setInt(3, geo.getParentAttributeID());
-			query.setInt(4, geo.getGeoID());
-			query.executeUpdate();
 		}
+
+		final OutputStream outputStream = new FileOutputStream(title + ".pdf");
+		doc.save(outputStream);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+		doc.save(out);
+
+		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+		HTTPUtils.sendFile(in, title + ".pdf", "application/pdf", "", req, res, ContentDisposition.ATTACHMENT);
+
+		return null;
+
 	}
-	
-	//Export PDF file
-    @WebPublic(toLowerCase = true)
-    public ForegroundModuleResponse exportPdf(HttpServletRequest req, HttpServletResponse res, User user,
-                            URIParser uriParser) throws IOException, AccessDeniedException, SQLException, COSVisitorException {             
-
-                //Creating PDF document object 
-                rst.pdfbox.layout.elements.Document doc = new rst.pdfbox.layout.elements.Document(40, 60, 40, 60);
-
-                Paragraph paragraph1 = new Paragraph();
-
-                String facilityId = uriParser.toString().substring(uriParser.toString().length() - 1);
-                int facID = Integer.valueOf(facilityId);
-                String title = null;
-
-                List<NodeOwner> nodes = this.getFacilityNodes( new ModuleRequestContext(req,res,user,uriParser));             
-
-                List<NodeOwner> allowedNodes = NodeOwnerCRUD.getAllowedNodes(user, nodes);
-
-                for(NodeOwner node : allowedNodes){
-                            //only get the current row
-                            if (node.getNode_id() == facID)
-                            {
-
-                                        DynamicAttributes.addMissingAttributes(node);
-                                        List<NodeAttribute> facilityNodeAttributes = node.getFacilityNodeAttributes();
-                                        Collections.sort(facilityNodeAttributes);
-                                        //title of register
-                                        title = node.getTitle();
-                                        paragraph1.addMarkup("\\\\\\\\\\\\*__" + node.getTitle() + "\\\\\\\\\\\\*__\n", 16, BaseFont.Times);
-                                        doc.add(paragraph1);
-
-                                        for ( NodeAttribute attr : facilityNodeAttributes ) {
-
-                                                    //each row that is not a subquestion (<templateAttributeID100) and not empty                       
-                                                    if (attr.getTemplateID().getTemplateAttributeID()<100 && attr.getAttributeID() != null)
-                                                    {
-
-                                                                //Check descriptive text
-                                                                String desc = null;
-                                                                String value = null;
-                                                                if (attr.getTemplateID().getDescription() == null || attr.getTemplateID().getDescription() == "")
-                                                                            desc = "Saknar beskrivande text";
-                                                                else
-                                                                            desc = attr.getTemplateID().getDescription();
-
-                                                                //heading
-                                                                Paragraph paragraph2 = new Paragraph();
-                                                                paragraph2.addMarkup("\\\\\\\\\\\\*" + DynamicAttributes.getTemplateName(attr) + "\\\\\\\\\\\\*" + 
-                                                                                        "\n_" +
-                                                                                        desc +
-                                                                                        "_\n", 11, BaseFont.Times);                                                                                             
-                                                                doc.add(paragraph2);  
-
-                                                                Paragraph paragraph3 = new Paragraph();
-                                                                //individual rows
-                                                                if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("true"))
-                                                                {
-                                                                            if (attr.getValue() == "" || attr.getValue()== null)
-                                                                                        value = "";
-                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
-                                                                            paragraph3.addMarkup("Ja" + 
-                                                                                                    "\n", 11, BaseFont.Times);
-
-                                                                            doc.add(paragraph3);
-                                                                }
-                                                                else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals("false"))
-                                                                {
-                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
-                                                                            paragraph3.addMarkup("Nej" + 
-                                                                                                    "\n", 11, BaseFont.Times);
-                                                                            doc.add(paragraph3);
-                                                                }
-                                                                else if (DynamicAttributes.getDisplayValue(attr).substring(0).equals(""))
-                                                                {
-                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
-                                                                            paragraph3.addMarkup("Uppgift saknas" + 
-                                                                                                    "\n", 11, BaseFont.Times);
-                                                                            doc.add(paragraph3);
-                                                                }
-                                                                else
-                                                                {
-                                                                            paragraph3.add(new Indent(20, SpaceUnit.pt));
-                                                                            paragraph3.addMarkup(DynamicAttributes.getDisplayValue(attr) + 
-                                                                                                    "\n", 11, BaseFont.Times);
-                                                                            doc.add(paragraph3);                                        
-                                                                }
-
-                                                    }
-                                        }
-                            }
-                }                                   
-                
-                final OutputStream outputStream = new FileOutputStream(title +".pdf");
-                doc.save(outputStream);
-                
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-    
-                doc.save(out);
-
-                ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
-                HTTPUtils.sendFile( in, title + ".pdf", "application/pdf", "", req, res, ContentDisposition.ATTACHMENT );
-
-                return null;
-
-    }
-
 
 }

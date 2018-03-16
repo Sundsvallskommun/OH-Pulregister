@@ -156,7 +156,7 @@ public class NodeOwner extends GeneratedElementable implements SearchableItem, S
 		if ( this.nodeAttributes != null && this.nodeAttributes.size() > 0 ) {
 			
 			for ( NodeAttribute attribute : this.nodeAttributes ) {
-				if ( attribute.getNote() != null && attribute.getNote().getValue() != "" ) {
+				if ( attribute.getNote() != null && attribute.getNote() != "" ) {
 					this.hasNotes = true;
 					break;
 				}
