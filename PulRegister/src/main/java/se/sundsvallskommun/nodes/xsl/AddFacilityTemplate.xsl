@@ -18,8 +18,6 @@
 		
 		<xsl:call-template name="FormScripts"/>
 		<xsl:call-template name="DynamicAttributesInit"/>		
-<!-- 		<xsl:call-template name="AddMapGeoDataVariable"/> -->
-	
 		
 		<div class="container">
 
@@ -115,20 +113,6 @@
 	
 	
 	<xsl:template name="AddMenuButton">
-	<!-- 
-		<xsl:call-template name="createCheckbox">
-			<xsl:with-param name="id" select="AttributeDetails" />
-			<xsl:with-param name="name" select="AttributeDetails" />
-			<xsl:with-param name="checked" select="requiredAction" />
-			<xsl:with-param name="value" select="requiredAction"/>
-		</xsl:call-template>Åtgärder krävs
-		 -->
-		<!-- 
-		<input type='hidden' value='false' name="{AttributeDetails}_requiredAction" class="hiddenRequiredCheckBox"/>
-		<input type="checkbox" id="{AttributeDetails}-requiredActionCheckbox" name="{AttributeDetails}_requiredAction" class="requiredActionCheckbox" value="{requiredAction}"/>
-		Åtgärder krävs
-		 -->
-		
 		
 		<a data-toggle="dropdown" href="javascript:void(0);" title="Alternativ"><div name="hamburger-menu-button" style="color:rgba(0,0,0,0.2);" onclick="" class="upper-left-corner glyphicon glyphicon-menu-hamburger"></div></a>
 		
@@ -140,16 +124,6 @@
 	      <li><a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').show();return false;"><span class="glyphicon glyphicon-pencil" style="padding-right: 5px;"/>Anteckningar</a></li>
 	      <li><a href="#" onclick="$('[id=&quot;{AttributeDetails}-notes-div&quot;]').hide();$('[id=&quot;{AttributeDetails}|note&quot;]').val('');$('[id=&quot;{AttributeDetails}-noteIcon&quot;]').hide();return false;"><span class="glyphicon glyphicon-remove" style="padding-right: 5px;"/>Rensa</a></li>	 
 	    </ul> 
-	    <!-- 	
-		<div class="" style="margin-top: 20px;">
-			<div class="row">
-				<ul class="nav nav-tabs nav-justified">		
-				  <li id="tab_1" class="active"><a href="javascript:void(0);" >Visa anteckningar</a></li>
-				  <li id="tab_2"><a href="javascript:void(0);" >Markera för uppföljning</a></li>				  				  
-				</ul>
-			</div>				
-		</div>
-		 -->
 	</xsl:template>
 	
 	<xsl:template name="AddNotesSection">
@@ -262,32 +236,9 @@
 			<xsl:if test="type='URL'">
 				<xsl:call-template name="UrlType" />
 			</xsl:if>
-<!-- 			<xsl:if test="type='GEO-AREA'"> -->
-<!-- 				<xsl:call-template name="MapAreaType" /> -->
-<!-- 			</xsl:if> -->
-<!-- 			<xsl:if test="type='GEO-POINT'"> -->
-<!-- 				<xsl:call-template name="MapPointType" /> -->
-<!-- 			</xsl:if> -->
 			
 			<script>
-				$("[id='<xsl:value-of select="AttributeDetails"/>']").on("change", function(event) { 
-				     updateDynamicAttributes(this);
-				} );
-				
-				
-				<!-- 
-				$("[id='<xsl:value-of select="AttributeDetails"/>-requiredActionCheckbox']").on("change", function(event) { 
-				     updateRequiredAction($("article[name='<xsl:value-of select="AttributeDetails"/>']"));
-				} );
-				
-				<xsl:if test="requiredAction='true'">
-					var requiredActionBGColor = "#f7f777";
-					$("article[name='<xsl:value-of select="AttributeDetails"/>']").css('background', requiredActionBGColor);
-					$("[id='<xsl:value-of select="AttributeDetails"/>-notes-div']").show();
-					$("[id='<xsl:value-of select="AttributeDetails"/>-requiredActionCheckbox']").prop('checked', true);
-				</xsl:if>
-				 -->
-				
+				$("[id='<xsl:value-of select="AttributeDetails"/>']").on("change", function(event) { updateDynamicAttributes(this);} );
 			</script>
 			
 		</article>
@@ -340,10 +291,6 @@
 			</div>
 		</xsl:if>
 	</xsl:template>
-	
-	
-	
-	
 	
 	<xsl:template name="ApplyAttributeTooltip">
 		<xsl:if test="string-length(./NodeTemplateAttribute/description)&gt;0">
@@ -400,7 +347,6 @@
 			function onClickSubmit()
 			{
 				if (typeof mapInitialized !== 'undefined' && mapInitialized ){
-					//updateGeo();
 					verifyAndSubmit(afterVerification);
 				}
 				else verifyAndSubmit(function(){});

@@ -176,30 +176,7 @@ public class NodeRestOperations {
 		
 		node.setEditUrl(context.getUriParser().getFullContextPath()+ "/pulregister/nodes/updatefacility/" + node.getID() );
 	}	
-	/*
-	public void getGeoLocations( ModuleRequestContext context ) {
-		
-		try {
-			List<NodeGeoLocation> geoDataList = this.facilitiesModule.getGeoData();
-			
-			Element element = doc.createElement("GeoLocations");			
-			XMLUtils.append(doc, element, geoDataList);
-			doc.appendChild(element);			
-			
-		 	String jsonStr;
-			jsonStr = nodeToJson();
-			HTTPUtils.sendReponse(jsonStr.toString(), "application/json", "UTF-8", context.getRes() );
-			
-		} 
-		catch (SQLException e) {
-			this.returnError(404,"Object not found.",context,e);
-		}
-		catch (IOException|ParserConfigurationException|JSONException|TransformerException e) {
-			this.returnError(400,"Internal server error.",context,e);
-		}		
-		
-	}
-	*/
+	
 	public void getTemplateAttributes(ModuleRequestContext context, Integer typeIndex) throws IOException {
 		
 		NodeType nodeType = null;

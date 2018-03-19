@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,13 +61,11 @@ import se.unlogic.standardutils.dao.AnnotatedDAO;
 import se.unlogic.standardutils.dao.HighLevelQuery;
 import se.unlogic.standardutils.dao.LowLevelQuery;
 import se.unlogic.standardutils.dao.QueryParameterFactory;
-import se.unlogic.standardutils.dao.querys.UpdateQuery;
 import se.unlogic.standardutils.db.tableversionhandler.TableVersionHandler;
 import se.unlogic.standardutils.db.tableversionhandler.UpgradeResult;
 import se.unlogic.standardutils.db.tableversionhandler.XMLDBScriptProvider;
 import se.unlogic.standardutils.json.JsonArray;
 import se.unlogic.standardutils.json.JsonObject;
-import se.unlogic.standardutils.reflection.ReflectionUtils;
 import se.unlogic.standardutils.xml.XMLUtils;
 import se.unlogic.webutils.http.HTTPUtils;
 import se.unlogic.webutils.http.RequestUtils;
@@ -82,7 +79,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	protected AnnotatedDAO<NodeAttribute> nodeAttributeDAO;
 	protected AnnotatedDAO<NodeTag> nodeTagDAO;
 	protected AnnotatedDAO<NodeTemplateAttribute> templateAttributeDAO;
-	// protected AnnotatedDAO<NodeGeoLocation> geoLocationDAO;
 	protected AnnotatedDAO<NodeFile> fileDAO;
 	protected AnnotatedDAO<NodeFileInfo> fileInfoDAO;
 	protected AnnotatedDAO<NodeAttributeNote> noteDAO;
@@ -99,7 +95,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	protected QueryParameterFactory<NodeFile, NodeOwner> nodeFileIDParamFactory;
 
 	protected QueryParameterFactory<NodeTag, String> facilityTagNameParamFactory;
-//	protected QueryParameterFactory<NodeGeoLocation, Integer> facilityGeoIDParamFactory;
 	protected QueryParameterFactory<NodeFile, Integer> facilitySingleFileIDParamFactory;
 	protected QueryParameterFactory<NodeFileInfo, Integer> facilitySingleFileInfoIDParamFactory;
 
@@ -127,7 +122,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		this.nodeAttributeDAO = daoFactory.getDAO(NodeAttribute.class);
 		this.templateAttributeDAO = daoFactory.getDAO(NodeTemplateAttribute.class);
 		this.nodeTagDAO = daoFactory.getDAO(NodeTag.class);
-//		this.geoLocationDAO = daoFactory.getDAO(NodeGeoLocation.class);
 		this.fileDAO = daoFactory.getDAO(NodeFile.class);
 		this.fileInfoDAO = daoFactory.getDAO(NodeFileInfo.class);
 		this.noteDAO = daoFactory.getDAO(NodeAttributeNote.class);
@@ -161,7 +155,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		this.facilitySingleFileIDParamFactory = this.fileDAO.getParamFactory("nodeFileID", Integer.class);
 		this.facilitySingleFileInfoIDParamFactory = this.fileInfoDAO.getParamFactory("nodeFileID", Integer.class);
 		this.facilityTagNameParamFactory = this.nodeTagDAO.getParamFactory("tagName", String.class);
-//		this.facilityGeoIDParamFactory = this.geoLocationDAO.getParamFactory("geoID", Integer.class);
 
 		this.nodeCRUD.addRequestFilter(new TransactionRequestFilter(dataSource));
 
@@ -188,14 +181,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 
 		this.nodeRestOperations.getNodes(new ModuleRequestContext(req, res, user, uriParser));
 	}
-	/*
-	 * @RESTMethod(alias = "rest/api/1/registry/geo", method = "get") public void
-	 * getFacilitiesGeoLocationsREST(HttpServletRequest req, HttpServletResponse
-	 * res, User user, URIParser uriParser) throws Throwable {
-	 * 
-	 * this.nodeRestOperations.getGeoLocations(new ModuleRequestContext(req, res,
-	 * user, uriParser) ); }
-	 */
 
 	@RESTMethod(alias = "rest/api/1/registryType/{typeIndex}/templateAttribute", method = "get")
 	public void getTemplateAttributesREST(HttpServletRequest req, HttpServletResponse res, User user,
@@ -264,6 +249,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		return resp;
 	}
 
+	//Add a registry
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse addFacility(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
@@ -285,6 +271,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		return fgResp;
 	}
 
+	//Update an existing registry
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse updateFacility(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
@@ -321,12 +308,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "DELETE");
 
 		this.nodeCRUD.checkAccess(bean, user);
-
-		// List<NodeGeoLocation> geoLocations = this.getGeoData(bean);
-		// if (geoLocations != null) {
-		// this.geoLocationDAO.delete(geoLocations);
-		// bean.setFacilityGeoLocations(null);
-		// }
 
 		List<NodeAttribute> attributes = bean.getFacilityNodeAttributes();
 		if (attributes != null) {
@@ -693,55 +674,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		query.addParameter(node.getNode_id());
 		return fileInfoDAO.getAll(query);
 	}
-
-	/*
-	 * public List<NodeGeoLocation> getGeoData() throws SQLException {
-	 * 
-	 * LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
-	 * "SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from " +
-	 * geoLocationDAO.getTableName() );
-	 * 
-	 * List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query); if
-	 * (geoLocations == null) geoLocations = new ArrayList<NodeGeoLocation>();
-	 * 
-	 * return geoLocations; }
-	 */
-	/*
-	 * public List<NodeGeoLocation> getGeoData(NodeOwner node) throws SQLException {
-	 * LowLevelQuery<NodeGeoLocation> query = new LowLevelQuery<NodeGeoLocation>(
-	 * "SELECT parent_node,geo_id,GeoToText(geo_data),parent_node_attribute from " +
-	 * geoLocationDAO.getTableName() + " WHERE parent_node = ?");
-	 * query.addParameter(node.getNode_id());
-	 * query.addRelation(ReflectionUtils.getField(NodeOwner.class, "geoLocations"));
-	 * List<NodeGeoLocation> geoLocations = geoLocationDAO.getAll(query); if
-	 * (geoLocations == null) geoLocations = new ArrayList<NodeGeoLocation>();
-	 * 
-	 * for (NodeGeoLocation geo : geoLocations) { geo.setParentNode(node); } return
-	 * geoLocations;
-	 * 
-	 * }
-	 */
-	/*
-	 * public void addGeoData(NodeGeoLocation geo) throws SQLException { if
-	 * (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) {
-	 * UpdateQuery query = new UpdateQuery(dataSource, "INSERT INTO " +
-	 * geoLocationDAO.getTableName() +
-	 * " (geo_data,parent_node,parent_node_attribute) VALUES (GeomFromText(?),?,?)"
-	 * ); query.setString(1, geo.getGeoData()); query.setInt(2,
-	 * geo.getParentNode().getNode_id()); query.setInt(3,
-	 * geo.getParentAttributeID()); query.executeUpdate(); } }
-	 */
-	/*
-	 * public void updateGeoData(NodeGeoLocation geo) throws SQLException { if
-	 * (geo.getGeoData() != null && geo.getGeoData().isEmpty() == false) { if
-	 * (geo.getGeoID() == null) { addGeoData(geo); return; } UpdateQuery query = new
-	 * UpdateQuery(dataSource, "UPDATE " + geoLocationDAO.getTableName() +
-	 * " SET geo_data=GeomFromText(?),parent_node=?,parent_node_attribute=? WHERE geo_id = ?"
-	 * ); query.setString(1, geo.getGeoData()); query.setInt(2,
-	 * geo.getParentNode().getNode_id()); query.setInt(3,
-	 * geo.getParentAttributeID()); query.setInt(4, geo.getGeoID());
-	 * query.executeUpdate(); } }
-	 */
+	
 	// Export PDF file
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse exportPdf(HttpServletRequest req, HttpServletResponse res, User user,
@@ -751,8 +684,7 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		rst.pdfbox.layout.elements.Document doc = new rst.pdfbox.layout.elements.Document(40, 60, 40, 60);
 
 		Paragraph paragraph1 = new Paragraph();
-
-		String facilityId = uriParser.toString().substring(uriParser.toString().length() - 1);
+		String facilityId = uriParser.get(2); 
 		int facID = Integer.valueOf(facilityId);
 		String title = null;
 

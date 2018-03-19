@@ -269,32 +269,23 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 
 		bean.setFacilityNodeType(facilityType);
 
-//		List<NodeGeoLocation> geoLocations = bean.getFacilityGeoLocations();
-//		if ( geoLocations == null ) geoLocations = new ArrayList<NodeGeoLocation>();
 		Map<String, String[]> params = req.getParameterMap();
 		List<NodeAttributeNote> notes = new ArrayList<NodeAttributeNote>();
-		log.info("node attributes 1: " + bean.getFacilityNodeAttributes());
+
 		for (Map.Entry<String, String[]> entry : params.entrySet()) {
 			
 			NodeAttribute attr = new NodeAttribute();
 			String key = entry.getKey();
 			String[] value = entry.getValue();
 			
-//			log.info("key: "+key);
-//			log.info("value: "+Arrays.toString(value));
-			
+			//Skip if empty node
 			if ( value.length == 0  || ( value.length == 1 && value[0].equals("") ) ) continue;
 			
-			
-
+			//Save nodes that are notes to notes
 			Integer noteTemplateID = getNoteParentTemplateID(bean,key,value);
-//			Integer noteID = getNoteParentID(bean,key,value);
-			
-			if ( noteTemplateID != null /*|| noteID != null */){
-				
+			if ( noteTemplateID != null ){
 				NodeAttributeNote note = new NodeAttributeNote();
 				note.setValue(value[0]);				
-//				note.setNodeAttributeNoteID(noteID);
 				note.setParentTemplateAttributeID(noteTemplateID);
 				notes.add(note);
 				continue;
@@ -302,12 +293,8 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			
 			handleFileRemoval( bean , key , value );
 		
-			log.info("encoded key: "+key);
-			
 			key = DynamicAttributes.decodeKey(key);
 			
-			log.info("decoded key: "+key);
-
 			if (DynamicAttributes.isDynamicAttribute(key)) {
 				
 				List<String> parts = new ArrayList<String>(Arrays.asList(key.split("\\|")));
@@ -318,12 +305,12 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 						attr = bean.getAttributeFromID(attrID);
 						setAttributeValue(attr, value);
 					}
+				//Create answer if it does not exist
 				} catch (NumberFormatException e) {
-					log.info("numberexception error; value: " + Arrays.toString(value));
 					attr.setAttributeID(null);
 					attr.setParentNode(bean);
-					
-					Integer templateID = Integer.parseInt(parts.get(4));
+					String templateIdString = parts.get(4).replaceAll("[^0-9]", "");
+					Integer templateID = Integer.parseInt(templateIdString);
 					NodeTemplateAttribute templateAttrib = callback.getFacilityTemplate(templateID);
 					attr.setTemplateID(templateAttrib);
 					List<NodeAttribute> attrList = bean.getFacilityNodeAttributes();
@@ -332,7 +319,6 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 					bean.setFacilityNodeAttributes(attrList);
 				}
 				handleNewTags(bean, attr);
-//				handleGeoData(bean, attr , geoLocations);
 				handleNewUploadedFiles(bean, req, attr);
 				setAttributeValue(attr, value);
 				handleGroupOwner(bean, attr, user);				
@@ -340,8 +326,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			}
 			
 		}
-//		bean.setFacilityGeoLocations(geoLocations);
-		log.info("node attributes 3: " + bean.getFacilityNodeAttributes());
+		//Save empty answers
 		if ( bean.getFacilityNodeAttributes() != null )
 		{
 			for ( NodeAttribute a : bean.getFacilityNodeAttributes() ){			
@@ -351,6 +336,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			}
 		}
 		
+		//Add/update notes
 		handleNewNotes(bean, notes);
 	}
 	
@@ -360,13 +346,14 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			
 			Boolean found = false;
 			for ( NodeAttribute attr : attributes ){
+				//Set note if answer exists
 				if ( attr.getTemplateID() != null && attr.getTemplateID().getTemplateAttributeID().equals(note.getParentTemplateAttributeID())){
-					
 					attr.setNote(note.getValue());
 					found = true;
 					break;
 				}
 			}
+			//Create answer with note if no answer exists
 			if ( !found ){
 					
 				NodeAttribute attr = new NodeAttribute();
@@ -396,11 +383,13 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			Integer noteID = null;
 			
 			try {
-				noteID = Integer.parseInt(dparts.get(3));
+				String noteIdString = dparts.get(3).replaceAll("[^0-9]", "");
+				noteID = Integer.parseInt(noteIdString);
 			}
 			catch(NumberFormatException e){}
 			try {
-				noteTemplateID = Integer.parseInt(dparts.get(4));
+				String noteTemplateIdString = dparts.get(4).replaceAll("[^0-9]", "");
+				noteTemplateID = Integer.parseInt(noteTemplateIdString);
 			}
 			catch(NumberFormatException e){}
 							

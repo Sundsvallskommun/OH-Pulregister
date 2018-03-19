@@ -42,13 +42,6 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 	@XMLElement
 	private String value;
 	
-	/*
-	@DAOManaged
-	@WebPopulate
-	@XMLElement
-	private Boolean requiredAction;
-	*/
-	
 	@DAOManaged(columnName = "note")
 	@WebPopulate(required = true)
 	@XMLElement
@@ -176,16 +169,6 @@ public class NodeAttribute extends GeneratedElementable implements Comparable<No
 		this.note = note;
 	}
 
-	/*
-	public Boolean getRequiredAction() {
-		return requiredAction;
-	}
-
-	public void setRequiredAction(Boolean requiredAction) {
-		this.requiredAction = requiredAction;
-	}
-	*/
-	
 	@Override
 	public String toString() { 
 		Integer nodeOwnerId = null;

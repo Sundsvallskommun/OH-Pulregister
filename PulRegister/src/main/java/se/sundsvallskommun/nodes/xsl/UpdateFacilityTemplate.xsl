@@ -19,7 +19,6 @@
 
 		<xsl:call-template name="FormScripts"/>
 		<xsl:call-template name="DynamicAttributesInit"/>
-<!-- 		<xsl:call-template name="AddMapGeoDataVariable"/> -->
 
 		<div class="container">
 

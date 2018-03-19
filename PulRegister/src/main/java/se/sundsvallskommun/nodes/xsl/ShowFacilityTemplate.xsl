@@ -48,34 +48,6 @@
 			select="NodeOwner/NodeTemplateAttributes/NodeAttribute">
 			
 			<xsl:choose>
-<!-- 				<xsl:when test="type='GEO-AREA'"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3"> -->
-<!-- 							<label for="name" class="control-label"> -->
-<!-- 								<xsl:text>Geografiskt område</xsl:text>						 -->
-<!-- 							</label> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-xs-9 col-sm-7 col-md-7 col-lg-6"> -->
-<!-- 							<label for="name" class="control-label"> -->
-<!-- 								<xsl:text>Ja</xsl:text> -->
-<!-- 							</label> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</xsl:when> -->
-<!-- 				<xsl:when test="type='GEO-POINT'"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3"> -->
-<!-- 								<label for="name" class="control-label"> -->
-<!-- 									<xsl:text>Geografisk punkt</xsl:text>						 -->
-<!-- 								</label> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-xs-9 col-sm-7 col-md-7 col-lg-6"> -->
-<!-- 							<label for="name" class="control-label"> -->
-<!-- 								<xsl:text>Ja</xsl:text> -->
-<!-- 							</label> -->
-<!-- 						</div>					 -->
-<!-- 					</div> -->
-<!-- 				</xsl:when> -->
 				<xsl:when test="type='FILES'">
 					<div class="row">
 						<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">

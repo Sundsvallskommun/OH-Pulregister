@@ -7,8 +7,13 @@ import se.unlogic.standardutils.dao.annotations.Table;
 import se.unlogic.standardutils.xml.GeneratedElementable;
 import se.unlogic.standardutils.xml.XMLElement;
 
+/**
+ * @deprecated  Note has changed to become internal attribute of NodeAttribute class
+ */
+
 @Table(name = "node_attribute_notes")
 @XMLElement
+@Deprecated
 public class NodeAttributeNote extends GeneratedElementable {
 
 	
@@ -20,11 +25,6 @@ public class NodeAttributeNote extends GeneratedElementable {
 	@DAOManaged(columnName="value")
 	@XMLElement
 	String value;
-	
-//	@DAOManaged(columnName="node_attribute_parent")
-//	@ManyToOne	
-//	NodeAttribute parentAttribute;
-	
 	
 	Integer parentTemplateAttributeID = null;
 
@@ -48,17 +48,7 @@ public class NodeAttributeNote extends GeneratedElementable {
 		this.value = value;
 	}
 
-
-//	public NodeAttribute getParentAttribute() {
-//		return parentAttribute;
-//	}
-//
-//
-//	public void setParentAttribute(NodeAttribute parentAttribute) {
-//		this.parentAttribute = parentAttribute;
-//	}
-
-
+	
 	public Integer getParentTemplateAttributeID() {
 		return parentTemplateAttributeID;
 	}
