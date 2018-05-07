@@ -307,6 +307,7 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 					}
 				//Create answer if it does not exist
 				} catch (NumberFormatException e) {
+					log.debug("Answer does not exist. "+e);
 					attr.setAttributeID(null);
 					attr.setParentNode(bean);
 					String templateIdString = parts.get(4).replaceAll("[^0-9]", "");
@@ -381,17 +382,22 @@ public class NodeOwnerCRUD extends ModularCRUD<NodeOwner, Integer, User, PulRegi
 			List<String> dparts = new ArrayList<String>(Arrays.asList(dkey.split("\\|")));
 			Integer noteTemplateID = null;
 			Integer noteID = null;
-			
+			String noteIdString = "";
 			try {
-				String noteIdString = dparts.get(3).replaceAll("[^0-9]", "");
+				noteIdString = dparts.get(3).replaceAll("[^0-9]", "");
 				noteID = Integer.parseInt(noteIdString);
 			}
-			catch(NumberFormatException e){}
+			catch(NumberFormatException e){
+				log.error("Cannot format noteId ("+noteIdString+"). "+e);
+			}
+			String noteTemplateIdString = "";
 			try {
-				String noteTemplateIdString = dparts.get(4).replaceAll("[^0-9]", "");
+				noteTemplateIdString = dparts.get(4).replaceAll("[^0-9]", "");
 				noteTemplateID = Integer.parseInt(noteTemplateIdString);
 			}
-			catch(NumberFormatException e){}
+			catch(NumberFormatException e){
+				log.error("Cannot format noteTemplateId ("+ noteTemplateIdString +") "+e);
+			}
 							
 			return getTemplateID.equals(true) ? noteTemplateID : noteID;
 		}

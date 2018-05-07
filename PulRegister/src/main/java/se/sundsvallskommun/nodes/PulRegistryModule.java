@@ -2,6 +2,7 @@ package se.sundsvallskommun.nodes;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import rst.pdfbox.layout.elements.Paragraph;
 import rst.pdfbox.layout.text.BaseFont;
 import rst.pdfbox.layout.text.Indent;
@@ -43,6 +46,8 @@ import se.sundsvallskommun.nodes.cruds.NodeTypeCRUD;
 import se.sundsvallskommun.nodes.rest.NodeRestOperations;
 import se.sundsvallskommun.nodes.tools.DynamicAttributes;
 import se.sundsvallskommun.nodes.tools.ModuleRequestContext;
+import se.unlogic.hierarchy.core.annotations.ModuleSetting;
+import se.unlogic.hierarchy.core.annotations.TextFieldSettingDescriptor;
 import se.unlogic.hierarchy.core.annotations.WebPublic;
 import se.unlogic.hierarchy.core.beans.SimpleForegroundModuleResponse;
 import se.unlogic.hierarchy.core.beans.User;
@@ -99,6 +104,10 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	protected QueryParameterFactory<NodeFileInfo, Integer> facilitySingleFileInfoIDParamFactory;
 
 	protected NodeRestOperations nodeRestOperations;
+	
+//	@ModuleSetting
+//	@TextFieldSettingDescriptor(description="Path till var dokument sparas.", name = "document filepath")
+//	protected String newFilePath = "/usr/share/tomcat/sites/register.sundsvall.se/filestore/";
 
 	public PulRegistryModule() {
 
@@ -278,7 +287,9 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 
 		NodeOwner bean = this.nodeCRUD.getRequestedBean(req, res, user, uriParser, "UPDATE");
 		this.nodeCRUD.checkAccess(bean, user);
-		ForegroundModuleResponse result = this.nodeCRUD.update(req, res, user, uriParser);
+		ForegroundModuleResponse result = null;
+
+		result = this.nodeCRUD.update(req, res, user, uriParser);
 		
 		try {
 			if(result != null) {
@@ -751,17 +762,14 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 				}
 			}
 		}
-
-		final OutputStream outputStream = new FileOutputStream(title + ".pdf");
-		doc.save(outputStream);
-
+		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 		doc.save(out);
 
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 		HTTPUtils.sendFile(in, title + ".pdf", "application/pdf", "", req, res, ContentDisposition.ATTACHMENT);
-
+		
 		return null;
 
 	}
