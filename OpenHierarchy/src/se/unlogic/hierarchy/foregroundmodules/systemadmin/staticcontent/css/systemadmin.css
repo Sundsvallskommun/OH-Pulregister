@@ -1,8 +1,0 @@
-form table {
-	width: 100%;
-}
-
-form table td:nth-child(1) {
-	width: 1px;
-	white-space: nowrap;
-}

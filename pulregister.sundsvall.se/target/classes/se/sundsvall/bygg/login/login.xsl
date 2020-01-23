@@ -22,12 +22,12 @@
 						</xsl:if>
 						
 						<div class="form-group">
-							<label for="username">Användarnamn</label>
+							<label for="username">Användarnamnis</label>
 							<input type="text" class="form-control" name="username" id="username" placeholder="Användarnamn" />
 						</div>
 						
 						<div class="form-group">
-							<label for="password">Lösenord</label>
+							<label for="password">Lösenordis</label>
 							<input type="password" class="form-control" name="password" id="password" placeholder="Lösenord" />
 						</div>
 						<div class="text-right">

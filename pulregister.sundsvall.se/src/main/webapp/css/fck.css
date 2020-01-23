@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+@import "openhierarchy.css";
+
+@import "general.css";
+
+html , body { background: none !important; margin: 5px; text-align: left; background-color: #FFFFFF; }
+
+table { font-size: 12px; }

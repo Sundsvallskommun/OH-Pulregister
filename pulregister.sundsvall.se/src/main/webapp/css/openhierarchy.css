@@ -1,0 +1,118 @@
+@CHARSET "ISO-8859-1";
+
+/* ~~~~~ OpenHieararchy Standard Css Inside Contentitem ~~~~*/
+
+.contentitem { clear: both; }
+
+/* ~~~~~ Backgrounds ~~~~~ */
+.contentitem .background { background-color: #E7E7E7; }
+.contentitem .lightbackground { background-color: #F1F1F1; }
+
+/* ~~~~~ Container width classes ~~~~~ */
+.contentitem .ten { width: 10%; }
+.contentitem .twenty { width: 20%; }
+.contentitem .thirty { width: 30%; }
+.contentitem .forty { width: 40%; }
+.contentitem .half { width: 50%; }
+.contentitem .fifty { width: 50%; }
+.contentitem .sixty { width: 60%; }
+.contentitem .seventy { width: 70%; }
+.contentitem .eighty { width: 78%; }
+.contentitem .ninety { width: 90%; }
+.contentitem .hundred { width: 100%; }
+.contentitem .full { width: 100%; }
+
+/* ~~~~~ Margin classes ~~~~~ */
+.contentitem .nomargin { margin: 0; }
+.contentitem .margin { margin: 5px; }
+.contentitem .margintop { margin-top: 5px; }
+.contentitem .marginbottom { margin-bottom: 5px; }
+.contentitem .marginright { margin-right: 5px; }
+.contentitem .marginleft { margin-left: 5px; }
+.contentitem .bigmargin { margin: 10px; }
+.contentitem .bigmargintop { margin-top: 10px; }
+.contentitem .bigmarginbottom { margin-bottom: 10px; }
+.contentitem .bigmarginleft { margin-left: 10px; }
+.contentitem .bigmarginright { margin-right: 10px; }
+
+/* ~~~~~ Padding classes ~~~~~ */
+.nopadding, table.nopadding, table.nopaddings, table.nopaddings th, table.nopaddings tr, table.nopaddings td { padding: 0 !important; }
+.contentitem .padding { padding: 5px; }
+.contentitem .paddingtop { padding-top: 5px; }
+.contentitem .paddingbottom { padding-bottom: 5px; }
+.contentitem .paddingright { padding-right: 5px; }
+.contentitem .paddingleft { padding-left: 5px; }
+
+/* ~~~~~ Border classes ~~~~~ */ 
+.contentitem .bordertop { border-top: 1px solid #E4E4E4; }
+.contentitem .borderbottom { border-bottom: 1px solid #E4E4E4; }
+.contentitem .borderright { border-right: 1px solid #E4E4E4; }
+.contentitem .borderleft { border-left: 1px solid #E4E4E4; }
+
+/* ~~~~~ Textarea classes ~~~~~ */
+.contentitem textarea.small { display: block; height: 45px; margin: 0 auto; width: 99%; }
+.contentitem textarea.medium { display: block; height: 90px; }
+.contentitem textarea.large { display: block; height: 180px; }
+
+/* ~~~~~ Table styles ~~~~~*/
+.contentitem table th { border: none; }
+.contentitem table th a { border: none; }
+.contentitem table th, td { display: table-cell; margin: 0; padding: 4px; vertical-align: middle; text-align: left; }
+.contentitem table.border { border: 1px solid #E4E4E4; border-radius: 4px; -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); }
+.contentitem table.border td, .border th { border-left: 1px solid #E4E4E4; border-top: 1px solid #E4E4E4; text-align: left; }
+.contentitem table.border th { border-top: none; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+.contentitem table.border td:first-child, .border th:first-child { border-left: none; }
+.contentitem table.border th:first-child { border-radius: 4px 0 0 0; }
+.contentitem table.border th:last-child { border-radius: 0 4px 0 0; }
+.contentitem table.border th:only-child { border-radius: 4px 4px 0 0; }
+.contentitem table.border tr:last-child td:first-child { border-radius: 0 0 0 4px; }
+.contentitem table.border tr:last-child td:last-child { border-radius: 0 0 4px 0; }
+
+/* ~~~~~ Container behaviour classes ~~~~~ */
+.floatright{ float: right; }
+.floatleft { float: left; }
+.clearboth { clear: both; }
+.display-inline-block { display: inline-block; zoom: 1; *display: inline; }
+.display-inline { display: inline; }
+.display-block { display: block; }
+
+/* ~~~~~ Paragraph classes ~~~~~ */
+.contentitem p.error, .contentitem label.error { color: #c32929; }
+.contentitem p.success { color: green; }
+p.tiny  { font-size: 85%; margin: 0px !important; padding: 0px; text-align: left; }
+
+/* ~~~~~ Text classes ~~~~~ */
+.contentitem .text-align-right { text-align: right; }
+.contentitem .text-align-left { text-align: left; }
+.contentitem .text-align-center { text-align: center; }
+.contentitem .text-align-justify { text-align: justify; }
+.contentitem .text-align-inherit { text-align: inherit; }
+.contentitem .text-decoration-none { text-decoration: none; }
+.contentitem .pointer { cursor: pointer; }
+.contentitem .required { color: red; }
+
+/* ~~~~~ Align classes ~~~~~ */
+.contentitem .vertical-align-middle { vertical-align: middle; }
+.contentitem .vertical-align-top { vertical-align: top; }
+.contentitem .vertical-align-bottom { vertical-align: bottom; }
+
+/* ~~~~~ Image classes ~~~~~ */
+.contentitem img { border: 0; margin: 0; padding: 0; }
+.contentitem img.alignbottom { vertical-align: bottom; }
+.contentitem img.alignmiddle { vertical-align: middle; }
+.contentitem img.aligntop { vertical-align: top; }
+
+/* ~~~~~ Misc ~~~~~ */
+.contentitem .hover:hover { background-color: #F1F1F1; color: #393939; }
+.contentitem .border { border: 1px solid #E4E4E4; }
+.contentitem .hidden { display: none; }
+.contentitem .disabledtext { color: gray; }
+.contentitem .italic { font-style: italic; }
+.contentitem .bold { font-weight: bold; }
+.contentitem div.scrolllist { overflow-x:hidden; overflow-y:scroll; height: 120px; padding-right: 3px;padding-right: 20px !ie-only; }
+
+.contentitem ul.list-style-type-none{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}

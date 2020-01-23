@@ -1,0 +1,210 @@
+{
+  "configId": 172,
+  "name": "Anlaggningar",
+  "version": null,
+  "maxExtent": [
+    487000,
+    6855000,
+    733000,
+    7110000
+  ],
+  "extent": [
+    578760,
+    6892286,
+    639800,
+    6949126
+  ],
+  "attribution": "Kartan har ingen rättsverkan du kan alltså INTE se exakta gränser i denna karttjänst ©Lantmäteriet Geodatasamverkan",
+  "autoClearDrawLayer": null,
+  "drawStyle": {},
+  "tools": [
+    {
+      "id": "ZoomSelector",
+      "type": "ZoomSelector"
+    },
+    {
+      "id": "Identify",
+      "type": "Identify",
+      "onlyVisibleLayers": false,
+      "useRegisterenhet": true,
+      "activate": true
+    },
+    {
+      "id": "DrawPolygon",
+      "type": "DrawGeometry",
+      "iconCls": "action-drawpolygon",
+      "geometry": "Polygon"
+    },
+    {
+      "id": "ModifyGeometry",
+      "type": "ModifyGeometry"
+    },
+    {
+      "id": "DeleteGeometry",
+      "type": "DeleteGeometry"
+    },
+    {
+      "id": "DeleteAllFeatures",
+      "type": "DeleteAllFeatures"
+    }
+  ],
+  "layers": [
+    {
+      "name": "Karta2",
+      "wms": {
+        "url": "https://extmaptest.sundsvall.se:443/geoserver/wms?SERVICE=WMS&",
+        "options": {
+          "displayInLayerSwitcher": true,
+          "isBaseLayer": true,
+          "visibility": false
+        },
+        "params": {
+          "LAYERS": "Lantmateriet:topowebbkartan",
+          "EXCEPTIONS": "application/vnd.ogc.se_inimage",
+          "FORMAT": "image/png",
+          "TRANSPARENT": true,
+          "VERSION": "1.1.1",
+          "SERVICE": "WMS",
+          "REQUEST": "GetMap",
+          "STYLES": ""
+        }
+      },
+      "wfs": null,
+      "metadataUrl": null,
+      "isGroupLayer": false,
+      "queryable": false,
+      "clickable": false,
+      "expanded": false
+    },
+    {
+      "name": "Karta1",
+      "wms": {
+        "params": {
+          "LAYERS": "Lantmateriet:topowebbkartan_nedtonad",
+          "EXCEPTIONS": "application/vnd.ogc.se_xml",
+          "FORMAT": "image/png",
+          "TRANSPARENT": true,
+          "VERSION": "1.1.1",
+          "SERVICE": "WMS",
+          "REQUEST": "GetMap",
+          "STYLES": ""
+        },
+        "url": "https://extmaptest.sundsvall.se/geoserver/gwc/service/wms?SERVICE=WMS&",
+        "options": {
+          "isBaseLayer": true,
+          "visibility": false
+        }
+      },
+      "wfs": null,
+      "metadataUrl": null,
+      "isGroupLayer": false,
+      "queryable": false,
+      "clickable": false,
+      "expanded": false
+    },
+    {
+      "name": "Anläggningar",
+      "wms": {
+        "url": "https://extmaptest.sundsvall.se/geoserver/gwc/service/wms?SERVICE=WMS&",
+        "options": {
+          "displayInLayerSwitcher": true,
+          "isBaseLayer": false,
+          "visibility": false
+        },
+        "params": {
+          "LAYERS": "SundsvallsKommun:Anlaggningar_yta",
+          "EXCEPTIONS": "application/vnd.ogc.se_xml",
+          "FORMAT": "image/png",
+          "TRANSPARENT": true,
+          "VERSION": "1.1.1",
+          "SERVICE": "WMS",
+          "REQUEST": "GetMap",
+          "STYLES": "",
+          "tiled": true
+        }
+      },
+      "wfs": {
+        "featurePrefix": "SundsvallsKommun",
+        "featureType": "Anlaggningar_yta",
+        "url": "https://extmaptest.sundsvall.se/geoserver/wfs"		,
+		"options": {
+          "displayInLayerSwitcher": true,
+          "isBaseLayer": false,
+          "visibility": true
+        }
+      },
+      "metadataUrl": null,
+      "isGroupLayer": false,
+      "queryable": true,
+      "clickable": true,
+      "expanded": false,
+      "metadata": {
+        "attributes": {
+          "OBJ_BESKR": {
+            "alias": "OBJ_BESKR"
+          },
+          "TYP_BESKR": {
+            "alias": "TYP_BESKR"
+          },
+          "EGN_BESKR": {
+            "alias": "EGN_BESKR"
+          },
+          "URSPRUNG_BESKR": {
+            "alias": "URSPRUNG_BESKR"
+          },
+          "DATE_MODIFIED": {
+            "alias": "DATE_MODIFIED"
+          },
+          "USER_MODIFIED": {
+            "alias": "USER_MODIFIED",
+            "mainAttribute": false
+          }
+        }
+      }
+    }
+  ],
+  "resolutions": [
+    280,
+    140,
+    70,
+    28,
+    14,
+    7,
+    4.2,
+    2.8,
+    1.4,
+    0.56,
+    0.28,
+    0.14,
+    0.112
+  ],
+  "units": null,
+  "projection": null,
+  "username": "riges",
+  "options": null,
+  "search": {
+    "searchEstates": {
+      "options": {
+        "municipalities": [
+          "Sundsvall"
+        ]
+      }
+    },
+    "searchAddresses": {
+      "options": {
+        "municipalities": [
+          "Sundsvall"
+        ]
+      }
+    },
+    "searchPlacenames": {
+      "options": {
+        "municipalities": [
+          "2281"
+        ]
+      }
+    }
+  },
+  "isPublic": true,
+  "searchStyle": null
+}

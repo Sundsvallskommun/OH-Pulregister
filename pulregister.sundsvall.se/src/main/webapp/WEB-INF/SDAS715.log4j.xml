@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="D:/pulregister/systemlog.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{[yyyy-MM-dd] [HH:mm:ss]} %C{1}.%M %m%n" />
+		</layout>
+	</appender>
+	
+	 <root>
+	 	<priority value="info" />
+		<appender-ref ref="file" />
+	</root>
+</log4j:configuration>

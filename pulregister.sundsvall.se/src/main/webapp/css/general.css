@@ -1,0 +1,170 @@
+@CHARSET "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #232323;
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-size: 0.8125em;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1.5em;	
+	
+}
+
+html,body {
+	height: 100%;
+}
+
+ul.normal {
+	list-style-type: none;
+	margin: 0px;
+	padding: 5px 5px 5px 20px;
+}
+
+ul.normal li {
+	background: url("../images/ArrowIcon.png") no-repeat 5px 5px transparent;
+	padding-left: 20px;
+}
+
+ol.normal {
+	margin: 0px;
+	padding: 5px 5px 5px 20px;
+	list-style-position: inside;
+}
+
+a:visited {
+	color: inherit;
+}
+
+a:link {
+	color: inherit;
+}
+
+h1 {
+	margin-bottom: 0.4em;
+	color: #232323;
+    font-family: helvetica,arial,sans-serif,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+}
+
+h1 a {
+	font-family: arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 100%;
+	color: #232323;
+	text-decoration: none;
+	line-height: normal;
+}
+
+h2 {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 115%;
+	color: #232323;
+	line-height: normal;
+	margin-top: 1.0em;
+	margin-bottom: 0.5em
+}
+
+h2 a {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 100%;
+	color: #232323;
+	text-decoration: none;
+	line-height: normal;
+}
+
+h3 {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 100%;
+	color: #232323;
+	line-height: normal;
+}
+
+h3 a {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 100%;
+	color: #232323;
+	text-decoration: underline;
+	line-height: normal;
+}
+
+.ingress {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 130%;
+	color: #232323;
+	line-height: normal;
+	margin-top: 1.0em;
+}
+
+a.ingress {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 130%;
+	color: #232323;
+	text-decoration: none;
+	line-height: normal;
+}
+
+.ingress a {
+	font-family: helvetica, arial, sans-serif, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 100%;
+	color: #232323;
+	text-decoration: none;
+	line-height: normal;
+}
+
+fieldset {
+	border: 1px solid #d7d7d7; 
+	padding: 0.35em 0.625em 0.75em;
+	margin-bottom: 15px;
+}
+
+fieldset legend {
+	font-size: 115%;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+.contentitem ul, .contentitem ol {
+	margin: 1em 0;
+	padding-left: 2em;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #d7d7d7;
+	margin: 5px 0;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	margin: 3px 3px 3px 4px;
+}
+
+label{
+	font-weight: bold;
+}
