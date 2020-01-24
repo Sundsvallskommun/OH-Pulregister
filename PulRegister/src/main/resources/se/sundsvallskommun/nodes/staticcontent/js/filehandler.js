@@ -28,11 +28,11 @@ function cleanFiles()
 	$("[id='fileselect']").val('');
 	
 	$('#newFilesDiv').slideUp( "slow", function() {
-		(this).remove();
+		$(this).remove();
 	});
 	
 	$('#add_file_btn').removeAttr("disabled");
-	$('#add_file_btn').children('input').click(true);
+	$('#add_file_btn').children('input').removeAttr("disabled");
 	$('#add_file_btn').attr("title", "");
 }
 
@@ -45,9 +45,8 @@ function removeFile(id)
 	
 	$('#fileUploaderInput').val('');
 	curElement.remove();
-	
+	$('#add_file_btn').children('input').removeAttr("disabled");
 	$('#add_file_btn').removeAttr("disabled");
-	$('#add_file_btn').children('input').click(true);
 	$('#add_file_btn').attr("title", "");
 	    
 }
@@ -97,7 +96,6 @@ function makeUL(files,removable,showOnly)
 
 
 $(document).on('change', ':file', function() {
-	console.log("first print")
     var input = $(this),
         numFiles = input.get(0).files ? input.get(0).files.length : 1,
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -105,7 +103,6 @@ $(document).on('change', ':file', function() {
 });
 
 function onFileSelect(event, numFiles, label,files) {
-    console.log("second print")
     filesToBeUploaded = ''
     if(files.length > 0){
 	    for(var k=0, len = files.length; k < len; k++){
@@ -114,8 +111,19 @@ function onFileSelect(event, numFiles, label,files) {
 	}
     document.getElementById('filesAdded').appendChild( makeUL( files , false , false ) );
     $("[id='fileUploaderInput']").val(filesToBeUploaded);
-    
 	$('#add_file_btn').attr("disabled", true);
-	$('#add_file_btn').children('input').click(false);
+	$('#add_file_btn').children('input').attr("disabled", true);
 	$('#add_file_btn').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
 }
+
+$(document).ready(function() {
+	$('#add_file_btn').on("click", function() {
+		if(!$(this).attr('disabled')){
+			$('#fileselect').trigger('click');
+			console.log('clicked');
+		}
+	});
+});
+//$('#add_file_btn').click(function(){
+//	$(this).children('input').click();
+//});

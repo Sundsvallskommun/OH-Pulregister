@@ -2037,12 +2037,6 @@
 <SortPrio>222</SortPrio>
 <Parent>52</Parent>
 <Option>true</Option>
-<value>
-<fileName>KvittoUsbMinne.pdf</fileName>
-<fileSize>286738</fileSize>
-<fileData>com.mysql.cj.jdbc.Blob@1b5f18a8</fileData>
-<fileId>35308</fileId>
-</value>
 <note/>
 <ActionRequired>false</ActionRequired>
 <AttributeDetails>question-53</AttributeDetails>
@@ -2268,6 +2262,6 @@
 </Question>
 </Forms>
 <sessionTimeout>7200</sessionTimeout>
-<sessionLastAccess>1579789496878</sessionLastAccess>
+<sessionLastAccess>1579858493924</sessionLastAccess>
 </UpdateForm>
 </document>

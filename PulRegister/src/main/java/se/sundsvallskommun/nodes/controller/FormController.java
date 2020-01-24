@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.tika.Tika;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -705,7 +706,7 @@ public class FormController {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 		doc.save(out);
-
+		
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 		HTTPUtils.sendFile(in, title + ".pdf", "application/pdf", "", req, res, ContentDisposition.ATTACHMENT);
 
@@ -735,7 +736,9 @@ public class FormController {
 
 		InputStream is = blobFile.getFileData().getBinaryStream();
 
-		HTTPUtils.sendFile(is, blobFile.getFileName(), "application/pdf", "", req, res, ContentDisposition.INLINE);
+		Tika tika = new Tika();
+		
+		HTTPUtils.sendFile(is, blobFile.getFileName(), tika.detect(is), "", req, res, ContentDisposition.INLINE);
 
 	}
 

@@ -52,8 +52,8 @@
 		<label id="add_file_btn" class="pull-left vcenter btn btn-default btn-file">
 <!-- 			<span class="btn btn-default btn-file"> -->
    			Lägg till fil 
-   			<input class="btn hide" type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
-   			<span style="padding-left:5px;padding-right:5px;font-size:1.5em;" class="glyphicon glyphicon-folder-open" id="filedrag"/>
+   			<input class="btn hide" type="file" id="fileselect" name="fileselect[]" multiple="multiple" style=" pointer-events: none;" />
+   			<span style="padding-left:5px;padding-right:5px;font-size:1.5em; pointer-events: none;" class="glyphicon glyphicon-folder-open" id="filedrag"/>
 <!-- 			</span> -->
 		</label>
 		</fieldset>
@@ -98,7 +98,6 @@
 		<![CDATA[
 			$(document).ready( function() {
 			    $(':file').on('fileselect', onFileSelect);
-			    		    
 			    if ( attachedFilelist.length > 0 )
 			    {			    	
 			    	document.getElementById('filesAdded').appendChild(makeUL( attachedFilelist, true , false ));
@@ -110,7 +109,7 @@
 		$(document).ready( function() {
 		if($('#existingFilesDiv').children('[id^=filerow]').length > 0){
 			    	$('#add_file_btn').attr("disabled", true);
-			    	$('#add_file_btn').children('input').click(false);
+			    	$('#add_file_btn').children('input').attr("disabled", true);
 			    	$('#add_file_btn').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
 			    };
 <!-- 			    console.log($('#existingFilesDiv').children('[id^=filerow]')); -->
