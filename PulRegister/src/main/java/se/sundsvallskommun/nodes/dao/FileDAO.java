@@ -58,8 +58,6 @@ public class FileDAO<T> extends AnnotatedDAO<File> {
 		}
 	}
 
-	
-
 	public File getFile(int fileId) throws SQLException {
 		LowLevelQuery<File> fileQuery = new LowLevelQuery<>();
 		fileQuery.setSql("SELECT * FROM form_file WHERE file_id = " + fileId);
@@ -67,10 +65,12 @@ public class FileDAO<T> extends AnnotatedDAO<File> {
 	}
 
 	public void updateFileId(int questionnaireId, int oldFileId) throws SQLException {
-		int fileId = this.getFileIdFromQuestionnaireId(questionnaireId);
-		LowLevelQuery<File> updateQuery = new LowLevelQuery<>();
-		updateQuery.setSql("UPDATE form_file SET file_id = " + fileId + " WHERE file_id = " + oldFileId);;
-		fileDAO.update(updateQuery);
+		Integer fileId = this.getFileIdFromQuestionnaireId(questionnaireId);
+		if(fileId != null) {
+			LowLevelQuery<File> updateQuery = new LowLevelQuery<>();
+			updateQuery.setSql("UPDATE form_file SET file_id = " + fileId + " WHERE file_id = " + oldFileId);;
+			fileDAO.update(updateQuery);	
+		}
 	}
 	
 }
