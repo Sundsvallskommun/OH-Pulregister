@@ -45,67 +45,32 @@ public class FileDAO<T> extends AnnotatedDAO<File> {
 		fileDAO.delete(file, dataSource.getConnection());
 	}
 
-	public int getOldFileId(int questionnaireId) throws SQLException {
+	public Integer getFileIdFromQuestionnaireId(int questionnaireId) throws SQLException {
 		LowLevelQuery<QuestionnaireValue> query = new LowLevelQuery<>();
 		query.setSql("SELECT * FROM form_questionnaire_value WHERE questionnaire_id = "
 				+ questionnaireId + " AND question_id = 53");
 		QuestionnaireValue  questionnaireValue = questionnaireValueDAO.get(query);
-		return questionnaireValue.getID();
+		if(questionnaireValue != null) {
+			return questionnaireValue.getID();	
+		}
+		else {
+			return null;
+		}
 	}
 
 	
 
 	public File getFile(int fileId) throws SQLException {
-		
 		LowLevelQuery<File> fileQuery = new LowLevelQuery<>();
 		fileQuery.setSql("SELECT * FROM form_file WHERE file_id = " + fileId);
 		return fileDAO.get(fileQuery);
-		
-
-//		File file = new File();
-//
-//		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-//
-//		Statement stmt = con.createStatement();
-//
-//		ResultSet rs = stmt.executeQuery("SELECT * FROM form_file WHERE file_id = " + fileId);
-//
-//		if (rs.next()) {
-//			file.setFileID(rs.getInt(1));
-//			file.setFileData(rs.getBlob(2));
-//			file.setFileName(rs.getString(3));
-//			file.setDateAdded(rs.getTimestamp(4));
-//			file.setFileSize(rs.getLong(5));
-//		} else {
-//			file = null;
-//		}
-//
-//		rs.close();
-//		stmt.close();
-//		con.close();
-//		return file;
 	}
 
 	public void updateFileId(int questionnaireId, int oldFileId) throws SQLException {
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt.executeQuery(
-				"SELECT questionnaire_value_id FROM form_questionnaire_value WHERE question_id = 53 AND questionnaire_id = "
-						+ questionnaireId);
-		if (rs.next()) {
-			System.out.println(rs.getInt(1) + " EFTER");
-
-			stmt.execute("UPDATE form_file SET file_id = " + rs.getInt(1) + " WHERE file_id = " + oldFileId);
-		}
-
-		rs.close();
-		stmt.close();
-		con.close();
+		int fileId = this.getFileIdFromQuestionnaireId(questionnaireId);
+		LowLevelQuery<File> updateQuery = new LowLevelQuery<>();
+		updateQuery.setSql("UPDATE form_file SET file_id = " + fileId + " WHERE file_id = " + oldFileId);;
+		fileDAO.update(updateQuery);
 	}
 	
-	
-
 }

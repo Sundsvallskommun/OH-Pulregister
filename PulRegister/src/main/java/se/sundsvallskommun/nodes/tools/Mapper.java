@@ -198,8 +198,8 @@ public class Mapper {
 
 				if (fileAsString.isEmpty()) {
 					// om det inte kommer någon fil från formuläret tar vi bort filen om det finns
-					// någon i db.
-					fileDAO.deleteFile(fileDAO.getOldFileId(questionnaireId));
+					// någon i db med hjälp av questionnareId.
+					fileDAO.deleteFile(fileDAO.getFileIdFromQuestionnaireId(questionnaireId));
 					
 				} else {
 
