@@ -105,7 +105,7 @@ public class FormController {
 		this.questionOptionDAO = daoFactory.getDAO(QuestionOption.class);
 		this.questionnaireValueDAO = daoFactory.getDAO(QuestionnaireValue.class);
 		this.selectedValueDAO = daoFactory.getDAO(SelectedValue.class);
-		this.fileDAO = new FileDAO<File>(dataSource, File.class, daoFactory);
+		this.fileDAO = new FileDAO<File>(dataSource, File.class, daoFactory, questionnaireValueDAO);
 
 		AdvancedAnnotatedDAOWrapper<Form, Integer> formDAOWrapper = this.formDAO.getAdvancedWrapper(Integer.class);
 

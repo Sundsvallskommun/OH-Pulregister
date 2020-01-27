@@ -1,1 +1,2277 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><document><errors><unhandledModuleException><throwable><![CDATA[se.unlogic.standardutils.annotations.NoAnnotatedFieldsFoundException: No annotated fields found in class java.lang.Integer with annotations interface se.unlogic.standardutils.dao.annotations.DAOManaged]]></throwable><section><sectionID>3</sectionID><parentSectionID>1</parentSectionID><alias><![CDATA[pulregister]]></alias><fullAlias><![CDATA[/pulregister]]></fullAlias><enabled>true</enabled><anonymousAccess>true</anonymousAccess><userAccess>true</userAccess><adminAccess>true</adminAccess><visibleInMenu>true</visibleInMenu><breadCrumb>true</breadCrumb><name><![CDATA[PUL-Register]]></name><description><![CDATA[PUL-Register]]></description><anonymousDefaultURI><![CDATA[/nodes/formlist]]></anonymousDefaultURI><userDefaultURI><![CDATA[/nodes/formlist]]></userDefaultURI></section><module><moduleID>30</moduleID><name><![CDATA[pulregister]]></name><classname>se.sundsvallskommun.nodes.PulRegistryModule</classname><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>true</anonymousAccess><enabled>true</enabled><sectionID>3</sectionID><xslPath>NodesTemplate.xsl</xslPath><xslPathType>Classpath</xslPathType><staticContentPackage><![CDATA[staticcontent]]></staticContentPackage><description><![CDATA[PUL-Register]]></description><alias><![CDATA[nodes]]></alias><requiredProtocol>HTTP</requiredProtocol><visibleInMenu>false</visibleInMenu></module></unhandledModuleException></errors><version><![CDATA[OpenHierarchy 1.2.10 (rev. -1)]]></version><requestinfo><contextpath><![CDATA[/pulregister.sundsvall.se]]></contextpath><servletpath><![CDATA[/core]]></servletpath><servername><![CDATA[localhost]]></servername><currentURI><![CDATA[/pulregister.sundsvall.se]]></currentURI><url><![CDATA[http://localhost:8080/pulregister.sundsvall.se/pulregister/nodes/updateform/1839]]></url><uri><![CDATA[/pulregister.sundsvall.se/pulregister/nodes/updateform/1839]]></uri><uriparts><uripart><value>pulregister</value><position>0</position></uripart><uripart><value>nodes</value><position>1</position></uripart><uripart><value>updateform</value><position>2</position></uripart><uripart><value>1839</value><position>3</position></uripart></uriparts></requestinfo><section><sectionID>1</sectionID><alias><![CDATA[start]]></alias><fullAlias/><enabled>true</enabled><anonymousAccess>true</anonymousAccess><userAccess>true</userAccess><adminAccess>true</adminAccess><visibleInMenu>true</visibleInMenu><breadCrumb>true</breadCrumb><name><![CDATA[Startsidan]]></name><description><![CDATA[Startsidan]]></description><anonymousDefaultURI><![CDATA[pulregister/nodes/formlist]]></anonymousDefaultURI><userDefaultURI><![CDATA[pulregister//nodes/formlist]]></userDefaultURI></section><user><userID>1000</userID><username>xmatjoh</username><firstname>Mats</firstname><lastname>Johansson</lastname><email>test@sundsvall.se</email><admin>true</admin><enabled>true</enabled><lastLogin>2020-01-27 11:17</lastLogin><lastLoginInMilliseconds>1580120262000</lastLoginInMilliseconds><currentLogin>2020-01-27 11:19</currentLogin><currentLoginInMilliseconds>1580120386916</currentLoginInMilliseconds><added>2019-10-25 17:05</added><isMutable>true</isMutable><hasFormProvider>true</hasFormProvider><groups><group><groupID><![CDATA[1]]></groupID><name><![CDATA[Administratörer]]></name><description><![CDATA[Administratörer]]></description><enabled><![CDATA[true]]></enabled><isMutable>true</isMutable></group></groups></user><menus><menu sectionAlias="" sectionID="1" sectionName="Startsidan"><menuitem><name><![CDATA[Administration]]></name><description><![CDATA[Administration och övervakning]]></description><menuIndex><![CDATA[1]]></menuIndex><url><![CDATA[/administration]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType><itemType><![CDATA[SECTION]]></itemType><sectionID><![CDATA[1]]></sectionID><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>false</anonymousAccess><sectionMenuItem><subSectionID><![CDATA[7]]></subSectionID></sectionMenuItem></menuitem><menuitem><name><![CDATA[PUL-Register]]></name><description><![CDATA[PUL-Register]]></description><menuIndex><![CDATA[2]]></menuIndex><url><![CDATA[/pulregister]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType><itemType><![CDATA[SECTION]]></itemType><sectionID><![CDATA[1]]></sectionID><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>true</anonymousAccess><sectionMenuItem><subSectionID><![CDATA[3]]></subSectionID></sectionMenuItem><menu sectionAlias="/pulregister" sectionID="3" sectionName="PUL-Register"/><selected/></menuitem></menu></menus></document>
+<?xml version="1.0" encoding="ISO-8859-1"?><document><links/><scripts/><moduleTransformedResponse><![CDATA[<script src="/pulregister.sundsvall.se/static/f/3/30/js/jquery-3.1.1.min.js"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/main.js"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/dynamic-attributes.js"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/bootstrap.min.js" type="text/javascript"></script><link href="/pulregister.sundsvall.se/static/f/3/30/css/main.css" rel="stylesheet"><link href="/pulregister.sundsvall.se/static/f/3/30/css/arrow.css" rel="stylesheet"><input value="/pulregister.sundsvall.se/pulregister/nodes/" type="hidden" id="modulePath"><script src="/pulregister.sundsvall.se/static/f/3/30/js/form-verification.js" type="text/javascript"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/dynamic-attributes.js" type="text/javascript"></script><script>
+			var isAdding = false;
+			var isUpdating = true;
+		</script><script>
+
+			
+
+
+
+
+
+			
+
+
+
+
+
+
+
+			
+
+
+
+
+
+			var sessionTimeout =7200;
+			function getCurrentLogin(){ return new Date(1580126870019);}
+
+					
+
+
+
+
+
+
+
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				    
+
+
+
+
+
+
+
+			
+
+
+
+
+
+		</script><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/bootstrap3/bootstrap-switch.min.css"><script src="/pulregister.sundsvall.se/static/f/3/30//js/select2.min.js" type="text/javascript"></script><link href="/pulregister.sundsvall.se/static/f/3/30//css/select2.min.css" rel="stylesheet"><script src="/pulregister.sundsvall.se/static/f/3/30/js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/bootstrap-switch.min.js" type="text/javascript"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/bootstrap-datepicker.min.js"></script><script charset="UTF-8" src="/pulregister.sundsvall.se/static/f/3/30/locales/bootstrap-datepicker.sv.min.js"></script><script charset="UTF-8" src="/pulregister.sundsvall.se/static/f/3/30/locales/bootstrap-datepicker.en-GB.min.js"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/woco.accordion.js" type="text/javascript"></script><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/bootstrap-datepicker3.standalone.min.css" id="bsdp-css"><script src="/pulregister.sundsvall.se/static/f/3/30/js/bootstrap-tagsinput.min.js" type="text/javascript"></script><script src="/pulregister.sundsvall.se/static/f/3/30/js/typeahead.bundle.js" type="text/javascript"></script><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/bootstrap-tagsinput.css"><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/typeaheadjs.css"><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/woco-accordion.css"><script src="/pulregister.sundsvall.se/static/f/3/30/js/bootstrap-multiselect.js" type="text/javascript"></script><link rel="stylesheet" href="/pulregister.sundsvall.se/static/f/3/30/css/bootstrap-multiselect.css"><div class="container">
+<h2>
+				Uppdatera
+				BRP Systems</h2>
+<div style="background:white;width:auto;position:fixed;position:sticky;top:0;z-index:2;" name="save_message_top" id="save_message_top">
+<div class="panel-body">
+<span id="time_left_message"></span><span class="btn btn-success pull-right" onclick="onClickSubmit()"><span class="glyphicon glyphicon-edit"></span>
+						Uppdatera
+					</span><button class="btn btn-info pull-right" onclick="location.href='/pulregister.sundsvall.se/pulregister/nodes/formlist'; return false" type="button"><span class="glyphicon glyphicon-list"></span>
+						&nbsp;&Aring;terg&aring;
+					</button>
+</div>
+</div>
+<form enctype="multipart/form-data" method="post" action="http://localhost:8080/pulregister.sundsvall.se/pulregister/nodes/updateform/1839" role="form" class="form-horizontal" id="dynamic_attributes_form">
+<article name="name" requiredcontent="true">
+<div style="display:none;" class="panel panel-body alert-danger" requiredcontent-info-box="false">Du m&aring;ste fylla i detta f&auml;lt.</div>
+<div id="questionNamnStatic">
+<a href="javascript:void(0)">
+<p title="Obligatorisk" class="pull-left">
+<span style="color:#993333;font-size:small;" class="glyphicon glyphicon-asterisk"></span>
+</p>
+</a>
+<h3>Namn</h3>
+</div>
+<div>
+<div class="col-xs-9 col-sm-7 col-md-7 col-lg-6">
+<input type="text" id="name" name="name" class="form-control" maxlength="50" style="width: 100%;" value="BRP Systems">
+</div>
+</div>
+<div class="vspace20"></div>
+<div class="vspace20"></div>
+</article>
+<article requiredcontent="true" name="selectedFormGroup" id="viewTempletAttribute1" templateID="1">
+<div id="questionHeader">
+<a href="javascript:void(0)">
+<p title="Obligatorisk" class="pull-left">
+<span style="color:#993333;font-size:small;" class="glyphicon glyphicon-asterisk"></span>
+</p>
+</a>
+<h3>Personuppgiftsansvarig</h3>
+</div>
+<div class="question" id="selectedFormGroup-question">
+<div style="display:none;" class="panel panel-body alert-danger" requiredcontent-info-box="false">Du m&aring;ste fylla i detta f&auml;lt.</div>
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange personuppgiftsansvarig (kan vara nämnd eller bolag). </div>
+<div class="pannel panel-body panel-default">
+<select class="form-control" name="selectedFormGroup" id="selectedFormGroup"><option value="17">Barn- och utbildningsn&auml;mnden</option><option value="30">Biogas Mellannorrland AB</option><option value="102">Individ- och arbetsmarknadsnmnden</option><option value="31">Kollektivtrafikmyndigheten</option><option value="32">Kommungaranti Skandinavien F&ouml;rs&auml;krings AB</option><option value="14">Kommunstyrelsen (Koncernstaben)</option><option value="15">Kommunstyrelsen (Servicecenter)</option><option value="16">Kommunstyrelsen Drakfastigheter</option><option value="24" selected>Kultur- och fritidsn&auml;mnden</option><option value="25">Lantm&auml;terin&auml;mnden</option><option value="23">Medelpads r&auml;ddningstj&auml;nstf&ouml;rbund</option><option value="95">Midlanda Flygplats AB</option><option value="20">Milj&ouml;n&auml;mnden</option><option value="33">Mitthem AB</option><option value="97">MittSverige Vatten och Avfall AB</option><option value="34">Norra Kajen Exploatering AB</option><option value="26">N&auml;mnden f&ouml;r arbetsmarknad, vuxenutbildning och integration (Navi)</option><option value="35">N&auml;ringslivsbolaget i Sundsvall AB</option><option value="27">Personaln&auml;mnden</option><option value="2">Redakt&ouml;rer</option><option value="36">Reko Sundsvall AB</option><option value="37">Scenkonst V&auml;sternorrland AB</option><option value="96">ServaNet</option><option value="13">Servicenter</option><option value="38">SKIFU AB</option><option value="18">Socialn&auml;mnden</option><option value="39">Stadsbacken AB</option><option value="19">Stadsbyggnadsn&auml;mnden</option><option value="40">Sundsvall Eln&auml;t AB</option><option value="21">Sundsvall Energi AB</option><option value="41">Sundsvall Logistikpark AB</option><option value="42">Sundsvall Oljehamn AB</option><option value="44">Sundsvall Vatten AB</option><option value="45">Sundsvalls Hamn AB</option><option value="100">Svensk Kommun F&ouml;rs&auml;krings AB</option><option value="98">Testgruppen</option><option value="83">testochtest</option><option value="28">Valn&auml;mnden</option><option value="101">Vrd- och omsorgsnmnden</option><option value="29">&Ouml;verf&ouml;rmyndarn&auml;mnden Mitt</option></select><script>
+					$("[id='selectedFormGroup']").select2({					
+						width:'resolve'
+					});
+				</script>
+</div>
+</div>
+<script>
+				$("[id='selectedFormGroup']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-8" id="viewTempletAttribute8" templateID="8">
+<div class="arrow" id="question-8-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-8-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-8-notes-div&quot;]').hide();$('[id=&quot;question-8|note&quot;]').val('');$('[id=&quot;question-8-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-8-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-8-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-8|note" id="question-8|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Typ av register</h3>
+</div>
+<div class="question" id="question-8-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vilken typ av lagringsvariant sker behandlingen i?</div>
+<div class="pannel panel-body panel-default">
+<select name="question-8" id="question-8" class="form-control" size="3"><option value="26">IT-system</option><option value="27">Strukturerat material</option><option value="28">Ostrukturerat material</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-8';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-8']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-36" parentTemplate="8" id="viewTempletAttribute36" templateID="36" expandmatch="27">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-36-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Bekriv det strukturerade materialet  i mer detalj.</div>
+<div id="question-36" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-36" id="question-36" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-36']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-37" parentTemplate="8" id="viewTempletAttribute37" templateID="37" expandmatch="28">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-37-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Bekriv det ostrukturerade materialet i mer detalj.</div>
+<div id="question-37" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-37" id="question-37" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-37']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-8-actionrequired" id="question-8-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-5" id="viewTempletAttribute5" templateID="5">
+<div class="arrow" id="question-5-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-5-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-5-notes-div&quot;]').hide();$('[id=&quot;question-5|note&quot;]').val('');$('[id=&quot;question-5-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-5-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-5-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-5|note" id="question-5|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>&Auml;ndam&aring;l</h3>
+</div>
+<div class="question" id="question-5-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange ändamålet med personuppgiftsbehandlingen. Om man samlar in personuppgifter ska ändamålen vara bestämda innan insamlingen. Ändamålen ska informeras till de registrerade, de får inte vara för allmänt hållna utan måste vara specificerade i viss mån. Man får inte byta ändamål med personuppgiftsbehandlingen efter insamlande hur som helst.</div>
+<div id="question-5" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-5" id="question-5" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-5']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-5-actionrequired" id="question-5-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-2" id="viewTempletAttribute2" templateID="2">
+<div class="arrow" id="question-2-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-2-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-2-notes-div&quot;]').hide();$('[id=&quot;question-2|note&quot;]').val('');$('[id=&quot;question-2-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-2-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-2-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-2|note" id="question-2|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Typer av personuppgift</h3>
+</div>
+<div class="question" id="question-2-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange vilken typ eller vilka typer av personuppgift eller personuppgifter som behandlas. Begreppet personuppgift är vitt och avser varje information som kan direkt eller indirekt kan identifiera en levande person. Avlidna personer omfattas inte av personuppgiftslagen eller dataskyddsförordningen.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-2" id="question-2" class="form-control" multiple size="13"><option value="1">Namn</option><option value="2">Adress</option><option value="3">Fastighetsbeteckning</option><option value="4">Epost</option><option value="5">Personnummer</option><option value="6">L&ouml;n p&aring; personniv&aring;</option><option value="7">Telefonnummer</option><option value="8">Mobilnummer</option><option value="9">ip-nummer</option><option value="10">Kundnummer</option><option value="11">GPS-kordinat kopplat till en individ</option><option value="12">Nej, men genom kompletterande uppgifter kan man enkelt identifiera fysiska personer t.ex. utgallring, single out.</option><option value="13">Annat</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-2';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-2']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-26" parentTemplate="2" id="viewTempletAttribute26" templateID="26" expandmatch="12">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-26-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vilka personuppgifter kan finnas om man lyckas med utgallring? Att kunna gallra ut en personuppgift innebär att man genom t ex uteslutningsmetoden eller via en specifik kunskap kan identifiera en viss person via en informationsmängd som i första anblick inte innehåller några direkta personuppgifter.</div>
+<div id="question-26" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-26" id="question-26" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-26']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-27" parentTemplate="2" id="viewTempletAttribute27" templateID="27" expandmatch="13">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-27-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Beskriv typ(er) av personuppgift mer utförligt. Det kan t ex vara så att allt data är pseudonymiserat och därigenom inte innehåller några av de "klassiska" personuppgifterna, men genom att ha koll på nyckeln så kan man identifiera personuppgifter såsom mängd avfall som slängs.</div>
+<div id="question-27" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-27" id="question-27" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-27']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-2-actionrequired" id="question-2-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-3" id="viewTempletAttribute3" templateID="3">
+<div class="arrow" id="question-3-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-3-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-3-notes-div&quot;]').hide();$('[id=&quot;question-3|note&quot;]').val('');$('[id=&quot;question-3-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-3-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-3-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-3|note" id="question-3|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>K&auml;nsliga personuppgifter</h3>
+</div>
+<div class="question" id="question-3-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Förekommer det känsliga personuppgifter? En känslig personuppgift är en uppgift som avslöjar ras/etniskt ursprung, politiska åsikter, religiös/filosofisk övertygelse, medlem i fackförening, hälsa (t ex sjukdomar, allergier), sexualliv, biometriska uppgifter (t ex fingeravtryck, iris) eller genetiska (t ex DNA) uppgifter. OBS, porträttfoton räknas inte som biometrisk uppgift. </div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-3" name="question-3"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-3']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-3']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-28" parentTemplate="3" id="viewTempletAttribute28" templateID="28" expandmatch="true">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-28-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Kommentera på dem känsliga personuppgifter som registret innehåller.</div>
+<div id="question-28" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-28" id="question-28" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-28']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-3-actionrequired" id="question-3-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-6" id="viewTempletAttribute6" templateID="6">
+<div class="arrow" id="question-6-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-6-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-6-notes-div&quot;]').hide();$('[id=&quot;question-6|note&quot;]').val('');$('[id=&quot;question-6-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-6-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-6-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-6|note" id="question-6|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Registrerade</h3>
+</div>
+<div class="question" id="question-6-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange kategori av registrerade. Dataskyddsförordningen ställer högre krav på behandling av barns personuppgifter. Samtycke kommer att krävas av vårdnadshavare. Vid vilken ålder ska regleras i kommande kompletterande nationell lagstiftning. Särskild information måste lämnas som är anpassad för barn.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-6" id="question-6" class="form-control" multiple size="5"><option value="14">Anst&auml;llda</option><option value="15">Medborgare i kommunen</option><option value="16">Barn</option><option value="17">Medborgare i andra kommuner</option><option value="18">Utl&auml;ndska medborgare</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-6';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-6']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-6-actionrequired" id="question-6-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-9" id="viewTempletAttribute9" templateID="9">
+<div class="arrow" id="question-9-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-9-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-9-notes-div&quot;]').hide();$('[id=&quot;question-9|note&quot;]').val('');$('[id=&quot;question-9-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-9-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-9-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-9|note" id="question-9|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Anv&auml;ndarkrets</h3>
+</div>
+<div class="question" id="question-9-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vilka har direktåtkomst till registret eller systemet?</div>
+<div class="pannel panel-body panel-default">
+<select name="question-9" id="question-9" class="form-control" multiple size="6"><option value="32">Allm&auml;nheten</option><option value="33">Alla anst&auml;llda</option><option value="34">Flera f&ouml;rvaltningar eller bolag</option><option value="35">En f&ouml;rvaltning eller bolag</option><option value="36">En eller flera avdelningar inom samma f&ouml;rvaltning eller bolag</option><option value="37">Vissa utvalda roller i koncernen</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-9';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-9']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-9-actionrequired" id="question-9-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-10" id="viewTempletAttribute10" templateID="10">
+<div class="arrow" id="question-10-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-10-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-10-notes-div&quot;]').hide();$('[id=&quot;question-10|note&quot;]').val('');$('[id=&quot;question-10-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-10-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-10-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-10|note" id="question-10|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Anv&auml;ndarkonton</h3>
+</div>
+<div class="question" id="question-10-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Kräver tillgången till personuppgifter någon form av inloggning med ett användarkonto? Ange den typ av användarkonto/inloggning som krävs för att komma åt personuppgifter.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-10" id="question-10" class="form-control" multiple size="5"><option value="38">&Ouml;ppet, ingen inloggning</option><option value="39">Inloggning som anst&auml;lld</option><option value="40">Inloggning som medborgare</option><option value="41">Inloggning med s&auml;rskild roll</option><option value="42">Systemadmin med personligt konto</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-10';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-10']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-10-actionrequired" id="question-10-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-11" id="viewTempletAttribute11" templateID="11">
+<div class="arrow" id="question-11-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-11-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-11-notes-div&quot;]').hide();$('[id=&quot;question-11|note&quot;]').val('');$('[id=&quot;question-11-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-11-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-11-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-11|note" id="question-11|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Beh&ouml;righetstilldelning</h3>
+</div>
+<div class="question" id="question-11-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Hur ser tilldelningen av behörigheter ut? Behörigheter ska vara begränsade till vad som krävs för att utföra de arbetsuppgifter användaren har. Samma användarkonto ska inte användas för t ex drift, systemadministration och vanlig användning.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-11" id="question-11" class="form-control" size="3"><option value="43">Samtliga anv&auml;ndare har samma niv&aring; av beh&ouml;righet i systemet</option><option value="44">Beh&ouml;righet tilldelas till anv&auml;ndare utefter arbetsuppgift</option><option value="45">Vet ej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-11';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-11']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-11-actionrequired" id="question-11-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-13" id="viewTempletAttribute13" templateID="13">
+<div class="arrow" id="question-13-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-13-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-13-notes-div&quot;]').hide();$('[id=&quot;question-13|note&quot;]').val('');$('[id=&quot;question-13-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-13-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-13-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-13|note" id="question-13|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Laglig grund</h3>
+</div>
+<div class="question" id="question-13-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange enligt vilken eller vilka lagliga grunder som personuppgiftsbehandlingen utförs:</div>
+<div class="pannel panel-body panel-default">
+<select name="question-13" id="question-13" class="form-control" multiple size="7"><option value="49">Den registrerade har l&auml;mnat sitt samtycke</option><option value="50">Avtal ska kunna fullg&ouml;ras med den registrerade</option><option value="51">Den personuppgiftsansvarige ska kunna fullg&ouml;ra en r&auml;ttslig skyldighet</option><option value="52">Vitala intressen f&ouml;r den registrerade ska skyddas</option><option value="53">En arbetsuppgift av allm&auml;nt intresse ska kunna utf&ouml;ras</option><option value="54">En arbetsuppgift i samband med myndighetsut&ouml;vning ska kunna utf&ouml;ras</option><option value="55">Ber&auml;ttigat intresse f&ouml;r behandlingen v&auml;ger tyngre &auml;n den registrerades intresse av skydd mot kr&auml;nkning av den personliga integriteten.</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-13';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-13']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-13-actionrequired" id="question-13-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-14" id="viewTempletAttribute14" templateID="14">
+<div class="arrow" id="question-14-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-14-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-14-notes-div&quot;]').hide();$('[id=&quot;question-14|note&quot;]').val('');$('[id=&quot;question-14-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-14-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-14-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-14|note" id="question-14|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Samtycke</h3>
+</div>
+<div class="question" id="question-14-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Behövs samtycke? Som utgångspunkt krävs samtycke om man inte kan utföra personuppgiftsbehandling på någon annan rättslig grund som anges i 9§ PuL eller i dataskyddsförordningens motsvarighet artikel 9. Det behövs till exempel inte samtycke vid insamlande av uppgifter som krävs för myndighetsutövning. </div>
+<div class="pannel panel-body panel-default">
+<select name="question-14" id="question-14" class="form-control" size="3"><option value="56">Ja, och det finns samtycke</option><option value="57">Ja, men det finns inte </option><option value="58">Nej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-14';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-14']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-41" parentTemplate="14" id="viewTempletAttribute41" templateID="41" expandmatch="56">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-41-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vart och hur sparas samtycket?</div>
+<div id="question-41" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-41" id="question-41" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-41']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-14-actionrequired" id="question-14-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-15" id="viewTempletAttribute15" templateID="15">
+<div class="arrow" id="question-15-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-15-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-15-notes-div&quot;]').hide();$('[id=&quot;question-15|note&quot;]').val('');$('[id=&quot;question-15-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-15-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-15-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-15|note" id="question-15|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>S&auml;rskild registerf&ouml;rfattning</h3>
+</div>
+<div class="question" id="question-15-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Regleras verksamhetens behandling av personuppgifter i en särskild registerförfattning? I nuläget gäller s.k särskilda registerförfattningar jämte personuppgiftslagen. Dessa regelverk gäller främst för myndigheters hantering av personuppgifter inom en specifik verksamhet. Personuppgiftslagen är subsidiär i förhållande till andra författningar, det betyder att om en verksamhets personuppgiftsbehandling faller inom tillämpningsområdet för en särskild registerförfattning så gäller bestämmelserna i den särskilda registerförfatttningen före PuL. Exempel på särskilda registerförfattningar är polisdatalagen, patientdatalagen och lagen om behandling av personuppgifter inom socialtjänsten.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-15" id="question-15" class="form-control" size="3"><option value="59">Ja</option><option value="60">Nej</option><option value="61">Vet ej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-15';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-15']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-38" parentTemplate="15" id="viewTempletAttribute38" templateID="38" expandmatch="59">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-38-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-38" name="question-38" class="form-control" style="width: 100%;" value="" placeholder="Namn p&aring; s&auml;rskild registerf&ouml;rfattning">
+</div>
+</div>
+<script>
+				$("[id='question-38']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-15-actionrequired" id="question-15-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-20" id="viewTempletAttribute20" templateID="20">
+<div class="arrow" id="question-20-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-20-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-20-notes-div&quot;]').hide();$('[id=&quot;question-20|note&quot;]').val('');$('[id=&quot;question-20-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-20-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-20-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-20|note" id="question-20|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Lag&ouml;vertr&auml;delse</h3>
+</div>
+<div class="question" id="question-20-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Behandlas uppgifter som rör lagöverträdelser? Strikta krav föreligger vid behandling av uppgifter om lagöverträdelser.</div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-20" name="question-20"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-20']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-20']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-40" parentTemplate="20" id="viewTempletAttribute40" templateID="40" expandmatch="true">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-40-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Ange skäl till behandlingen</div>
+<div id="question-40" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-40" id="question-40" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-40']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-20-actionrequired" id="question-20-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-16" id="viewTempletAttribute16" templateID="16">
+<div class="arrow" id="question-16-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-16-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-16-notes-div&quot;]').hide();$('[id=&quot;question-16|note&quot;]').val('');$('[id=&quot;question-16-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-16-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-16-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-16|note" id="question-16|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Insamling</h3>
+</div>
+<div class="question" id="question-16-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Hur samlas personuppgifterna in? Den personuppgiftsansvarige har olika informationsskyldigheter beroende på om personuppgifterna samlas in från den registrerade själv eller från någon annan.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-16" id="question-16" class="form-control" multiple size="2"><option value="62">Personuppgifterna samlas in fr&aring;n den registrerade sj&auml;lv</option><option value="63">Personuppgifterna samlas in fr&aring;n n&aring;gon annan</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-16';
+				var selectAllOption = '';
+				var multiSelect = false;
+				multiSelect = true;
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-16']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-44" parentTemplate="16" id="viewTempletAttribute44" templateID="44" expandmatch="63">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-44-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Personuppgifterna samlas in från någon annan</div>
+<div id="question-44" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-44" id="question-44" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-44']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-16-actionrequired" id="question-16-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-25" id="viewTempletAttribute25" templateID="25">
+<div class="arrow" id="question-25-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-25-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-25-notes-div&quot;]').hide();$('[id=&quot;question-25|note&quot;]').val('');$('[id=&quot;question-25-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-25-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-25-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-25|note" id="question-25|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Utl&auml;mnande av uppgifter</h3>
+</div>
+<div class="question" id="question-25-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Lämnas ut personuppgifter till någon/några utanför organisationen?</div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-25" name="question-25"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-25']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-25']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-46" parentTemplate="25" id="viewTempletAttribute46" templateID="46" expandmatch="true">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-46-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>ex support, skatteverket, försäkringskassan, pensionsförvaltare, tjänsteleverantörer osv</div>
+<div id="question-46" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-46" id="question-46" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-46']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-25-actionrequired" id="question-25-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-23" id="viewTempletAttribute23" templateID="23">
+<div class="arrow" id="question-23-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-23-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-23-notes-div&quot;]').hide();$('[id=&quot;question-23|note&quot;]').val('');$('[id=&quot;question-23-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-23-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-23-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-23|note" id="question-23|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Datak&auml;llor</h3>
+</div>
+<div class="question" id="question-23-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Föds systemet med personuppgifter från andra datakällor eller föder systemet andra system med personuppgifter?</div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-23" name="question-23"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-23']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-23']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-43" parentTemplate="23" id="viewTempletAttribute43" templateID="43" expandmatch="true">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-43-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vilka system är födare av eller föds med personuppgifter?</div>
+<div id="question-43" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-43" id="question-43" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-43']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-23-actionrequired" id="question-23-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-17" id="viewTempletAttribute17" templateID="17">
+<div class="arrow" id="question-17-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a><a id="question-17-noteIcon" onclick="$('[id=&quot;question-17-notes-div&quot;]').show();return false;" href="#">
+<div class="upper-left-corner glyphicon glyphicon-comment" onclick="" style="color:rgba(0,0,0,0.2);padding-right: 8px;" title="Viss information finns p&aring; hemsidan och i skrift, men beh&ouml;ver ses &ouml;ver."></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-17-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-17-notes-div&quot;]').hide();$('[id=&quot;question-17|note&quot;]').val('');$('[id=&quot;question-17-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-17-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-17-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-17|note" id="question-17|note" type="text">Viss information finns p&aring; hemsidan och i skrift, men beh&ouml;ver ses &ouml;ver.</textarea>
+</div>
+<div id="questionHeader">
+<h3>Information registrerade</h3>
+</div>
+<div class="question" id="question-17-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Informeras de registrerade om att deras personuppgifter behandlas?</div>
+<div class="pannel panel-body panel-default">
+<select name="question-17" id="question-17" class="form-control" size="4"><option value="64">Ja, muntligt</option><option value="65">Ja, skriftligt</option><option value="66">Ja, p&aring; annat s&auml;tt</option><option value="67">Nej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-17';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-17']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-17-actionrequired" id="question-17-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-18" id="viewTempletAttribute18" templateID="18">
+<div class="arrow" id="question-18-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-18-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-18-notes-div&quot;]').hide();$('[id=&quot;question-18|note&quot;]').val('');$('[id=&quot;question-18-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-18-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-18-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-18|note" id="question-18|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Lagringstid</h3>
+</div>
+<div class="question" id="question-18-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Hur länge lagras personuppgifterna? Det är viktigt att få en överblick över hur länge personuppgifter lagras. Lagringstiden kan variera beroende på för vilket ändamål. Till exempel måste uppgifter lagras i minst 10 år för bokföringsändamål enligt 11§ kommunala redovisnings lagen.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-18" id="question-18" class="form-control" size="3"><option value="68">F&ouml;r evigt</option><option value="69">Gallras</option><option value="70">Vej ej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-18';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-18']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-39" parentTemplate="18" id="viewTempletAttribute39" templateID="39" expandmatch="69">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-39-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Beskriv rutiner för gallring, t ex hur länge personuppgifter sparas</div>
+<div id="question-39" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-39" id="question-39" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-39']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-18-actionrequired" id="question-18-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-22" id="viewTempletAttribute22" templateID="22">
+<div class="arrow" id="question-22-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-22-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-22-notes-div&quot;]').hide();$('[id=&quot;question-22|note&quot;]').val('');$('[id=&quot;question-22-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-22-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-22-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-22|note" id="question-22|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Finns det plats f&ouml;r fritext?</h3>
+</div>
+<div class="question" id="question-22-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>  </div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-22" name="question-22"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-22']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-22']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-42" parentTemplate="22" id="viewTempletAttribute42" templateID="42" expandmatch="true">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-42-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Vad finns i fritexten och varför? Finns det rutiner för hur fritext får skrivas?</div>
+<div id="question-42" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-42" id="question-42" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-42']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-22-actionrequired" id="question-22-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-19" id="viewTempletAttribute19" templateID="19">
+<div class="arrow" id="question-19-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-19-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-19-notes-div&quot;]').hide();$('[id=&quot;question-19|note&quot;]').val('');$('[id=&quot;question-19-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-19-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-19-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-19|note" id="question-19|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Utl&auml;mning till EU-land</h3>
+</div>
+<div class="question" id="question-19-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Lämnas uppgifter ut ett annat EU-land av leverantör eller dess eventuella underleverantör gäller både nyttjande och lagring? Även om ett personuppgiftsbiträde har sina serverhallar i Sverige, så kan deras underbiträden ha serverhallar i andra länder där den personuppgiftsansvariges uppgifter behandlas.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-19" id="question-19" class="form-control" size="3"><option value="71">Ja</option><option value="72">Nej</option><option value="73">Vet ej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-19';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-19']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-49" parentTemplate="19" id="viewTempletAttribute49" templateID="49" expandmatch="71">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-49-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-49" name="question-49" class="form-control" style="width: 100%;" value="" placeholder="Ange organisation">
+</div>
+</div>
+<script>
+				$("[id='question-49']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-47" parentTemplate="19" id="viewTempletAttribute47" templateID="47" expandmatch="71">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-47-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Välj vilket land inom EU det gäller.</div>
+<div class="pannel panel-body panel-default">
+<select class="form-control" name="question-47" id="question-47"><option value="77">Belgien</option><option value="78">Bulgarien</option><option value="79">Cypern</option><option value="80">Danmark</option><option value="81">Estland</option><option value="82">Finland</option><option value="83">Frankrike</option><option value="84">Grekland</option><option value="85">Irland</option><option value="86">Italien</option><option value="87">Kroatien</option><option value="88">Lettland</option><option value="89">Litauen</option><option value="90">Luxemburg</option><option value="91">Malta</option><option value="92">Nederl&auml;nderna</option><option value="93">Polen</option><option value="94">Portugal</option><option value="95">Rum&auml;nien</option><option value="96">Slovakien</option><option value="97">Slovenien</option><option value="98">Spanien</option><option value="99">Storbritannien</option><option value="100">Sverige</option><option value="101">Tjeckien</option><option value="102">Tyskland</option><option value="103">Ungern</option><option value="104">&Ouml;sterrike</option></select><script>
+					$("[id='question-47']").select2({					
+						width:'resolve'
+					});
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-47']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-19-actionrequired" id="question-19-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-21" id="viewTempletAttribute21" templateID="21">
+<div class="arrow" id="question-21-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-21-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-21-notes-div&quot;]').hide();$('[id=&quot;question-21|note&quot;]').val('');$('[id=&quot;question-21-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-21-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-21-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-21|note" id="question-21|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Utl&auml;mning tredje land</h3>
+</div>
+<div class="question" id="question-21-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Lämnas uppgifter ut till tredje land av leverantör eller dess eventuella underleverantör gäller både nyttjande och lagring? Även om ett personuppgiftsbiträde har sina serverhallar i Sverige, så kan deras underbiträden ha serverhallar i andra länder där den personuppgiftsansvariges uppgifter behandlas.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-21" id="question-21" class="form-control" size="3"><option value="74">Ja</option><option value="75">Nej</option><option value="76">Vet ej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-21';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-21']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-51" parentTemplate="21" id="viewTempletAttribute51" templateID="51" expandmatch="74">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-51-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>För USA krävs ett specialskrivet personuppgiftsbiträdesavtal.</div>
+<div class="pannel panel-body panel-default">
+<mark></mark>
+<input value="" name="question-51" id="question-51" type="hidden">
+</div>
+</div>
+<script>
+				$("[id='question-51']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-50" parentTemplate="21" id="viewTempletAttribute50" templateID="50" expandmatch="74">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-50-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-50" name="question-50" class="form-control" style="width: 100%;" value="" placeholder="Ange organisation eller f&ouml;retag">
+</div>
+</div>
+<script>
+				$("[id='question-50']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-48" parentTemplate="21" id="viewTempletAttribute48" templateID="48" expandmatch="74">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-48-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Välj vilket land utanför EU det gäller.</div>
+<div class="pannel panel-body panel-default">
+<select class="form-control" name="question-48" id="question-48"><option value="105">Afghanistan</option><option value="106">Albanien</option><option value="107">Algeriet</option><option value="108">Amerikanska jungfru&ouml;arna</option><option value="109">Amerikanska Samoa</option><option value="110">Andorra</option><option value="111">Angola</option><option value="112">Anguilla</option><option value="113">Antigua och Barbuda</option><option value="114">Argentina</option><option value="115">Armenien</option><option value="116">Aruba</option><option value="117">Australien</option><option value="118">Azerbajdzjan</option><option value="119">Bahamas</option><option value="120">Bahrain</option><option value="121">Bangladesh</option><option value="123">Barbados</option><option value="124">Belize</option><option value="125">Benin</option><option value="126">Bermuda</option><option value="127">Bhutan</option><option value="128">Bolivia</option><option value="129">Bosnien Hercegovina</option><option value="130">Botswana</option><option value="131">Brasilien</option><option value="132">Brittiska jungfru&ouml;arna</option><option value="133">Brunei</option><option value="134">Burkina Faso</option><option value="135">Burma</option><option value="136">Burundi</option><option value="137">Cayman&ouml;arna</option><option value="138">Centralafrikanska republiken</option><option value="139">Chile</option><option value="140">Colombia</option><option value="141">Comorerna</option><option value="142">Cook&ouml;arna</option><option value="143">Costa Rica</option><option value="144">Dominica</option><option value="145">Dominikanska republiken</option><option value="146">Ecuador</option><option value="147">Egypten</option><option value="148">Ekvatorialguinea</option><option value="149">El Salvador</option><option value="150">Elfenbenskusten</option><option value="151">England</option><option value="152">Eritrea</option><option value="153">Etiopien</option><option value="154">Falklands&ouml;arna</option><option value="155">Fiji</option><option value="156">Filippinerna</option><option value="157">Franska</option><option value="158">Guyana</option><option value="159">Franska Polynesien</option><option value="160">F&auml;r&ouml;arna</option><option value="161">Gabon</option><option value="162">Gambia</option><option value="163">Georgien</option><option value="164">Ghana</option><option value="165">Gibraltar</option><option value="166">Grenada</option><option value="167">Gr&ouml;nland</option><option value="168">Guadeloupe</option><option value="169">Guam</option><option value="170">Guatemala</option><option value="171">Guinea</option><option value="172">Guinea-Bissau</option><option value="173">Guyana</option><option value="174">Haiti</option><option value="175">Honduras</option><option value="176">Hongkong</option><option value="177">Indien</option><option value="178">Indonesien</option><option value="179">Irak</option><option value="180">Iran</option><option value="181">Island</option><option value="182">Isle of Man</option><option value="183">Israel</option><option value="184">Jamaica</option><option value="185">Japan</option><option value="186">Jemen</option><option value="187">Jordanien</option><option value="188">Kambodja</option><option value="189">Kamerun</option><option value="190">Kanada</option><option value="191">Kenya</option><option value="192">Kina</option><option value="193">Kiribati</option><option value="194">Kongo-Kinshasa</option><option value="195">Kuba</option><option value="196">Kuwait</option><option value="197">Laos</option><option value="198">Lesotho</option><option value="199">Libanon</option><option value="200">Liberia</option><option value="201">Libyen</option><option value="202">Liechtenstein</option><option value="203">Madagaskar</option><option value="204">Makedonien</option><option value="205">Malawi</option><option value="206">Malaysia</option><option value="207">Maldiverna</option><option value="208">Mali</option><option value="209">Marocko</option><option value="210">Marshall&ouml;arna</option><option value="211">Martinique</option><option value="212">Mauritius</option><option value="213">Mayotte</option><option value="214">Mexiko</option><option value="215">Mikronesiens federerade stater</option><option value="216">Mo&ccedil;ambique</option><option value="217">Moldavien</option><option value="218">Monaco</option><option value="219">Mongoliet</option><option value="220">Namibia</option><option value="221">Nauru</option><option value="222">Nederl&auml;ndska Antillerna</option><option value="223">Nepal</option><option value="224">Nicaragua</option><option value="225">Niger</option><option value="226">Nigeria</option><option value="227">Nordkorea</option><option value="228">Norge</option><option value="229">Nya Zeeland</option><option value="230">Oman</option><option value="231">Pakistan</option><option value="232">Panama</option><option value="233">Papua Nya Guinea</option><option value="234">Paraguay</option><option value="235">Peru</option><option value="236">Pitcairn&ouml;arna</option><option value="237">Puerto Rico</option><option value="238">Reunion</option><option value="239">Rwanda</option><option value="240">Ryssland</option><option value="241">Saint Christopher och Nevis</option><option value="242">Saint Helena</option><option value="243">Saint Lucia</option><option value="244">Saint Vincent och Grenadinerna</option><option value="245">Saint-Pierre-et-Miquelon</option><option value="246">Salomon&ouml;arna</option><option value="247">Samoa</option><option value="248">S&atilde;o Tom&eacute; och Pr&iacute;ncipe</option><option value="249">Saudiarabien</option><option value="250">Schweiz</option><option value="251">Senegal</option><option value="252">Serbien</option><option value="253">Sierra Leone</option><option value="254">Singapore</option><option value="255">Skottland</option><option value="256">Sri Lanka</option><option value="257">Sudan</option><option value="258">Surinam</option><option value="259">Swaziland</option><option value="260">Sydafrika</option><option value="261">Sydkorea</option><option value="262">Syrien</option><option value="263">Taiwan</option><option value="264">Tanzania</option><option value="265">Tchad</option><option value="266">Thailand</option><option value="267">Togo</option><option value="268">Tonga</option><option value="269">Trinidad och Tobago</option><option value="270">Tunisien</option><option value="271">Turkiet</option><option value="272">Turkmenistan</option><option value="273">Turks- och Caicos&ouml;arna</option><option value="274">Tuvalu</option><option value="275">Uganda</option><option value="276">Ukraina</option><option value="277">Uruguay</option><option value="278">USA</option><option value="279">Uzbekistan</option><option value="280">Vanuatu</option><option value="281">Venezuela</option><option value="282">Vietnam</option><option value="283">Vitryssland</option><option value="284">Wales</option><option value="285">Wallis och Futuna</option><option value="286">Zambia</option><option value="287">Zimbabwe</option><option value="288">&Ouml;sterrike</option><option value="289">&Ouml;sttimor</option></select><script>
+					$("[id='question-48']").select2({					
+						width:'resolve'
+					});
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-48']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-21-actionrequired" id="question-21-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-12" id="viewTempletAttribute12" templateID="12">
+<div class="arrow" id="question-12-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-12-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-12-notes-div&quot;]').hide();$('[id=&quot;question-12|note&quot;]').val('');$('[id=&quot;question-12-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-12-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-12-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-12|note" id="question-12|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Bitr&auml;desrelation</h3>
+</div>
+<div class="question" id="question-12-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Föreligger biträdesrelation? Ett personuppgiftsbiträde definieras som en fysisk eller juridisk person, offentlig myndighet eller annat organ som behandlar personuppgifter för den personuppgiftsansvariges räkning. Om den personuppgiftsansvarige lagrar sina uppgifter hos en extern molntjänstleverantör är leverantören att betrakta som biträde. Exempelvis om ni köper drift av ett IT-stöd från en extern part (molntjänst/outsourcing) eller att ni lagrar personuppgifter hos en extern part.</div>
+<div class="pannel panel-body panel-default">
+<select name="question-12" id="question-12" class="form-control" size="3"><option value="46" selected>Ja, Servicenter IT</option><option value="47">Ja, Annan</option><option value="48">Nej</option></select><script type="text/javascript">
+				var curMultiSelectID = 'question-12';
+				var selectAllOption = '';
+				var multiSelect = false;
+				
+				 
+				    $("[id='"+curMultiSelectID+"']").multiselect({		
+				    	selectAllText: 'Markera alla',	            
+			            includeSelectAllOption: selectAllOption,
+			            includeSelectAllDivider: false,			            
+			            multiple:multiSelect,
+			            templates : {		
+			            	button: '<button type="button" data-toggle="dropdown" style="display:none" ><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',	            	
+			            	li: '<li><a class="mslistitem" tabindex="0"><label class="mslistitem"></label></a></li>',
+			            	liGroup: '<li class="mslistitem"><label class="mslistitem"></label></li>',
+			            	ul: '<ul style="list-style-type: none;" class="mslistitem" id="multiselect-{AttributeDetails}"></ul>'  ,
+			            	divider: '<li class="multiselect-item divider"></li>'}
+			          });
+			          
+
+			</script>
+</div>
+</div>
+<script>
+				$("[id='question-12']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-52" parentTemplate="12" id="viewTempletAttribute52" templateID="52" expandmatch="46">
+<div id="questionHeader">
+<h3>Personuppgiftsbitr&auml;desavtal</h3>
+</div>
+<div class="question" id="question-52-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Finns personuppgiftsbiträdesavtal? Om det föreligger en biträdesrelation ska personuppgiftsbiträdesavtal föreligga. Det är genom avtalet som man reglerar ansvarsfördelningen. I den kommande dataskyddsförordningen finns direkta lagkrav som gäller för personuppgiftsbiträdet, någon motsvarighet föreligger inte i personuppgiftslagen. </div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-52" name="question-52" checked><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-52']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-52']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-53" parentTemplate="52" id="viewTempletAttribute53" templateID="53" expandmatch="true">
+<div id="questionHeader">
+<h3>Bifoga personuppgiftsbitr&auml;desavtal</h3>
+</div>
+<div class="question" id="question-53-question">
+<script>		
+			var attachedFilelist = [];	
+			
+		
+		function downloadFile() {
+			var url = window.location.href;
+			url = url.substr(0, url.lastIndexOf("nodes") + ("nodes").length) + "/downloadfile/" + "35400";
+   			window.open(url);	
+   		}
+   		
+
+
+
+
+
+
+
+
+		</script>
+<fieldset>
+<input value="35400;com.mysql.cj.jdbc.Blob@4cd32eac" name="file" id="fileUploaderInput" type="hidden">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div> </div>
+<label class="pull-left vcenter btn btn-default btn-file" id="add_file_btn">
+
+   			L&auml;gg till fil 
+   			<input style=" pointer-events: none;" multiple="multiple" name="fileselect[]" id="fileselect" type="file" class="btn hide"><span id="filedrag" class="glyphicon glyphicon-folder-open" style="padding-left:5px;padding-right:5px;font-size:1.5em; pointer-events: none;"></span></label>
+</fieldset>
+<div id="filesAdded" class="panel-body"></div>
+<script src="/pulregister.sundsvall.se/static/f/3/30/js/filehandler.js" type="text/javascript"></script><script>
+		
+		
+		var fileValue = "mall (5).csv1491com.mysql.cj.jdbc.Blob@4cd32eac35400";
+		var jqList = undefined;
+		var attachedFilelist = [];
+		var file = { name: "mall (5).csv", 
+ 			    size: "1491",
+ 			    fileid:	 "35400"
+ 			    };
+ 			    
+ 		if(file.fileid != ""){
+ 			attachedFilelist.push(file);
+ 		}
+ 		
+ 		
+		
+			$(document).ready( function() {
+			    $(':file').on('fileselect', onFileSelect);
+			    if ( attachedFilelist.length > 0 )
+			    {			    	
+			    	document.getElementById('filesAdded').appendChild(makeUL( attachedFilelist, true , false ));
+			    }
+			   
+			});	
+				
+		
+		$(document).ready( function() {
+		if($('#existingFilesDiv').children('[id^=filerow]').length > 0){
+			    	$('#add_file_btn').attr("disabled", true);
+			    	$('#add_file_btn').children('input').attr("disabled", true);
+			    	$('#add_file_btn').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
+			    };
+
+
+				});	
+		
+		
+		</script>
+</div>
+<script>
+				$("[id='question-53']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-59" parentTemplate="52" id="viewTempletAttribute59" templateID="59">
+<div id="questionHeader">
+<h3>Underleverant&ouml;rer</h3>
+</div>
+<div class="question" id="question-59-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Har personuppgiftsbiträdet underleverantörer som har tillgång till den personuppgiftsansvariges personuppgifter? Personuppgiftsbiträdet kan i sin tur ha egna personuppgiftsbiträden som behandlar den personuppgiftsansvariges uppgifter, så kallade underleverantörer eller underbiträden. Det ska framgå i personuppgiftsbiträdesavtalet om biträdet har egna biträden, relationen mellan den personuppgiftsansvarige och underbiträden ska också regleras i personuppgiftsbiträdesavtalet.</div>
+<div class="pannel panel-body panel-default">
+<input value="true" type="checkbox" id="question-59" name="question-59"><script>
+					if ( is_running_msie() == false )
+					{
+						$("[id='question-59']").bootstrapSwitch({
+							onText : 'Ja',
+							offText : 'Nej',
+							onSwitchChange : updateDynamicAttributes
+						});
+					}
+				</script>
+</div>
+</div>
+<script>
+				$("[id='question-59']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-60" parentTemplate="52" id="viewTempletAttribute60" templateID="60">
+<div id="questionHeader">
+<h3>F&ouml;retag</h3>
+</div>
+<div class="question" id="question-60-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-60" name="question-60" class="form-control" style="width: 100%;" value="" placeholder="Exempelvis F&ouml;retag1, F&ouml;retag 2">
+</div>
+</div>
+<script>
+				$("[id='question-60']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-12-actionrequired" id="question-12-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-7" id="viewTempletAttribute7" templateID="7">
+<div class="arrow" id="question-7-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-7-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-7-notes-div&quot;]').hide();$('[id=&quot;question-7|note&quot;]').val('');$('[id=&quot;question-7-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-7-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-7-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-7|note" id="question-7|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Kontaktperson</h3>
+</div>
+<div class="question" id="question-7-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Kontaktpersonen är den som är sakkunnig i verksamheten om den aktuella behandlingen, denna person är den som kontaktas vid frågor rörande behandling eller vid begäran av registerutdrag.</div>
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-7" name="question-7" class="form-control" style="width: 100%;" value="">
+</div>
+</div>
+<script>
+				$("[id='question-7']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-65" parentTemplate="7" id="viewTempletAttribute65" templateID="65">
+<div id="questionHeader">
+<h3>E-post (Kontaktperson)</h3>
+</div>
+<div class="question" id="question-65-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-65" name="question-65" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-65']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-29" parentTemplate="7" id="viewTempletAttribute29" templateID="29">
+<div id="questionHeader">
+<h3>Telefonnummer (Kontaktperson)</h3>
+</div>
+<div class="question" id="question-29-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-29" name="question-29" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-29']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-30" parentTemplate="7" id="viewTempletAttribute30" templateID="30">
+<div id="questionHeader">
+<h3>System&auml;gare</h3>
+</div>
+<div class="question" id="question-30-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-30" name="question-30" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-30']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-31" parentTemplate="7" id="viewTempletAttribute31" templateID="31">
+<div id="questionHeader">
+<h3>E-post (System&auml;gare)</h3>
+</div>
+<div class="question" id="question-31-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-31" name="question-31" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-31']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-32" parentTemplate="7" id="viewTempletAttribute32" templateID="32">
+<div id="questionHeader">
+<h3>Telefonnummer (System&auml;gare)</h3>
+</div>
+<div class="question" id="question-32-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-32" name="question-32" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-32']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-33" parentTemplate="7" id="viewTempletAttribute33" templateID="33">
+<div id="questionHeader">
+<h3>Systemf&ouml;rvaltare</h3>
+</div>
+<div class="question" id="question-33-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-33" name="question-33" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-33']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-34" parentTemplate="7" id="viewTempletAttribute34" templateID="34">
+<div id="questionHeader">
+<h3>E-post (Systemf&ouml;rvaltare)</h3>
+</div>
+<div class="question" id="question-34-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-34" name="question-34" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-34']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<article requiredcontent="false" name="question-35" parentTemplate="7" id="viewTempletAttribute35" templateID="35">
+<div id="questionHeader">
+<h3>Telefonnummer (Systemf&ouml;rvaltare)</h3>
+</div>
+<div class="question" id="question-35-question">
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-35" name="question-35" class="form-control" style="width: 100%;" value="" placeholder=" ">
+</div>
+</div>
+<script>
+				$("[id='question-35']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-7-actionrequired" id="question-7-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="false" name="question-24" id="viewTempletAttribute24" templateID="24">
+<div class="arrow" id="question-24-rotate" title="&Auml;ndra"></div>
+<a href="javascript:void(0);" data-toggle="dropdown" title="Alternativ">
+<div class="upper-left-corner glyphicon glyphicon-menu-hamburger" onclick="" style="color:rgba(0,0,0,0.2);" name="hamburger-menu-button"></div>
+</a>
+<ul class="dropdown-menu upper-left-corner">
+<li>
+<a onclick="$('[id=&quot;question-24-notes-div&quot;]').show();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-pencil"></span>
+					Anteckningar
+				</a>
+</li>
+<li>
+<a onclick="$('[id=&quot;question-24-notes-div&quot;]').hide();$('[id=&quot;question-24|note&quot;]').val('');$('[id=&quot;question-24-noteIcon&quot;]').hide();return false;" href="#"><span style="padding-right: 5px;" class="glyphicon glyphicon-remove"></span>
+					Rensa
+				</a>
+</li>
+</ul>
+<div class="notes-div" style="display:none;" id="question-24-notes-div">
+<h3 class="pull-right">
+				Anteckningar
+				<a onclick="$('[id=&quot;question-24-notes-div&quot;]').slideUp();" href="javascript:void(0);"><span style="color:rgba(0,0,0,0.2);padding-left: 5px;" class="glyphicon glyphicon-chevron-up pull-right" title="D&ouml;lj"></span></a>
+</h3>
+<textarea style="width: 100%; resize:vertical; margin-top: 0px; margin-bottom: 0px;" rows="5" name="question-24|note" id="question-24|note" type="text"></textarea>
+</div>
+<div id="questionHeader">
+<h3>Medverkande i dokumentation av behandling</h3>
+</div>
+<div class="question" id="question-24-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>  </div>
+<div class="pannel panel-body panel-default">
+<input type="text" id="question-24" name="question-24" class="form-control" style="width: 100%;" value="">
+</div>
+</div>
+<script>
+				$("[id='question-24']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+<article requiredcontent="false" name="question-45" parentTemplate="24" id="viewTempletAttribute45" templateID="45">
+<div id="questionHeader">
+<h3> 
+</h3>
+</div>
+<div class="question" id="question-45-question">
+<div class="line-divider"></div>
+<div class="panel-body">
+<div class="vspace20"></div>Kommentar rörande dokumentation av behandling</div>
+<div id="question-45" class="panel-body panel-default">
+<textarea style="width:100%;resize:vertical;" rows="5" name="question-45" id="question-45" type="text"></textarea>
+</div>
+</div>
+<script>
+				$("[id='question-45']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<div id="action">
+<div class="line-divider"></div>
+<div class="pannel panel-body panel-default">
+<label for="notes"><input name="question-24-actionrequired" id="question-24-notes" type="checkbox">
+						 &Aring;tg&auml;rd kr&auml;vs
+					</label>
+</div>
+</div>
+</article>
+<article requiredcontent="true" name="questionstatus" id="viewTempletAttribute4" templateID="4">
+<div id="questionHeader">
+<a href="javascript:void(0)">
+<p title="Obligatorisk" class="pull-left">
+<span style="color:#993333;font-size:small;" class="glyphicon glyphicon-asterisk"></span>
+</p>
+</a>
+<h3>Status</h3>
+</div>
+<div class="question" id="questionstatus-question">
+<div style="display:none;" class="panel panel-body alert-danger" requiredcontent-info-box="false">Du m&aring;ste fylla i detta f&auml;lt.</div>
+<div class="line-divider"></div>
+<div class="panel-body"></div>
+<div class="pannel panel-body panel-default">
+<select class="form-control" name="questionstatus" id="questionstatus"><option value="1">Ej p&aring;b&ouml;rjad</option><option value="2">P&aring;b&ouml;rjad</option><option value="3" selected>Klar</option></select><script>
+					$("[id='questionstatus']").select2({					
+						width:'resolve'
+					});
+				</script>
+</div>
+</div>
+<script>
+				$("[id='questionstatus']").on("change", function(event) {
+				updateDynamicAttributes(this);
+				});
+			</script>
+</article>
+<input value="" class="form-control" name="type" id="type" type="hidden">
+<div class="panel-body">
+<span class="btn btn-success pull-right" onclick="onClickSubmit()"><span class="glyphicon glyphicon-edit"></span>
+						Uppdatera
+					</span>
+</div>
+</form>
+</div>
+]]></moduleTransformedResponse><version><![CDATA[OpenHierarchy 1.2.10 (rev. -1)]]></version><requestinfo><contextpath><![CDATA[/pulregister.sundsvall.se]]></contextpath><servletpath><![CDATA[/core]]></servletpath><servername><![CDATA[localhost]]></servername><currentURI><![CDATA[/pulregister.sundsvall.se]]></currentURI><url><![CDATA[http://localhost:8080/pulregister.sundsvall.se/pulregister/nodes/updateform/1839]]></url><uri><![CDATA[/pulregister.sundsvall.se/pulregister/nodes/updateform/1839]]></uri><uriparts><uripart><value>pulregister</value><position>0</position></uripart><uripart><value>nodes</value><position>1</position></uripart><uripart><value>updateform</value><position>2</position></uripart><uripart><value>1839</value><position>3</position></uripart></uriparts></requestinfo><section><sectionID>1</sectionID><alias><![CDATA[start]]></alias><fullAlias/><enabled>true</enabled><anonymousAccess>true</anonymousAccess><userAccess>true</userAccess><adminAccess>true</adminAccess><visibleInMenu>true</visibleInMenu><breadCrumb>true</breadCrumb><name><![CDATA[Startsidan]]></name><description><![CDATA[Startsidan]]></description><anonymousDefaultURI><![CDATA[pulregister/nodes/formlist]]></anonymousDefaultURI><userDefaultURI><![CDATA[pulregister//nodes/formlist]]></userDefaultURI></section><user><userID>1000</userID><username>xmatjoh</username><firstname>Mats</firstname><lastname>Johansson</lastname><email>test@sundsvall.se</email><admin>true</admin><enabled>true</enabled><lastLogin>2020-01-27 12:02</lastLogin><lastLoginInMilliseconds>1580122943000</lastLoginInMilliseconds><currentLogin>2020-01-27 13:06</currentLogin><currentLoginInMilliseconds>1580126794243</currentLoginInMilliseconds><added>2019-10-25 17:05</added><isMutable>true</isMutable><hasFormProvider>true</hasFormProvider><groups><group><groupID><![CDATA[1]]></groupID><name><![CDATA[Administratörer]]></name><description><![CDATA[Administratörer]]></description><enabled><![CDATA[true]]></enabled><isMutable>true</isMutable></group></groups></user><menus><menu sectionAlias="" sectionID="1" sectionName="Startsidan"><menuitem><name><![CDATA[Administration]]></name><description><![CDATA[Administration och övervakning]]></description><menuIndex><![CDATA[1]]></menuIndex><url><![CDATA[/administration]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType><itemType><![CDATA[SECTION]]></itemType><sectionID><![CDATA[1]]></sectionID><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>false</anonymousAccess><sectionMenuItem><subSectionID><![CDATA[7]]></subSectionID></sectionMenuItem></menuitem><menuitem><name><![CDATA[PUL-Register]]></name><description><![CDATA[PUL-Register]]></description><menuIndex><![CDATA[2]]></menuIndex><url><![CDATA[/pulregister]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType><itemType><![CDATA[SECTION]]></itemType><sectionID><![CDATA[1]]></sectionID><adminAccess>true</adminAccess><userAccess>true</userAccess><anonymousAccess>true</anonymousAccess><sectionMenuItem><subSectionID><![CDATA[3]]></subSectionID></sectionMenuItem><menu sectionAlias="/pulregister" sectionID="3" sectionName="PUL-Register"/><selected/></menuitem></menu></menus><title><![CDATA[se.sundsvallskommun.nodes.model.Form@b0796ad]]></title><breadcrumbs><breadcrumb><name><![CDATA[Startsidan]]></name><description><![CDATA[Startsidan]]></description><url><![CDATA[/]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb><breadcrumb><name><![CDATA[PUL-Register]]></name><description><![CDATA[PUL-Register]]></description><url><![CDATA[/pulregister]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb><breadcrumb><name><![CDATA[pulregister]]></name><description><![CDATA[PUL-Register]]></description><url><![CDATA[/pulregister/nodes]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb><breadcrumb><name><![CDATA[se.sundsvallskommun.nodes.model.Form...]]></name><description><![CDATA[se.sundsvallskommun.nodes.model.Form@b0796ad]]></description><url><![CDATA[/pulregister/nodes/updateform/1839]]></url><urlType><![CDATA[RELATIVE_FROM_CONTEXTPATH]]></urlType></breadcrumb></breadcrumbs></document>

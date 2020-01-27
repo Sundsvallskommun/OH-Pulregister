@@ -527,7 +527,7 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 			}
 
 			Form form = this.getRequestedBean(req, res, user, uriParser, UPDATE);
-//			int oldFileId = FileDAO.getInstance().getOldFileId(form.getQuestionnaire().getID());
+			int oldFileId = FileDAO.getInstance().getOldFileId(form.getQuestionnaire().getID());
 
 			try {
 				this.checkUpdateAccess(form, user, req, uriParser);
@@ -563,8 +563,7 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 
 					this.updateBean(form, req, user, uriParser);
 
-//					if()
-//					updateFileId(form.getQuestionnaire().getID(), oldFileId);
+					FileDAO.getInstance().updateFileId(form.getQuestionnaire().getID(), oldFileId);
 
 					return this.beanUpdated(form, req, res, user, uriParser);
 
