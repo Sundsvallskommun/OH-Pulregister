@@ -25,6 +25,7 @@ import org.w3c.dom.Element;
 
 import se.sundsvallskommun.nodes.PulRegistryModule;
 import se.sundsvallskommun.nodes.controller.FormController;
+import se.sundsvallskommun.nodes.dao.FileDAO;
 import se.sundsvallskommun.nodes.model.File;
 import se.sundsvallskommun.nodes.model.Form;
 import se.sundsvallskommun.nodes.model.FormType;
@@ -526,7 +527,7 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 			}
 
 			Form form = this.getRequestedBean(req, res, user, uriParser, UPDATE);
-			int oldFileId = getOldFileId(form.getQuestionnaire().getID());
+//			int oldFileId = FileDAO.getInstance().getOldFileId(form.getQuestionnaire().getID());
 
 			try {
 				this.checkUpdateAccess(form, user, req, uriParser);
@@ -862,74 +863,7 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 
 	}
 
-	private int getOldFileId(int questionnaireId) throws SQLException {
 
-		int id = -1;
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt
-				.executeQuery("SELECT questionnaire_value_id FROM form_questionnaire_value WHERE questionnaire_id = "
-						+ questionnaireId + " AND question_id = 53");
-
-		if (rs.next()) {
-			id = rs.getInt(1);
-		}
-
-		rs.close();
-		stmt.close();
-		con.close();
-		return id;
-
-	}
-
-	public File getSavedFile(int fileId) throws SQLException {
-
-		File file = new File();
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt.executeQuery("SELECT * FROM form_file WHERE file_id = " + fileId);
-
-		if (rs.next()) {
-			file.setFileID(rs.getInt(1));
-			file.setFileData(rs.getBlob(2));
-			file.setFileName(rs.getString(3));
-			file.setDateAdded(rs.getTimestamp(4));
-			file.setFileSize(rs.getLong(5));
-		} else {
-			file = null;
-		}
-
-		rs.close();
-		stmt.close();
-		con.close();
-		return file;
-	}
-
-	private void updateFileId(int questionnaireId, int oldFileId) throws SQLException {
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt.executeQuery(
-				"SELECT questionnaire_value_id FROM form_questionnaire_value WHERE question_id = 53 AND questionnaire_id = "
-						+ questionnaireId);
-		if (rs.next()) {
-			System.out.println(rs.getInt(1) + " EFTER");
-
-			stmt.execute("UPDATE form_file SET file_id = " + rs.getInt(1) + " WHERE file_id = " + oldFileId);
-		}
-
-		rs.close();
-		stmt.close();
-		con.close();
-	}
 
 	/**
 	 * Add register type and contact name to each form on the list page

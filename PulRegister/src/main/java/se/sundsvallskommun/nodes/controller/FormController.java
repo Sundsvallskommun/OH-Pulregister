@@ -30,6 +30,7 @@ import rst.pdfbox.layout.elements.Paragraph;
 import rst.pdfbox.layout.text.BaseFont;
 import se.sundsvallskommun.nodes.PulRegistryModule;
 import se.sundsvallskommun.nodes.crud.FormCRUD;
+import se.sundsvallskommun.nodes.dao.FileDAO;
 import se.sundsvallskommun.nodes.model.File;
 import se.sundsvallskommun.nodes.model.Form;
 import se.sundsvallskommun.nodes.model.FormType;
@@ -67,7 +68,7 @@ public class FormController {
 	private AnnotatedDAO<Questionnaire> questionnaireDAO;
 	private AnnotatedDAO<QuestionnaireValue> questionnaireValueDAO;
 	private AnnotatedDAO<SelectedValue> selectedValueDAO;
-	private AnnotatedDAO<File> fileDAO;
+	private FileDAO fileDAO;
 
 	private FormCRUD formCRUD;
 
@@ -104,7 +105,7 @@ public class FormController {
 		this.questionOptionDAO = daoFactory.getDAO(QuestionOption.class);
 		this.questionnaireValueDAO = daoFactory.getDAO(QuestionnaireValue.class);
 		this.selectedValueDAO = daoFactory.getDAO(SelectedValue.class);
-		this.fileDAO = daoFactory.getDAO(File.class);
+		this.fileDAO = new FileDAO<File>(dataSource, File.class, daoFactory);
 
 		AdvancedAnnotatedDAOWrapper<Form, Integer> formDAOWrapper = this.formDAO.getAdvancedWrapper(Integer.class);
 
@@ -732,7 +733,7 @@ public class FormController {
 			throws IOException, AccessDeniedException, SQLException {
 
 		int fileId = Integer.parseInt(uriParser.get(2));
-		File blobFile = this.formCRUD.getSavedFile(fileId);
+		File blobFile = this.fileDAO.getFile(fileId);
 
 		InputStream is = blobFile.getFileData().getBinaryStream();
 

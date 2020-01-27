@@ -31,6 +31,7 @@ import com.google.protobuf.Field;
 import com.itextpdf.text.log.SysoCounter;
 
 import se.sundsvallskommun.nodes.crud.FormCRUD;
+import se.sundsvallskommun.nodes.dao.FileDAO;
 import se.sundsvallskommun.nodes.model.File;
 import se.sundsvallskommun.nodes.model.Note;
 import se.sundsvallskommun.nodes.model.Question;
@@ -49,9 +50,11 @@ public class Mapper {
 	private FormCRUD formCRUD;
 	private boolean hasActionRequired = false;
 	private boolean hasNotes = false;
+	private FileDAO fileDAO;
 
 	public Mapper(FormCRUD formCRUD) {
 		this.formCRUD = formCRUD;
+		this.fileDAO = FileDAO.getInstance();
 	}
 
 	/**
@@ -190,13 +193,13 @@ public class Mapper {
 				if (!fileAsString.isEmpty() && fileAsString.contains(";")) {
 					fileId = Integer.valueOf(fileAsString.split(";")[0]);
 					System.out.println(fileId);
-					fileInDB = getFile(fileId);
+					fileInDB = fileDAO.getFile(fileId);
 				}
 
 				if (fileAsString.isEmpty()) {
 					// om det inte kommer någon fil från formuläret tar vi bort filen om det finns
 					// någon i db.
-					deleteFile(getOldFileId(questionnaireId));
+					fileDAO.deleteFile(fileDAO.getOldFileId(questionnaireId));
 					
 				} else {
 
@@ -559,61 +562,6 @@ public class Mapper {
 
 	}
 
-	private File getFile(int fileId) throws SQLException {
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt.executeQuery("Select * FROM form_file WHERE file_id = " + fileId);
-
-		rs.next();
-		File file = new File();
-		file.setFileID(rs.getInt(1));
-		file.setFileData(rs.getBlob(2));
-		file.setFileName(rs.getString(3));
-		file.setDateAdded(rs.getTimestamp(4));
-		file.setFileSize(rs.getLong(5));
-
-		rs.close();
-		stmt.close();
-		con.close();
-
-		return file;
-	}
-
-
-
-	private void deleteFile(int FileId) throws SQLException {
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		stmt.execute("DELETE FROM form_file WHERE file_id = " + FileId);
-
-		stmt.close();
-		con.close();
-
-	}
-
-	private int getOldFileId(int questionnaireId) throws SQLException {
-
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root", "root");
-
-		Statement stmt = con.createStatement();
-
-		ResultSet rs = stmt
-				.executeQuery("SELECT questionnaire_value_id FROM form_questionnaire_value WHERE questionnaire_id = "
-						+ questionnaireId + " AND question_id = 53");
-		rs.next();
-
-		int id = rs.getInt(1);
-		rs.close();
-		stmt.close();
-		con.close();
-		return id;
-
-	}
+	
 
 }

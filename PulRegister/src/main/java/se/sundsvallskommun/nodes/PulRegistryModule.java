@@ -47,6 +47,8 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 		}
 
 		this.formController = new FormController(this, dataSource, systemInterface);
+		System.out.println("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		System.out.println(dataSource.toString());
 
 	}
 
