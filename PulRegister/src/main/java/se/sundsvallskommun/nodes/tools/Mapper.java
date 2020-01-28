@@ -188,11 +188,8 @@ public class Mapper {
 					fileAsString = s;
 				}
 
-				System.out.println("filen som sträng...? " + fileAsString);
-
 				if (!fileAsString.isEmpty() && fileAsString.contains(";")) {
 					fileId = Integer.valueOf(fileAsString.split(";")[0]);
-					System.out.println(fileId);
 					fileInDB = fileDAO.getFile(fileId);
 				}
 
@@ -209,11 +206,7 @@ public class Mapper {
 						if (req instanceof MultipartRequest) {
 							MultipartRequest wrapper = (MultipartRequest) req;
 							
-							
 							List<FileItem> fileItems = wrapper.getFiles();
-							// File file = questionnaireValue.getFile();
-							
-							System.out.println("fileitems:     "+fileItems);
 
 							// Wrappern hittar bara de nya filerna därför tappas dom redan tillagda bort.
 							File f = null;
@@ -235,15 +228,21 @@ public class Mapper {
 									System.out.println("the current file is: " + f.getFileName() + " " + f.getFileSize()
 											+ " " + f.getDateAdded());
 									System.out.println("filedata: " + f.getFileData());
-//											System.out.println(f);
-
 								}
 							}
+							
+							Integer oldFileId = fileDAO.getFileIdFromQuestionnaireId(questionnaireId);
+							if(oldFileId != null) {
+								fileDAO.deleteFile(oldFileId);
+							}
+							
 							System.out.println(f);
 							questionnaireValue.setFile(f);
 							questionnaireValue.setQuestion(questionMap.get(53));
 						}
 
+						
+						
 						if (!valueFound) {
 							valueMap.put(53, questionnaireValue);
 
