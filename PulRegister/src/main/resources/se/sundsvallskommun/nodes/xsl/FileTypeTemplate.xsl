@@ -20,23 +20,16 @@
 
 		
 		<script>		
-			var attachedFilelist = [];	
+<!-- 			var attachedFilelist = []; -->
 			
 		
 		function downloadFile() {
 			var url = window.location.href;
 			url = url.substr(0, url.lastIndexOf("nodes") + ("nodes").length) + "/downloadfile/" + "<xsl:value-of select="value/fileId"/>";
    			window.open(url);	
-   		}
-   		
-<!--    		$(document).ready(function() { -->
-<!-- 			$('#file_to_download').on("click", function(e) { -->
-<!-- 		e.preventDefault() -->
-<!-- 		var url = window.location.href; -->
-<!-- 		url = url.substr(0, url.lastIndexOf("nodes") + ("nodes").length) + "/downloadfile/" + "<xsl:value-of select="value/fileId"/>"; -->
-<!-- 		window.open(url); -->
-<!-- 	}); -->
-<!-- }); -->
+   			}
+   			
+
 		</script>
 		
 		
@@ -45,15 +38,15 @@
 	
 		<fieldset>
 	
-		<input type="hidden" id="fileUploaderInput" name="file" value="{value/fileId};{value/fileData}" />
+		<input type="hidden" id="fileUploaderInput-{AttributeDetails}" name="file-{AttributeDetails}" value="{value/fileId};{value/fileData}" />
 	
 		<xsl:call-template name="ApplyAttributeDescription"/>
 					
-		<label id="add_file_btn" class="pull-left vcenter btn btn-default btn-file">
+		<label id="add_file_btn-{AttributeDetails}" class="pull-left vcenter btn btn-default btn-file">
 <!-- 			<span class="btn btn-default btn-file"> -->
-   			Lägg till fil 
-   			<input class="btn hide" type="file" id="fileselect" name="fileselect[]" multiple="multiple" style=" pointer-events: none;" />
-   			<span style="padding-left:5px;padding-right:5px;font-size:1.5em; pointer-events: none;" class="glyphicon glyphicon-folder-open" id="filedrag"/>
+   			Lägg till fil
+   			<input class="btn hide" type="file" id="fileselect-{AttributeDetails}" name="fileselect[]" /> 
+   			<span style="padding-left:5px;padding-right:5px;font-size:1.5em; pointer-events: none;" class="glyphicon glyphicon-folder-open" id="filedrag-{AttributeDetails}"/>
 <!-- 			</span> -->
 		</label>
 		</fieldset>
@@ -62,61 +55,41 @@
 		
 		<xsl:call-template name="ApplyAttributeTooltip"/>
 		
-		<div class="panel-body" id="filesAdded"></div>
-			<!--   </div> 
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<label id="filesAdded"><xsl:value-of select="value" /></label>
-			</div>-->				
-		
-		<!-- var item = document.createElement('li');
-			        var node = document.createTextNode(files[i].name);
-			        
-			        item.appendChild(node);
-			        list.appendChild(item); -->
-			        
-			        
-<!-- 		<button class="btn btn-default" title="Download" onclick="downloadFile(); return false"><span class="glyphicon glyphicon-export" ></span> Exportera till CSV</button> -->
-		<script type="text/javascript"
-			src="{/document/requestinfo/contextpath}/static/f/{/document/module/sectionID}/{/document/module/moduleID}/js/filehandler.js">
-			</script>
+		<div class="panel-body" id="filesAdded-{AttributeDetails}"></div>
+
 		<script>
 		
 		
 		var fileValue = "<xsl:value-of select="value"/>";
 		var jqList = undefined;
-		var attachedFilelist = [];
-		var file = { name: "<xsl:value-of select="value/fileName"/>", 
- 			    size: "<xsl:value-of select="value/fileSize"/>",
- 			    fileid:	 "<xsl:value-of select="value/fileId"/>"
- 			    };
- 			    
- 		if(file.fileid != ""){
- 			attachedFilelist.push(file);
- 		}
- 		
- 		
-		<![CDATA[
-			$(document).ready( function() {
-			    $(':file').on('fileselect', onFileSelect);
-			    if ( attachedFilelist.length > 0 )
-			    {			    	
-			    	document.getElementById('filesAdded').appendChild(makeUL( attachedFilelist, true , false ));
-			    }
-			   
-			});	
-		]]>		
+
 		
 		$(document).ready( function() {
-		if($('#existingFilesDiv').children('[id^=filerow]').length > 0){
-			    	$('#add_file_btn').attr("disabled", true);
-			    	$('#add_file_btn').children('input').attr("disabled", true);
-			    	$('#add_file_btn').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
-			    };
-<!-- 			    console.log($('#existingFilesDiv').children('[id^=filerow]')); -->
-<!--     			console.log($('#newFilesDiv').children('[id^=filerow]')); -->
-				});	
 		
 		
+			var attachedFilelist = [];
+			var file = { name: "<xsl:value-of select="value/fileName"/>", 
+ 				    size: "<xsl:value-of select="value/fileSize"/>",
+ 			    	fileid:	 "<xsl:value-of select="value/fileId"/>"
+ 			};
+ 			   
+ 			if(file.fileid != ""){
+ 				attachedFilelist.push(file);
+ 			}
+		
+		
+		  	if ( attachedFilelist.length > 0 ) 
+  			    {			    	 
+  			    	document.getElementById('filesAdded-<xsl:value-of select="AttributeDetails"/>').appendChild(makeUL( attachedFilelist, true , false ));
+  			    }
+		
+		
+			if($('#filesAdded-<xsl:value-of select="AttributeDetails"/>').children().children('[id^=filerow]').length > 0){
+			    	$('#add_file_btn-<xsl:value-of select="AttributeDetails"/>').attr("disabled", true);
+			    	$('#add_file_btn-<xsl:value-of select="AttributeDetails"/>').children('input').attr("disabled", true);
+			    	$('#add_file_btn-<xsl:value-of select="AttributeDetails"/>').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
+			};
+		});		
 		</script>
 	</xsl:template>
 		

@@ -27,27 +27,25 @@ function cleanFiles()
 {
 	$("[id='fileselect']").val('');
 	
-	$('#newFilesDiv').slideUp( "slow", function() {
+	$('[id^="newFilesDiv"]:visible').slideUp( "slow", function() {
 		$(this).remove();
 	});
 	
-	$('#add_file_btn').removeAttr("disabled");
-	$('#add_file_btn').children('input').removeAttr("disabled");
-	$('#add_file_btn').attr("title", "");
+	$('[id^="add_file_btn"]:visible').removeAttr("disabled");
+	$('[id^="add_file_btn"]:visible').children('input').removeAttr("disabled");
+	$('[id^="add_file_btn"]:visible').attr("title", "");
 }
 
 function removeFile(id)
 {	
 	var elementId = "filerow_"+id;
 	var curElement = $("[id='"+elementId+"']");
-//	curElement.slideUp( "slow", function() {});
-	curElement.parent('#existingFilesDiv').slideUp( "slow", function() {});
-	
-	$('#fileUploaderInput').val('');
+	curElement.parent().slideUp( "slow", function() {});
+	$('[id^="filesAdded"]:visible').siblings('fieldset').children('input').val('');
 	curElement.remove();
-	$('#add_file_btn').children('input').removeAttr("disabled");
-	$('#add_file_btn').removeAttr("disabled");
-	$('#add_file_btn').attr("title", "");
+	$('[id^="add_file_btn"]:visible').children('input').removeAttr("disabled");
+	$('[id^="add_file_btn"]:visible').removeAttr("disabled");
+	$('[id^="add_file_btn"]:visible').attr("title", "");
 	    
 }
 
@@ -103,26 +101,31 @@ $(document).on('change', ':file', function() {
 });
 
 function onFileSelect(event, numFiles, label,files) {
-    filesToBeUploaded = ''
+	var targetId = event.target.id;
+	var questionId = targetId.substring(targetId.indexOf("-"))
+	console.log(questionId);
+    filesToBeUploaded = '';
     if(files.length > 0){
 	    for(var k=0, len = files.length; k < len; k++){
-	        filesToBeUploaded += files[k].name + '|';
+	        filesToBeUploaded += files[k].name;
 	    }
 	}
-    document.getElementById('filesAdded').appendChild( makeUL( files , false , false ) );
-    $("[id='fileUploaderInput']").val(filesToBeUploaded);
-	$('#add_file_btn').attr("disabled", true);
-	$('#add_file_btn').children('input').attr("disabled", true);
-	$('#add_file_btn').attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
+    document.getElementById('filesAdded'+ questionId).appendChild( makeUL( files , false , false ) );
+    $("#fileUploaderInput" + questionId).val(filesToBeUploaded);
+	$('#add_file_btn' + questionId).attr("disabled", true);
+	$('#add_file_btn' + questionId).children('input').attr("disabled", true);
+	$('#add_file_btn' + questionId).attr("title", "Du måste ta bort den tillagda filen för att kunna lägga till en ny.");
 }
 
 $(document).ready(function() {
-	$('#add_file_btn').on("click", function() {
-		if(!$(this).attr('disabled')){
-			$('#fileselect').trigger('click');
-			console.log('clicked');
-		}
-	});
+	$(':file').on('fileselect', onFileSelect); 
+	
+//	$('#add_file_btn').on("click", function() {
+//		if(!$(this).attr('disabled')){
+//			$('#fileselect').trigger('click');
+//			console.log('clicked');
+//		}
+//	});
 });
 //$('#add_file_btn').click(function(){
 //	$(this).children('input').click();

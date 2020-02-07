@@ -527,7 +527,7 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 			}
 
 			Form form = this.getRequestedBean(req, res, user, uriParser, UPDATE);
-			Integer oldFileId = FileDAO.getInstance().getFileIdFromQuestionnaireId(form.getQuestionnaire().getID());
+//			Integer oldFileId = FileDAO.getInstance().getFileIdFromQuestionnaireId(form.getQuestionnaire().getID());
 
 			try {
 				this.checkUpdateAccess(form, user, req, uriParser);
@@ -562,10 +562,9 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 					log.info("User " + user + " updating " + typeLogName + " " + form);
 
 					this.updateBean(form, req, user, uriParser);
-					
-					if(oldFileId != null) {
-						FileDAO.getInstance().updateFileId(form.getQuestionnaire().getID(), oldFileId);	
-					}
+//					if(oldFileId != null) {
+//						FileDAO.getInstance().updateFileId(form.getQuestionnaire().getID(), oldFileId);	
+//					}
 
 					return this.beanUpdated(form, req, res, user, uriParser);
 
@@ -731,16 +730,25 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 			if (q.getQuestionType().getQuestionType().equalsIgnoreCase("ENUM")
 					&& q.getName().equalsIgnoreCase("Personuppgiftsansvarig")) {
 				try {
-					for (Group g : this.systemInterface.getGroupHandler().getGroups(false)) {
-						if (g.getGroupID() != 1) {
-							QuestionOption qv = new QuestionOption();
-							qv.setID(g.getGroupID());
-							qv.setOption(g.getName());
-
-							qvList.add(qv);
+					if (!user.isAdmin()) {
+						for (Group g : user.getGroups()) {
+							if (g.getGroupID() != 1) {
+								QuestionOption qv = new QuestionOption();
+								qv.setID(g.getGroupID());
+								qv.setOption(g.getName());
+								qvList.add(qv);
+							}
+						}
+					} else {
+						for (Group g : this.systemInterface.getGroupHandler().getGroups(false)) {
+							if (g.getGroupID() != 1) {
+								QuestionOption qv = new QuestionOption();
+								qv.setID(g.getGroupID());
+								qv.setOption(g.getName());
+								qvList.add(qv);
+							}
 
 						}
-
 					}
 
 					q.setQuestionOptions(qvList);
@@ -769,16 +777,30 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 		List<QuestionOption> qvList = new ArrayList<>();
 
 		try {
-			for (Group g : this.systemInterface.getGroupHandler().getGroups(false)) {
-				if (g.getGroupID() != 1) {
-					QuestionOption qv = new QuestionOption();
-					qv.setID(g.getGroupID()); // XML row <GroupID>
-					qv.setOption(g.getName()); // XML row <GroupName>
+			if (!user.isAdmin()) {
+				for (Group g : user.getGroups()) {
+					if (g.getGroupID() != 1) {
+						QuestionOption qv = new QuestionOption();
+						qv.setID(g.getGroupID()); // XML row <GroupID>
+						qv.setOption(g.getName()); // XML row <GroupName>
 
-					qvList.add(qv);
+						qvList.add(qv);
+
+					}
 
 				}
+			} else {
+				for (Group g : this.systemInterface.getGroupHandler().getGroups(false)) {
+					if (g.getGroupID() != 1) {
+						QuestionOption qv = new QuestionOption();
+						qv.setID(g.getGroupID()); // XML row <GroupID>
+						qv.setOption(g.getName()); // XML row <GroupName>
 
+						qvList.add(qv);
+
+					}
+
+				}
 			}
 
 			question.setQuestionOptions(qvList);
@@ -863,8 +885,6 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 		return questionList;
 
 	}
-
-
 
 	/**
 	 * Add register type and contact name to each form on the list page

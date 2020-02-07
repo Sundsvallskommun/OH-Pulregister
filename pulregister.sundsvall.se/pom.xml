@@ -19,7 +19,7 @@
 				<version>3.2.3</version>
 				<configuration>
 					<warName>pulregister</warName>
-					<outputDirectory>C:\Users\ThomasHämäläinen\apache-tomcat-9.0.27\webapps</outputDirectory>
+					<outputDirectory>C:\apache-tomcat-7.0.99\webapps</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>

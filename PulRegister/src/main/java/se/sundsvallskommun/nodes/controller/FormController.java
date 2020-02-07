@@ -162,15 +162,17 @@ public class FormController {
 	 */
 	public ForegroundModuleResponse addNewForm(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-
+		
 		Form form = this.formCRUD.getRequestedBean(req, res, user, uriParser, "ADD");
 		this.formCRUD.checkAccess(form, user);
+		
 
 		ForegroundModuleResponse fgResp = this.formCRUD.add(req, res, user, uriParser);
 
 		try {
 			if (fgResp != null) {
 				Document doc = fgResp.getDocument();
+				
 				Element element = (Element) fgResp.getDocument().getFirstChild().getFirstChild().getNextSibling()
 						.getNextSibling();
 				XMLUtils.appendNewElement(doc, element, "sessionTimeout", user.getSession().getMaxInactiveInterval());
@@ -736,7 +738,6 @@ public class FormController {
 		File blobFile = this.fileDAO.getFile(fileId);
 
 		InputStream is = blobFile.getFileData().getBinaryStream();
-
 		Tika tika = new Tika();
 		
 		HTTPUtils.sendFile(is, blobFile.getFileName(), tika.detect(is), "", req, res, ContentDisposition.INLINE);

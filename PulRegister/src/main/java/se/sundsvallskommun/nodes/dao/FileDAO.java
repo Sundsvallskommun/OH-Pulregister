@@ -42,13 +42,15 @@ public class FileDAO<T> extends AnnotatedDAO<File> {
 		LowLevelQuery<File> fileQuery = new LowLevelQuery<>();
 		fileQuery.setSql("SELECT * FROM form_file WHERE file_id = " + fileId);
 		File file  = fileDAO.get(fileQuery);
-		fileDAO.delete(file, dataSource.getConnection());
+		if(file != null) {
+			fileDAO.delete(file, dataSource.getConnection());	
+		}	
 	}
 
-	public Integer getFileIdFromQuestionnaireId(int questionnaireId) throws SQLException {
+	public Integer getFileIdFromQuestionnaireId(int questionnaireId, int questionId) throws SQLException {
 		LowLevelQuery<QuestionnaireValue> query = new LowLevelQuery<>();
 		query.setSql("SELECT * FROM form_questionnaire_value WHERE questionnaire_id = "
-				+ questionnaireId + " AND question_id = 53");
+				+ questionnaireId + " AND question_id =" + questionId);
 		QuestionnaireValue  questionnaireValue = questionnaireValueDAO.get(query);
 		if(questionnaireValue != null) {
 			return questionnaireValue.getID();	
@@ -64,13 +66,12 @@ public class FileDAO<T> extends AnnotatedDAO<File> {
 		return fileDAO.get(fileQuery);
 	}
 
-	public void updateFileId(int questionnaireId, int oldFileId) throws SQLException {
-		Integer fileId = this.getFileIdFromQuestionnaireId(questionnaireId);
+	public void updateFileId(int questionnaireId, int oldFileId, int questionId) throws SQLException {
+		Integer fileId = this.getFileIdFromQuestionnaireId(questionnaireId, questionId);
 		if(fileId != null) {
 			LowLevelQuery<File> updateQuery = new LowLevelQuery<>();
 			updateQuery.setSql("UPDATE form_file SET file_id = " + fileId + " WHERE file_id = " + oldFileId);;
 			fileDAO.update(updateQuery);	
 		}
 	}
-	
 }

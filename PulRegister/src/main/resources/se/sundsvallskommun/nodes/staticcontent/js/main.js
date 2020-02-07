@@ -26,7 +26,7 @@ function onClickSubmit(){
 		console.log("something wrong with the map");
 	}
 	else {
-		$('#fileselect').removeAttr('disabled');
+		$('[id^="fileselect"]').removeAttr('disabled');
 		verifyAndSubmit(function(){});
 	}
 }
