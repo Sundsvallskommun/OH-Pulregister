@@ -34,6 +34,12 @@
 			<id>Shibboleth</id>
 			<url>https://build.shibboleth.net/nexus/content/repositories/releases/</url>
 		</repository>
+
+		<repository>
+			<id>maven-releases</id>
+			<url>http://10.11.2.190:8081/repository/maven-releases/</url>
+		</repository>
+
 	</repositories>
 
 
@@ -226,95 +232,89 @@
 			<version>1.0.3</version>
 		</dependency>
 
-
-		<!-- LOCAL REPOSITORY -->
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>standardutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>StandardUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>webutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>WebUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>openhierarchy</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>OpenHierarchy</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>fileuploadutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>FileUploadUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>emailutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>EmailUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>log4jutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>Log4JUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>purecaptcha</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>PureCaptcha</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>jcaptchautils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>JCaptchaUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>cron4jutils</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>Cron4JUtils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>se.unlogic</groupId>
-			<artifactId>lucenesearch</artifactId>
+			<groupId>se.xlent</groupId>
+			<artifactId>LuceneSearch</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
-		<!-- CKEDITOR PÅ LOCAL REPOSITORY SÅ LÄNGE -->
 		<dependency>
-			<groupId>com.ckeditor</groupId>
+			<groupId>se.xlent</groupId>
 			<artifactId>ckeditor</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.ckeditor</groupId>
+			<groupId>se.xlent</groupId>
 			<artifactId>ckeditor-filemanager</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.ckeditor</groupId>
+			<groupId>se.xlent</groupId>
 			<artifactId>ckeditor-mediaembed</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.ckeditor</groupId>
+			<groupId>se.xlent</groupId>
 			<artifactId>ckeditor-scripts</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
-
-
 
 	</dependencies>
 
