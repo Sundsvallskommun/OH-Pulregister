@@ -86,8 +86,6 @@ public class Mapper {
 			String key = it.next();
 			String[] params = key.split("-");
 
-//			System.out.println("Param[0]: " + params[0] + ", key: " + key);
-
 			int id = 0;
 
 			boolean actionRequired = false;
@@ -179,12 +177,10 @@ public class Mapper {
 
 			case "file":
 
-				System.out.println("key = " + key);
-
 				String fileAsString = "";
 				int fileId = -1;
 				File fileInDB = null;
-				int questionnaireId = questionnaire.getID();
+				Integer questionnaireId = questionnaire.getID();
 				int questionId = Integer.parseInt(params[2]);
 
 				// Hämtar ut filen ur paramMap
@@ -200,9 +196,11 @@ public class Mapper {
 					// om det inte kommer någon fil från formuläret tar vi bort filen om det finns
 					// någon i db med hjälp av questionnareId.
 
-					Integer fileIdFromQuestionnaire = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
-					if (fileIdFromQuestionnaire != null) {
-						fileDAO.deleteFile(fileIdFromQuestionnaire);
+					if (questionnaireId != null) {
+						Integer fileIdFromQuestionnaire = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
+						if (fileIdFromQuestionnaire != null) {
+							fileDAO.deleteFile(fileIdFromQuestionnaire);
+						}
 					}
 				}
 				if (!fileAsString.isEmpty() && fileAsString.contains(";")) {
@@ -250,7 +248,6 @@ public class Mapper {
 									if (file.getName().equals(fileName)) {
 										long sz = file.getSize();
 										if (file.getName() != null && sz > 0L) {
-											System.out.println("the file is: " + req.getParameterValues(key)[0]);
 											Path p = Paths.get(file.getName());
 											String filename = p.getFileName().toString();
 
@@ -262,17 +259,16 @@ public class Mapper {
 											f.setQuestionnaireValue(questionnaireValue);
 
 											f.setDateAdded(TimeUtils.getCurrentTimestamp());
-											System.out.println("the current file is: " + f.getFileName() + " "
-													+ f.getFileSize() + " " + f.getDateAdded());
-											System.out.println("filedata: " + f.getFileData());
 										}
 										break;
 									}
 								}
 
-								Integer oldFileId = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
-								if (oldFileId != null) {
-									fileDAO.deleteFile(oldFileId);
+								if (questionnaireId != null) {
+									Integer oldFileId = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
+									if (oldFileId != null) {
+										fileDAO.deleteFile(oldFileId);
+									}
 								}
 								questionnaireValue.setFile(f);
 								questionnaireValue.setQuestion(questionMap.get(questionId));
@@ -291,20 +287,13 @@ public class Mapper {
 				break;
 
 			default:
-
 				break;
-
 			}
 
 			if (questionnaireValue != null) {
 				questionnaireValue.setActionRequired(actionRequired);
-
 			}
 
-		}
-
-		for (Integer i : valueMap.keySet()) {
-			System.out.println("key is: " + i);
 		}
 
 		try {

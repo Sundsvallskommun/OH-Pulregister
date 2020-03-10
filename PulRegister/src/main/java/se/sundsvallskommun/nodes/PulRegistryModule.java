@@ -98,7 +98,6 @@ public class PulRegistryModule extends AnnotatedRESTModule implements CRUDCallba
 	@WebPublic(toLowerCase = true)
 	public ForegroundModuleResponse updateForm(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-		System.out.println(uriParser);
 		return formController.updateExistingForm(req, res, user, uriParser);
 		
 	}

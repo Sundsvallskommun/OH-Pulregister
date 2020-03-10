@@ -135,19 +135,7 @@ public class FormController {
 	 */
 	public ForegroundModuleResponse listForms(HttpServletRequest req, HttpServletResponse res, User user,
 			URIParser uriParser) throws Exception {
-
-		ForegroundModuleResponse response = formCRUD.list(req, res, user, uriParser, null);
-
-		if (response != null) {
-			return response;
-
-		} else {
-			System.out.println("It was null!");
-
-		}
-
-		return null;
-
+		return formCRUD.list(req, res, user, uriParser, null);
 	}
 
 	/**

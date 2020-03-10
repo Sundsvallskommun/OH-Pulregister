@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>pulregister.sundsvall.se</groupId>
   <artifactId>pulregister.sundsvall.se</artifactId>
-  <version>1.1.5-SNAPSHOT</version>
+  <version>1.2.5</version>
   <packaging>war</packaging>
   	<properties>
   		<javaversion>8</javaversion>
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>Pulregister</groupId>
 			<artifactId>Pulregister</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.2.5</version>
 		</dependency>
 	</dependencies>
 </project>

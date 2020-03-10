@@ -363,22 +363,6 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 				if (req.getMethod().equalsIgnoreCase("POST")) {
 
 					Form form = this.populateFromAddRequest(req, user, uriParser);
-					System.out.println("FormName: " + form.getName());
-
-					Map<String, String[]> paramMap = req.getParameterMap();
-					Iterator<String> it = paramMap.keySet().iterator();
-
-					while (it.hasNext()) {
-						String key = it.next();
-						for (String s : paramMap.get(key)) {
-							System.out.println("Key: " + key + ", Value: " + s);
-							if (key.contains("question-53")) {
-								System.out.println("----------------------------------------------------------"
-										+ paramMap.get(key).getClass());
-							}
-						}
-
-					}
 
 					try {
 						form.setName(req.getParameter("name"));
@@ -403,8 +387,6 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 					log.info("User " + user + " adding " + this.typeLogName + " " + form);
 
 					this.addBean(form, req, user, uriParser);
-
-					System.out.println("ID: " + form.getID() + " FormName: " + form.getName());
 
 					return this.beanAdded(form, req, res, user, uriParser);
 
@@ -538,19 +520,8 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 
 					form = this.populateFromUpdateRequest(form, req, user, uriParser);
 
-					System.out.println("FormName: " + form.getName());
-
 					Map<String, String[]> paramMap = req.getParameterMap();
 					Iterator<String> it = paramMap.keySet().iterator();
-
-					while (it.hasNext()) {
-						String key = it.next();
-						for (String s : paramMap.get(key)) {
-							System.out.println("Key: " + key + ", Value: " + s);
-
-						}
-
-					}
 
 					form.setGroupID(Integer.parseInt(req.getParameter("selectedFormGroup")));
 
@@ -636,7 +607,6 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 				if (question.getName().equalsIgnoreCase("Personuppgiftsansvarig")) {
 					handleSingleQuestionGroup(question, user);
 					question.setAttributeDetails("selectedFormGroup");
-					System.out.println("Handled questiongroup");
 
 				} else if (question.getName().equalsIgnoreCase("Status")) {
 					List<QuestionOption> statusList = new ArrayList<>();
@@ -646,8 +616,6 @@ public class FormCRUD extends ModularCRUD<Form, Integer, User, PulRegistryModule
 						value.setOption(status.getStatus());
 
 						statusList.add(value);
-
-						System.out.println("handled status");
 
 					}
 
