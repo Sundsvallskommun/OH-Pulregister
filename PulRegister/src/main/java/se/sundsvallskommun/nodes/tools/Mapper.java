@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.FilenameUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -197,13 +198,13 @@ public class Mapper {
 					// någon i db med hjälp av questionnareId.
 
 					if (questionnaireId != null) {
-						Integer fileIdFromQuestionnaire = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
+						Integer fileIdFromQuestionnaire = fileDAO.getFileIdFromQuestionnaireId(questionnaireId,
+								questionId);
 						if (fileIdFromQuestionnaire != null) {
 							fileDAO.deleteFile(fileIdFromQuestionnaire);
 						}
 					}
-				}
-				if (!fileAsString.isEmpty() && fileAsString.contains(";")) {
+				} else if (!fileAsString.isEmpty() && fileAsString.contains(";")) {
 					questionnaireValue = checkIfExist(id, valueMap, valueFound);
 					if (questionnaireValue != null) {
 						fileId = Integer.valueOf(fileAsString.split(";")[0]);
@@ -229,43 +230,47 @@ public class Mapper {
 				}
 
 				else {
-
 					// lägg in ny fil.
 					questionnaireValue = checkIfExist(id, valueMap, valueFound);
 					if (questionnaireValue != null) {
 						if (req instanceof MultipartRequest) {
 							MultipartRequest wrapper = (MultipartRequest) req;
 
-							String fileName = wrapper.getParameter(key);
-
-							if (!fileName.isEmpty()) {
+							String fileNameParameter = wrapper.getParameter(key);
+							if (!fileNameParameter.isEmpty()) {
 
 								List<FileItem> fileItems = wrapper.getFiles();
 								// Wrappern hittar bara de nya filerna därför tappas dom redan tillagda bort.
 								File f = null;
-								for (FileItem file : fileItems) {
-									// if för att hitta rätt fil till questionid
-									if (file.getName().equals(fileName)) {
-										long sz = file.getSize();
-										if (file.getName() != null && sz > 0L) {
-											Path p = Paths.get(file.getName());
-											String filename = p.getFileName().toString();
+								if (fileItems != null) {
+									for (FileItem file : fileItems) {
 
-											if (f == null)
-												f = new File();
-											f.setFileName(filename);
-											f.setFileSize(sz);
-											f.setFileData(new SerialBlob(file.get()));
-											f.setQuestionnaireValue(questionnaireValue);
+										if (file != null) {
+											String fileName = FilenameUtils.getName(file.getName());
+											// if för att hitta rätt fil till questionid
+											if (fileName.equals(fileNameParameter)) {
+												long sz = file.getSize();
 
-											f.setDateAdded(TimeUtils.getCurrentTimestamp());
+												if (fileName != null && sz > 0L) {
+													if (f == null)
+														f = new File();
+													f.setFileName(fileName);
+													f.setFileSize(sz);
+													f.setFileData(new SerialBlob(file.get()));
+													f.setQuestionnaireValue(questionnaireValue);
+
+													f.setDateAdded(TimeUtils.getCurrentTimestamp());
+												}
+												break;
+											}
 										}
-										break;
+
 									}
 								}
 
 								if (questionnaireId != null) {
-									Integer oldFileId = fileDAO.getFileIdFromQuestionnaireId(questionnaireId, questionId);
+									Integer oldFileId = fileDAO.getFileIdFromQuestionnaireId(questionnaireId,
+											questionId);
 									if (oldFileId != null) {
 										fileDAO.deleteFile(oldFileId);
 									}
@@ -364,7 +369,7 @@ public class Mapper {
 			// Builds the enum question options and add selected value to the saved value
 			if (question.getQuestionType().getQuestionType().equalsIgnoreCase("ENUM")) {
 				Element questionOptionsElement = doc.createElement("QuestionOptions");
-					
+
 				if (question.getQuestionOptions() != null) {
 					for (QuestionOption questionOption : question.getQuestionOptions()) {
 						questionElement.appendChild(questionOptionsElement);
@@ -451,27 +456,30 @@ public class Mapper {
 
 				// file handling stuff
 			} else if (question.getQuestionType().getQuestionType().equalsIgnoreCase("FILES")) {
+				System.out.println("filesssss");
+				if (questionnaireValueList != null) {
+					System.out.println("questionnaireValueList är inte null");
+					for (QuestionnaireValue questionnaireValue : questionnaireValueList) {
 
-				for (QuestionnaireValue questionnaireValue : questionnaireValueList) {
+						if (questionnaireValue.getFile() != null) {
 
-					if (questionnaireValue.getFile() != null) {
+							if (question.getQuestionID().equals(questionnaireValue.getQuestion().getQuestionID())) {
+								Element valueElement = doc.createElement("value");
+								Element fileName = XMLUtils.createElement("fileName",
+										questionnaireValue.getFile().getFileName(), doc);
+								valueElement.appendChild(fileName);
+								Element fileSize = XMLUtils.createElement("fileSize",
+										questionnaireValue.getFile().getFileSize(), doc);
+								valueElement.appendChild(fileSize);
+								Element fileData = XMLUtils.createElement("fileData",
+										questionnaireValue.getFile().getFileData(), doc);
+								valueElement.appendChild(fileData);
+								Element fileId = XMLUtils.createElement("fileId",
+										questionnaireValue.getFile().getFileID(), doc);
+								valueElement.appendChild(fileId);
 
-						if (question.getQuestionID().equals(questionnaireValue.getQuestion().getQuestionID())) {
-							Element valueElement = doc.createElement("value");
-							Element fileName = XMLUtils.createElement("fileName",
-									questionnaireValue.getFile().getFileName(), doc);
-							valueElement.appendChild(fileName);
-							Element fileSize = XMLUtils.createElement("fileSize",
-									questionnaireValue.getFile().getFileSize(), doc);
-							valueElement.appendChild(fileSize);
-							Element fileData = XMLUtils.createElement("fileData",
-									questionnaireValue.getFile().getFileData(), doc);
-							valueElement.appendChild(fileData);
-							Element fileId = XMLUtils.createElement("fileId", questionnaireValue.getFile().getFileID(),
-									doc);
-							valueElement.appendChild(fileId);
-
-							questionElement.appendChild(valueElement);
+								questionElement.appendChild(valueElement);
+							}
 						}
 					}
 				}
